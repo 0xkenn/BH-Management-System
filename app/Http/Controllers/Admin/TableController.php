@@ -13,8 +13,8 @@ class TableController extends Controller
     public function approveOwner(): View{
 
         if(Auth::guard('admin')->check()){
-            $owners = Owner::all();
-            return view('admin.dashboard', compact('owners'));
+        
+            return view('admin.dashboard');
         }
 
     }
