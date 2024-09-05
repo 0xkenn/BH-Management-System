@@ -22,9 +22,9 @@ class AddBoardingHouseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' =>['required', 'string', ],
-            'address' => ['required', 'string', ],
-            'background_image' => ['required', 'mimes:png,jpg, jpeg, gif'],
+            'name' =>'required|string',
+            'address' => 'required|string', 
+            'background_image' => 'required|image|mimes:png,jpg,jpeg,gif',
         ];
     }
 }

@@ -11,10 +11,13 @@ class BoardingHouse extends Model
     use HasFactory;
 
     protected $fillable = [
+        'owner_id',
         'name',
         'address',
+        'business_permit_image',
         'background_image',
     ];
+    
 
     public function rooms(): HasMany{
         return $this->hasMany(Room::class);

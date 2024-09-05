@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('boarding_houses', function (Blueprint $table) {
+        Schema::create('departments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('owner_id')->constrained()->cascadeOnDelete();
-            $table->string('name');
-            $table->string('address');
-            $table->string('business_permit_image');
-            $table->string('background_image');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table('department_name');
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('boarding_houses');
+        Schema::dropIfExists('departments');
     }
 };

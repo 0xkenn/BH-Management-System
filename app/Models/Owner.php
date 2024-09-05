@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -45,6 +46,10 @@ class Owner extends Authenticatable
 
     public function admin(): BelongsTo{
         return $this->belongsTo(Admin::class);
+    }
+
+    public function boardingHouse(): HasMany {
+        return $this->hasMany(BoardingHouse::class);
     }
 
 }

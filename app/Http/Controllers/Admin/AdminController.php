@@ -14,4 +14,17 @@ class AdminController extends Controller
         $owners = DB::table('owners')->paginate(7);
         return view('admin.owner-screen', compact('owners'));
     }
+
+    public function destroyOwner(Owner $request, $id){
+        $owner = Owner::findOrFail($id);
+
+        $owner->hash();
+        $owner->delete();
+
+        return redirect()->back();
+
+
+    }
+
+
 }

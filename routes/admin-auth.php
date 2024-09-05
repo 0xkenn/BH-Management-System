@@ -26,10 +26,17 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
-
+    
     Route::get('/owner-panel', [AdminController::class, 'ownerScreen'])->name('admin.owner-screen');
     Route::get('/dashboard',[TableController::class, 'approveOwner'])->name('admin.dashboard');
-    Route::post('/dashboard/{id}', [TableController::class, 'editApproval'])->name('owner.approve');
+    Route::post('/dashboard/{owner}', [TableController::class, 'editApproval'])->name('owner.approve');
+
+
+
     Route::post('logout', [LoginAdminController::class, 'destroy'])
                 ->name('admin.logout')->middleware(PreventBack::class);
+
+
+
+    Route::delete('/delete/{id}', [AdminController::class], 'destroyOwner')->name('delete.owner');
 });

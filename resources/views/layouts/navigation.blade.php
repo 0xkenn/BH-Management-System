@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ url('/') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
@@ -16,8 +16,16 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+
+             
+
+
             </div>
 
+            {{-- search input --}}
+            {{-- <form method="post" action="{{route('search.route')}}" role="search"  class="form-control ml-52">
+                <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto mt-2 ml-80   " />
+              </form> --}}
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">

@@ -34,7 +34,7 @@ class RegisteredAdminController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Admin::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
+     
         $admin = Admin::create([
             'name' => $request->name,
             'email' => $request->email,

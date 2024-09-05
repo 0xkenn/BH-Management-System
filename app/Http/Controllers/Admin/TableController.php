@@ -27,8 +27,11 @@ class TableController extends Controller
             $owner->approved = 1;
             $owner->save();
         }
-        return redirect()->back()->with('message', 'User Approval Sucessfully Approved');
+        return redirect()->back()->with('message', "$owner->name can now login");
     }
+    
+
+    
 
  
 }

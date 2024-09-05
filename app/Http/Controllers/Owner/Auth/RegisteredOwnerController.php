@@ -29,6 +29,7 @@ class RegisteredOwnerController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+       
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.Owner::class],
@@ -36,8 +37,10 @@ class RegisteredOwnerController extends Controller
             'mobile_number' => ['required', 'string', 'regex:/^(09|63)\d{9}$/'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+        
 
         $owner = Owner::create([
+            'id' => Hash::make($request->id),
             'name' => $request->name,
             'email' => $request->email,
             'address' => $request->address,
