@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         body {
@@ -21,59 +22,33 @@
             font-size: 1.5rem;
             font-weight: bold;
         }
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #004085;
-        }
         .card {
-            border: none;
-            border-radius: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             background-color: #fff;
-            margin-bottom: 1rem;
-            height: 100%;
         }
+
+
         .card-img-top {
             width: 100%;
-            height: 200px; /* Fixed height */
+            height: 180px; /* Adjusted height */
             object-fit: cover;
         }
-        .card-body {
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-        }
-        .card-text {
-            font-size: 0.875rem;
-            color: #666;
-            margin-bottom: 1rem;
-        }
+
         .btn-primary-card {
             background-color: #007bff;
             color: white;
             border: none;
             border-radius: 20px;
-            padding: 0.5rem 1rem;
+
+            font-size: 0.8rem;
             text-align: center;
-            display: inline-block;
-            font-size: 0.875rem;
+
+            transition: background-color 0.3s;
         }
-        .btn-primary-card:hover {
-            background-color: #0056b3;
-        }
+
     </style>
 </head>
 <body class="font-sans antialiased">
@@ -91,12 +66,19 @@
     <div class="container py-5">
         <div class="row">
             @foreach($boardingHouses as $house)
-                <div class="col-md-3 mb-4">
-                    <div class="card h-100">
+                <div class="col-md-3 mb-8">
+                    <div class="card">
                         <img src="{{ asset('storage/' . $house->background_image) }}" class="card-img-top" alt="{{ $house->name }}">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $house->name }}</h5>
-                            <p class="card-text">{{ Str::limit($house->address, 80) }}</p>
+                            <h5 class="card-title">
+                                <i class="fas fa-house-user icon"></i>
+                                {{ $house->name }}
+                            </h5>
+                            <p class="card-text">
+                                <i class="fas fa-map-marker-alt icon"></i>
+                                {{ Str::limit($house->address, 90) }}
+                            </p>
+                            <p class="card-text italic">{{ Str::limit($house->description, 50) }}</p>
                             <a href="#" class="btn btn-primary-card">View Details</a>
                         </div>
                     </div>
