@@ -20,10 +20,11 @@ class OwnerController extends Controller
 
         $data = $request->validated();
         $data['owner_id'] = Auth::guard('owner')->id();
-            if($request->hasFile('background_image')){
+            if($request->hasFile('background_image') && $request->hasFile('business_permit_image')){
 
             $data['background_image'] = $request->file('background_image')->store('background_images', 'public');
-
+            $data['business_permit_image'] = $request->file('business_permit_image')->store('business_permit_images', 'public');
+            
             
             BoardingHouse::create($data);
                 return redirect()->route('owner.boardingHouse');
