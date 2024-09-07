@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('capacity'); //6
             $table->integer('price'); //1200 
+            $table->string('room_image'); // image room
             $table->boolean('is_occupied')->default(false); //
             $table->timestamps();
         });

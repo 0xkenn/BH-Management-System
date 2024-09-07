@@ -29,6 +29,7 @@ Route::prefix('owner')->middleware('auth:owner')->group(function () {
 
         Route::get('/boarding-house', [OwnerController::class, 'boardingHouse'])->name('owner.boardingHouse');
         Route::post('/add-bh', [OwnerController::class, 'store'])->name('add-boarding-house');
+        Route::post('/add-room', [OwnerController::class, 'storeRoom'])->name('add-room');
 
     Route::post('logout', [LoginOwnerController::class, 'destroy'])
                 ->name('owner.logout')->middleware(PreventBack::class);

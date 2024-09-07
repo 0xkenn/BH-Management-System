@@ -72,7 +72,7 @@
 
         <!-- Image Upload Section -->
         <h1>Select Images to Display Filenames and Previews</h1>
-        <input>
+
         <input type="file" id="file-input" accept="image/*" multiple style="
             padding: 5px;
             border: 2px solid #007BFF;
