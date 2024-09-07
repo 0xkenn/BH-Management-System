@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('boarding_houses_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->integer('capacity'); //6
-            $table->int('price'); //1200 
+            $table->integer('price'); //1200 
             $table->boolean('is_occupied')->default(false); //
             $table->timestamps();
         });
