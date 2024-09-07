@@ -62,6 +62,28 @@ class="flex items-center justify-center   px-2 py-2 text-sm font-medium leading-
                   </div>
                 </div>
               </label>
+
+            {{-- DEscription --}}
+            <label class="block text-sm mb-5">
+                <span class="text-gray-700 dark:text-gray-400" for="description">Description</span>
+                <!-- focus-within sets the color for the icon when input is focused -->
+                <div
+                  class="relative text-gray-500 focus-within:text-purple-600 dark:focus-within:text-purple-400"
+                >
+                  <input name="description" value="{{old('description')}}" type="text"
+                    class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
+                    placeholder="Description"
+                  />
+                  <div
+                    class="absolute inset-y-0 flex items-center ml-3 pointer-events-none"
+                  >
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                  </svg>
+
+                  </div>
+                </div>
+              </label>
 {{-- pwermit field --}}
 <label class="block text-sm mb-5" for="business_permit_image">
     <span class="text-gray-700 dark:text-gray-400">Business Permit
