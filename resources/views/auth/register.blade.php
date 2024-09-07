@@ -42,6 +42,19 @@
     <x-input-error :messages="$errors->get('mobile_number')" class="mt-2" />
 </div>
 
+
+{{-- partial --}}
+<div class="mt-4">
+    <x-input-label for="is_student" :value="__('is_student')" />
+<select id="is_student" name="is_student" class="block mt-1 w-full">
+    <option value="">Select is_student</option>
+    <option value="true" {{ old('is_student') == 'true' ? 'selected' : '' }}>Yes</option>
+    <option value="false" {{ old('is_student') == 'false' ? 'selected' : '' }}>No</option>
+</select>
+<x-input-error :messages="$errors->get('is_student')" class="mt-2" />
+</div>
+
+
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
