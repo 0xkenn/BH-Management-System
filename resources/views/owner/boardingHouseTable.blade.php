@@ -74,6 +74,7 @@
         <h1>Select Images to Display Filenames and Previews</h1>
       <form action="{{route('add-room')}}" method="post" enctype="multipart/form-data">
         @csrf
+        {{-- d --}}
         <input type="file" id="room_image" name="room_image[]" accept="image/*" multiple style="
         padding: 5px;
         border: 2px solid #007BFF;
