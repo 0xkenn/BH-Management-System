@@ -73,7 +73,7 @@ class="flex items-center justify-center   px-2 py-2 text-sm font-medium leading-
       <input name="business_permit_image" value="{{old('business_permit_image')}}"
       type="file"
         class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
-        placeholder="Background image"
+        placeholder="Business permit image"
       />
       <div
         class="absolute inset-y-0 flex items-center ml-3 pointer-events-none"

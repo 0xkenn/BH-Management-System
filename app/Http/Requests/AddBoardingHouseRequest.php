@@ -24,7 +24,7 @@ class AddBoardingHouseRequest extends FormRequest
         return [
             'name' =>'required|string',
             'address' => 'required|string', 
-            'business_permit_image' => 'required|image|mimes: png. jpg,jpeg',
+            'business_permit_image' => 'required|image|mimes:png,jpg,jpeg',
             'background_image' => 'required|image|mimes:png,jpg,jpeg,gif',
         ];
     }
