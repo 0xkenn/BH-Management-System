@@ -14,6 +14,7 @@ class BoardingHouse extends Model
         'owner_id',
         'name',
         'address',
+        'description',
         'business_permit_image',
         'background_image',
     ];
