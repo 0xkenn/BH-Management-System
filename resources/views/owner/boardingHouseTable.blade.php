@@ -70,7 +70,7 @@
 
         <!-- Image Upload Section -->
 
-        <form action="{{ route('add-room', $id) }}" method="post" enctype="multipart/form-data" style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+        <form action="{{ route('add-room', $bh->id) }}" method="post" enctype="multipart/form-data" style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
             @csrf
 
             <div style="margin-bottom: 15px;">

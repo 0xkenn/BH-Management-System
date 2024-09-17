@@ -36,9 +36,10 @@ class OwnerController extends Controller
             return redirect()->back();
     }
 
-    public function storeRoom(AddRoomRequest $request){
+    public function storeRoom(AddRoomRequest $request, $id){
         
         $data = $request->validated();
+        dd($data);
         $data['owner_id'] = Auth::guard('owner')->id();
         $data['boarding_houses_id'] = $id;
         if ($request->hasFile('room_image')) {
@@ -49,7 +50,7 @@ class OwnerController extends Controller
             }
             // Save images as JSON if multiple images, or as string if one
             $data['room_image'] = json_encode($imagePaths);
-            dd($data);
+            
             Room::create($data);
             return redirect()->route('owner.boardingHouse')->with('success', 'Room created successfully');
         } else {
