@@ -70,7 +70,7 @@
 
         <!-- Image Upload Section -->
 
-        <form action="{{ route('add-room', $id) }}" method="post" enctype="multipart/form-data" style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+        <form action="{{ route('add-room', $bh->id) }}" method="POST" enctype="multipart/form-data" style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
             @csrf
 
             <div style="margin-bottom: 15px;">
@@ -89,7 +89,7 @@
 
             <div style="margin-bottom: 15px;">
                 <label for="capacity" style="display: block; font-weight: bold; margin-bottom: 5px;">Capacity:</label>
-                <input type="text" id="capacity" name="capacity" placeholder="Enter room capacity" style="
+                <input type="number" id="capacity" name="capacity" placeholder="Enter room capacity" style="
                     width: 100%;
                     padding: 10px;
                     border: 1px solid #ced4da;
@@ -103,7 +103,7 @@
 
             <div style="margin-bottom: 15px;">
                 <label for="price" style="display: block; font-weight: bold; margin-bottom: 5px;">Price:</label>
-                <input type="text" id="price" name="price" placeholder="Enter room price" style="
+                <input type="number" id="price" name="price" placeholder="Enter room price" style="
                     width: 100%;
                     padding: 10px;
                     border: 1px solid #ced4da;
@@ -136,84 +136,6 @@
       </form>
 
         <div id="file-info" style="margin-top: 10px;"></div>
-
-        <script>
-            const fileInfo = document.getElementById('file-info');
-            const fileNames = new Set(); // To track added filenames
-
-            document.getElementById('file-input').addEventListener('change', function(event) {
-                const files = Array.from(event.target.files);
-
-                files.forEach(file => {
-                    if (!fileNames.has(file.name)) {
-                        fileNames.add(file.name); // Add filename to the set
-
-                        // Create a container for each file
-                        const fileContainer = document.createElement('div');
-                        fileContainer.style.marginBottom = '15px';
-                        fileContainer.style.display = 'flex';
-                        fileContainer.style.alignItems = 'center';
-                        fileContainer.style.position = 'relative';
-                        fileContainer.style.padding = '10px';
-                        fileContainer.style.border = '1px solid #dee2e6';
-                        fileContainer.style.borderRadius = '5px';
-                        fileContainer.style.backgroundColor = '#ffffff';
-                        fileContainer.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-
-                        // Create an image element for the preview
-                        const imagePreview = document.createElement('img');
-                        imagePreview.style.width = '80px'; // Adjust width as needed
-                        imagePreview.style.height = '80px'; // Adjust height as needed
-                        imagePreview.style.objectFit = 'cover';
-                        imagePreview.style.marginRight = '10px';
-                        imagePreview.style.borderRadius = '5px';
-
-                        // Create a span element for the filename
-                        const filename = document.createElement('span');
-                        filename.textContent = file.name;
-                        filename.style.flexGrow = '1'; // Allows filename to take up remaining space
-
-                        // Create a remove button
-                        const removeButton = document.createElement('button');
-                        removeButton.textContent = 'X';
-                        removeButton.style.backgroundColor = '#dc3545';
-                        removeButton.style.color = 'white';
-                        removeButton.style.border = 'none';
-                        removeButton.style.borderRadius = '50%';
-                        removeButton.style.width = '30px';
-                        removeButton.style.height = '30px';
-                        removeButton.style.textAlign = 'center';
-                        removeButton.style.lineHeight = '30px';
-                        removeButton.style.cursor = 'pointer';
-                        removeButton.style.position = 'absolute';
-                        removeButton.style.top = '10px';
-                        removeButton.style.right = '10px';
-                        removeButton.style.fontSize = '16px';
-
-                        // Add event listener to the remove button
-                        removeButton.addEventListener('click', function() {
-                            fileContainer.remove();
-                            fileNames.delete(file.name); // Remove filename from the set
-                        });
-
-                        // Read the file and set the image preview
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            imagePreview.src = e.target.result;
-                        };
-                        reader.readAsDataURL(file);
-
-                        // Append elements to the container
-                        fileContainer.appendChild(imagePreview);
-                        fileContainer.appendChild(filename);
-                        fileContainer.appendChild(removeButton);
-
-                        // Append the container to the file-info div
-                        fileInfo.appendChild(fileContainer);
-                    }
-                });
-            });
-        </script>
     </div>
 </div>
 
