@@ -22,7 +22,10 @@ class AddRoomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string',
+            'capacity' => 'required|integer',
+            'price' => 'required|integer',
+            'room_image' => 'required|image|mimes:png,jpg,jpeg',
         ];
     }
 }
