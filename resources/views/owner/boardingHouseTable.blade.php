@@ -53,7 +53,7 @@
 
 
 {{-- add room --}}
-<a href="#add-room-{{$bh->id}}"
+<a href="{{route('owner.room')}}"
     class="items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
     aria-label="approver"
 >
@@ -63,81 +63,7 @@
 </a>
 
 <!-- Modal Section -->
-<div id="add-room-{{$bh->id}}" class="modal" role="dialog">
-    <div class="modal-box flex flex-col">
-        <a href="#" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</a>
-        <h3 class="text-lg font-bold">{{$bh->name}}'s Data!</h3>
 
-        <!-- Image Upload Section -->
-
-        <form action="{{ route('add-room', $bh->id) }}" method="POST" enctype="multipart/form-data" style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
-            @csrf
-
-            <div style="margin-bottom: 15px;">
-                <label for="name" style="display: block; font-weight: bold; margin-bottom: 5px;">Name:</label>
-                <input type="text" id="name" name="name" placeholder="Enter room name" style="
-                    width: 100%;
-                    padding: 10px;
-                    border: 1px solid #ced4da;
-                    border-radius: 4px;
-                    box-sizing: border-box;
-                ">
-            </div>
-            @error('name')
-            <div class="text-sm text-red-400">{{ $message }}</div>
-            @enderror
-
-            <div style="margin-bottom: 15px;">
-                <label for="capacity" style="display: block; font-weight: bold; margin-bottom: 5px;">Capacity:</label>
-                <input type="number" id="capacity" name="capacity" placeholder="Enter room capacity" style="
-                    width: 100%;
-                    padding: 10px;
-                    border: 1px solid #ced4da;
-                    border-radius: 4px;
-                    box-sizing: border-box;
-                ">
-            </div>
-            @error('capacity')
-        <div class="text-sm text-red-400">{{ $message }}</div>
-        @enderror
-
-            <div style="margin-bottom: 15px;">
-                <label for="price" style="display: block; font-weight: bold; margin-bottom: 5px;">Price:</label>
-                <input type="number" id="price" name="price" placeholder="Enter room price" style="
-                    width: 100%;
-                    padding: 10px;
-                    border: 1px solid #ced4da;
-                    border-radius: 4px;
-                    box-sizing: border-box;
-                ">
-            </div>
-            @error('price')
-            <div class="text-sm text-red-400">{{ $message }}</div>
-            @enderror
-            <div style="margin-bottom: 20px;">
-                <label for="room_image" style="display: block; font-weight: bold; margin-bottom: 5px;">Room Image:</label>
-                <input type="file" id="room_image" name="room_image[]" accept="image/*" multiple style="
-                    padding: 8px;
-                    border: 2px solid #007BFF;
-                    border-radius: 4px;
-                    background-color: #ffffff;
-                    cursor: pointer;
-                    font-size: 14px;
-                    box-sizing: border-box;
-                    display: block;
-                    width: 100%;
-                ">
-            </div>
-
-
-
-    <button class="btn">submit</button>
-
-      </form>
-
-        <div id="file-info" style="margin-top: 10px;"></div>
-    </div>
-</div>
 
 
           {{-- view details --}}
