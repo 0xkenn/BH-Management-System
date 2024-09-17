@@ -62,7 +62,7 @@
     </svg>
 </a>
 
-<!-- Modal Section -->
+<!-- add room  -->
 <div id="add-room-{{$bh->id}}" class="modal" role="dialog">
     <div class="modal-box flex flex-col">
         <a href="#" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</a>
@@ -74,6 +74,13 @@
         <h1>Select Images to Display Filenames and Previews</h1>
       <form action="{{route('add-room')}}" method="post" enctype="multipart/form-data">
         @csrf
+
+        <input type="text" id="name"  name="name" placeholder="Name">
+        <br>
+        <input type="text" id="capacity"  name="name" placeholder="Capacity">
+        <br>
+        <input type="text" id="price"  name="name" placeholder="Price">
+        <br>
         {{-- d --}}
         <input type="file" id="room_image" name="room_image[]" accept="image/*" multiple style="
         padding: 5px;
