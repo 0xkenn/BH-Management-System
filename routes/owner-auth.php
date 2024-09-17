@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Owner\Auth\LoginOwnerController;
 use App\Http\Controllers\Owner\Auth\RegisteredOwnerController;
+use App\Http\Controllers\Owner\CreateRoomController;
 use App\Http\Controllers\Owner\OwnerController;
 use App\Http\Middleware\PreventBack;
 use Illuminate\Support\Facades\Route;
@@ -26,10 +27,10 @@ Route::prefix('owner')->middleware('auth:owner')->group(function () {
         return view('owner.dashboard');
     })->name('owner.dashboard');
 
-
+        Route::get('/room', [CreateRoomController::class, 'index'])->name('owner.room');
         Route::get('/boarding-house', [OwnerController::class, 'boardingHouse'])->name('owner.boardingHouse');
         Route::post('/add-bh', [OwnerController::class, 'store'])->name('add-boarding-house');
-        Route::post('/add-room/{id}', [OwnerController::class, 'storeRoom'])->name('add-room');
+        Route::post('/add-room/{id}', [OwnerController::class, 'storeRoom'])->name('room-add');
 
     Route::post('logout', [LoginOwnerController::class, 'destroy'])
                 ->name('owner.logout')->middleware(PreventBack::class);
