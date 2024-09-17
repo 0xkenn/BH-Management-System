@@ -14,7 +14,7 @@ class OwnerController extends Controller
 {
     public function boardingHouse(){
         $bh = BoardingHouse::where('owner_id', Auth::guard('owner')->id())->get();
-
+        
         return view('owner.boardingHouse', compact('bh'));
     }
 
@@ -26,8 +26,8 @@ class OwnerController extends Controller
 
             $data['background_image'] = $request->file('background_image')->store('background_images', 'public');
             $data['business_permit_image'] = $request->file('business_permit_image')->store('business_permit_images', 'public');
-
-
+            
+            
             BoardingHouse::create($data);
                 return redirect()->route('owner.boardingHouse')->with('message', 'successfully created a boarding house');
             }else{
@@ -36,26 +36,5 @@ class OwnerController extends Controller
             return redirect()->back();
     }
 
-    public function storeRoom(AddRoomRequest $request, $id){
-        
-        $data = $request->validated();
-        dd($data);
-        $data['owner_id'] = Auth::guard('owner')->id();
-        $data['boarding_houses_id'] = $id;
-        if ($request->hasFile('room_image')) {
-            $imagePaths = [];
-            foreach ($request->file('room_image') as $image) {
-                // Store each image and collect paths
-                $imagePaths[] = $image->store('room_images', 'public');
-            }
-            // Save images as JSON if multiple images, or as string if one
-            $data['room_image'] = json_encode($imagePaths);
-            
-            Room::create($data);
-            return redirect()->route('owner.boardingHouse')->with('success', 'Room created successfully');
-        } else {
-            return redirect()->back()->withErrors('Error: Room image is required.');
-        }
-    }
-    
+   
 }
