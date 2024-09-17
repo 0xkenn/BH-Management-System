@@ -62,7 +62,7 @@
     </svg>
 </a>
 
-<!-- add room  -->
+<!-- Modal Section -->
 <div id="add-room-{{$bh->id}}" class="modal" role="dialog">
     <div class="modal-box flex flex-col">
         <a href="#" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</a>
@@ -75,11 +75,20 @@
       <form action="{{route('add-room')}}" method="post" enctype="multipart/form-data">
         @csrf
 
-        <input type="text" id="name"  name="name" placeholder="Name">
+        <input type="text" id="name"  name="name" value="{{old('name')}}" placeholder="Name">
+        @error('name')
+        <div class="text-sm text-red-400">{{ $message }}</div>
+        @enderror
         <br>
-        <input type="text" id="capacity"  name="name" placeholder="Capacity">
+        <input type="number" id="capacity"  name="capacity" value="{{old('capacity')}}" placeholder="Capacity">
+        @error('capacity')
+        <div class="text-sm text-red-400">{{ $message }}</div>
+        @enderror
         <br>
-        <input type="text" id="price"  name="name" placeholder="Price">
+        <input type="number" id="price"  name="price" value="{{old('price')}}" placeholder="Price">
+        @error('price')
+        <div class="text-sm text-red-400">{{ $message }}</div>
+        @enderror
         <br>
         {{-- d --}}
         <input type="file" id="room_image" name="room_image[]" accept="image/*" multiple style="
@@ -91,7 +100,9 @@
         font-size: 12px;
     ">
     <button class="btn">submit</button>
+    
       </form>
+    
         <div id="file-info" style="margin-top: 10px;"></div>
 
         <script>
