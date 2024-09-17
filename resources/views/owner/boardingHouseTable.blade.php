@@ -52,7 +52,7 @@
 
 
 
-{{-- add --}}
+{{-- add room --}}
 <a href="#add-room-{{$bh->id}}"
     class="items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
     aria-label="approver"
@@ -62,7 +62,7 @@
     </svg>
 </a>
 
-<!-- add room  -->
+<!-- Modal Section -->
 <div id="add-room-{{$bh->id}}" class="modal" role="dialog">
     <div class="modal-box flex flex-col">
         <a href="#" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</a>
@@ -71,6 +71,7 @@
         <p class="py-4">Address: {{$bh->address}}</p>
 
         <!-- Image Upload Section -->
+
         <form action="{{ route('add-room') }}" method="post" enctype="multipart/form-data" style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
             @csrf
 
@@ -123,8 +124,11 @@
             </div>
 
 
+
     <button class="btn">submit</button>
+    
       </form>
+    
         <div id="file-info" style="margin-top: 10px;"></div>
 
         <script>

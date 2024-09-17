@@ -29,7 +29,7 @@ class OwnerController extends Controller
             
             
             BoardingHouse::create($data);
-                return redirect()->route('owner.boardingHouse');
+                return redirect()->route('owner.boardingHouse')->with('message', 'successfully created a boarding house');
             }else{
                 return redirect()->back()->withErrors('Error creating boarding house');
             }
