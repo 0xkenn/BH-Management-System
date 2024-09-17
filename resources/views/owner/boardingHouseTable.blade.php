@@ -67,8 +67,6 @@
     <div class="modal-box flex flex-col">
         <a href="#" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</a>
         <h3 class="text-lg font-bold">{{$bh->name}}'s Data!</h3>
-        <p class="py-4">Name: {{$bh->name}}</p>
-        <p class="py-4">Address: {{$bh->address}}</p>
 
         <!-- Image Upload Section -->
 
@@ -85,6 +83,9 @@
                     box-sizing: border-box;
                 ">
             </div>
+            @error('name')
+            <div class="text-sm text-red-400">{{ $message }}</div>
+            @enderror
 
             <div style="margin-bottom: 15px;">
                 <label for="capacity" style="display: block; font-weight: bold; margin-bottom: 5px;">Capacity:</label>
@@ -96,6 +97,9 @@
                     box-sizing: border-box;
                 ">
             </div>
+            @error('capacity')
+        <div class="text-sm text-red-400">{{ $message }}</div>
+        @enderror
 
             <div style="margin-bottom: 15px;">
                 <label for="price" style="display: block; font-weight: bold; margin-bottom: 5px;">Price:</label>
@@ -107,7 +111,9 @@
                     box-sizing: border-box;
                 ">
             </div>
-
+            @error('price')
+            <div class="text-sm text-red-400">{{ $message }}</div>
+            @enderror
             <div style="margin-bottom: 20px;">
                 <label for="room_image" style="display: block; font-weight: bold; margin-bottom: 5px;">Room Image:</label>
                 <input type="file" id="room_image" name="room_image[]" accept="image/*" multiple style="
@@ -126,9 +132,9 @@
 
 
     <button class="btn">submit</button>
-    
+
       </form>
-    
+
         <div id="file-info" style="margin-top: 10px;"></div>
 
         <script>
