@@ -71,25 +71,58 @@
         <p class="py-4">Address: {{$bh->address}}</p>
 
         <!-- Image Upload Section -->
-        <h1>Select Images to Display Filenames and Previews</h1>
-      <form action="{{route('add-room')}}" method="post" enctype="multipart/form-data">
-        @csrf
+        <form action="{{ route('add-room') }}" method="post" enctype="multipart/form-data" style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+            @csrf
 
-        <input type="text" id="name"  name="name" placeholder="Name">
-        <br>
-        <input type="text" id="capacity"  name="name" placeholder="Capacity">
-        <br>
-        <input type="text" id="price"  name="name" placeholder="Price">
-        <br>
-        {{-- d --}}
-        <input type="file" id="room_image" name="room_image[]" accept="image/*" multiple style="
-        padding: 5px;
-        border: 2px solid #007BFF;
-        border-radius: 5px;
-        background-color: #f8f9fa;
-        cursor: pointer;
-        font-size: 12px;
-    ">
+            <div style="margin-bottom: 15px;">
+                <label for="name" style="display: block; font-weight: bold; margin-bottom: 5px;">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter room name" style="
+                    width: 100%;
+                    padding: 10px;
+                    border: 1px solid #ced4da;
+                    border-radius: 4px;
+                    box-sizing: border-box;
+                ">
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label for="capacity" style="display: block; font-weight: bold; margin-bottom: 5px;">Capacity:</label>
+                <input type="text" id="capacity" name="capacity" placeholder="Enter room capacity" style="
+                    width: 100%;
+                    padding: 10px;
+                    border: 1px solid #ced4da;
+                    border-radius: 4px;
+                    box-sizing: border-box;
+                ">
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label for="price" style="display: block; font-weight: bold; margin-bottom: 5px;">Price:</label>
+                <input type="text" id="price" name="price" placeholder="Enter room price" style="
+                    width: 100%;
+                    padding: 10px;
+                    border: 1px solid #ced4da;
+                    border-radius: 4px;
+                    box-sizing: border-box;
+                ">
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label for="room_image" style="display: block; font-weight: bold; margin-bottom: 5px;">Room Image:</label>
+                <input type="file" id="room_image" name="room_image[]" accept="image/*" multiple style="
+                    padding: 8px;
+                    border: 2px solid #007BFF;
+                    border-radius: 4px;
+                    background-color: #ffffff;
+                    cursor: pointer;
+                    font-size: 14px;
+                    box-sizing: border-box;
+                    display: block;
+                    width: 100%;
+                ">
+            </div>
+
+
     <button class="btn">submit</button>
       </form>
         <div id="file-info" style="margin-top: 10px;"></div>
