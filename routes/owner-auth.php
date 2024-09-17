@@ -27,10 +27,10 @@ Route::prefix('owner')->middleware('auth:owner')->group(function () {
         return view('owner.dashboard');
     })->name('owner.dashboard');
 
-        Route::get('/room', [CreateRoomController::class, 'index'])->name('owner.room');
+        Route::get('/room/{id}', [CreateRoomController::class, 'index'])->name('owner.room');
         Route::get('/boarding-house', [OwnerController::class, 'boardingHouse'])->name('owner.boardingHouse');
         Route::post('/add-bh', [OwnerController::class, 'store'])->name('add-boarding-house');
-        Route::post('/add-room/{id}', [OwnerController::class, 'storeRoom'])->name('room-add');
+        Route::post('/add-room/{id}', [CreateRoomController::class, 'storeRoom'])->name('room-add');
 
     Route::post('logout', [LoginOwnerController::class, 'destroy'])
                 ->name('owner.logout')->middleware(PreventBack::class);
