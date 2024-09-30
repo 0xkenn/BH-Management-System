@@ -83,7 +83,7 @@
                      <h3 class="text-lg font-bold">{{$bh->name}}'s Data!</h3>
                      <p class="py-4">Name: {{$bh->name}}</p>
                      <p class="py-4">Address: {{$bh->address}}</p>
-                     <p class="py-4">Description:</p> <!-- Added description -->
+                     <p class="py-4">Description: {{$bh->description}}</p> <!-- Added description -->
                      <p class="py-4">Rooms:</p> <!-- Added rooms -->
                      <div class="modal-action">
                          <!-- You can add action buttons here if needed -->

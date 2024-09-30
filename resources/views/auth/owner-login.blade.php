@@ -1,9 +1,12 @@
+
+
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
     @if (session()->has('approval'))
         <x-error-toast :message="session()->get('approval')"/>
     @endif
+
 
 <h1 class="flex justify-center items-center font-bold">Owner Login</h1>
     <form method="POST" action="{{ route('login-owner.store') }}">
@@ -47,5 +50,6 @@
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
+       
     </form>
 </x-guest-layout>

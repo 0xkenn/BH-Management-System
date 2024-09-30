@@ -64,13 +64,22 @@
                                 </button>
                             </div>
                             <div class="modal-body">
+                                @foreach ($house->rooms as $room)
+                                {{-- edit this make it a card --}}
                                 <div class="mb-3">
-                                    <img src="{{ asset('storage/' . $house->image1) }}" class="img-fluid" alt="{{ $house->name }}">
-                                    <img src="{{ asset('storage/' . $house->image2) }}" class="img-fluid" alt="{{ $house->name }}">
-                                    <img src="{{ asset('storage/' . $house->image3) }}" class="img-fluid" alt="{{ $house->name }}">
+                                   @if ($room->room_image_1 != null)
+                                   <img src="{{ asset('storage/' . $room->room_image_1) }}" class="img-fluid" alt="{{ $room->name }}">
+                                   @endif
+                                    @if ($room->room_image_2 != null)
+                                    <img src="{{ asset('storage/' . $room->room_image_2) }}" class="img-fluid" alt="{{ $room->name }}">
+                                    @endif
+                                    @if ($room->room_image_3 != null)
+                                    <img src="{{ asset('storage/' . $room->room_image_3) }}" class="img-fluid" alt="{{ $room->name }}">
+                                    @endif
                                 </div>
-                                <p><strong>Price:</strong> ${{ $house->price }}</p>
-                                <p><strong>Description:</strong> {{ $house->description }}</p>
+                                <p><strong>Price:</strong> ${{ $room->price }}</p>
+                                <p><strong>Available:</strong> {{ !$room->is_occupied ? 'Yes' : 'No' }}</p>
+                                @endforeach
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-success">Book Now</button>

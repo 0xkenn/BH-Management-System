@@ -29,7 +29,7 @@ class LoginAdminController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-
+        Auth::guard('admin');
         return redirect()->route('admin.dashboard');
     }
 

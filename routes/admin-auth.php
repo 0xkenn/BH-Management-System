@@ -20,7 +20,6 @@ Route::prefix('admin')->middleware('guest:admin')->group(function () {
 
   
 });
-
 Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
     Route::get('/dashboard', function () {

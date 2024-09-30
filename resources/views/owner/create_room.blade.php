@@ -58,8 +58,8 @@
               <div class="text-sm text-red-400">{{ $message }}</div>
               @enderror
               <div style="margin-bottom: 20px;">
-                  <label for="room_image" style="display: block; font-weight: bold; margin-bottom: 5px;">Room Image:</label>
-                  <input type="file" id="room_image" name="room_image" accept="image/*" multiple style="
+                  <label for="room_image_1" style="display: block; font-weight: bold; margin-bottom: 5px;">Room Image:(optional)</label>
+                  <input type="file" id="room_image_1" name="room_image_1"  style="
                       padding: 8px;
                       border: 2px solid #007BFF;
                       border-radius: 4px;
@@ -71,6 +71,45 @@
                       width: 100%;
                   ">
               </div>
+              @error('room_image_1')
+              <div class="text-sm text-red-400">{{ $message }}</div>
+              @enderror
+
+              <div style="margin-bottom: 20px;">
+                <label for="room_image_2" style="display: block; font-weight: bold; margin-bottom: 5px;">Room Image:</label>
+                <input type="file" id="room_image_2" name="room_image_2"  style="
+                    padding: 8px;
+                    border: 2px solid #007BFF;
+                    border-radius: 4px;
+                    background-color: #ffffff;
+                    cursor: pointer;
+                    font-size: 14px;
+                    box-sizing: border-box;
+                    display: block;
+                    width: 100%;
+                ">
+            </div>
+            @error('room_image_2')
+            <div class="text-sm text-red-400">{{ $message }}</div>
+            @enderror
+
+            <div style="margin-bottom: 20px;">
+                <label for="room_image_3" style="display: block; font-weight: bold; margin-bottom: 5px;">Room Image:</label>
+                <input type="file" id="room_image_3" name="room_image_3"  style="
+                    padding: 8px;
+                    border: 2px solid #007BFF;
+                    border-radius: 4px;
+                    background-color: #ffffff;
+                    cursor: pointer;
+                    font-size: 14px;
+                    box-sizing: border-box;
+                    display: block;
+                    width: 100%;
+                ">
+            </div>
+            @error('room_image_3')
+            <div class="text-sm text-red-400">{{ $message }}</div>
+            @enderror
 
 
 

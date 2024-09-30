@@ -21,16 +21,22 @@ class CreateRoomController extends Controller
         
         $data = $request->validated();
         $data['owner_id'] = Auth::guard('owner')->id();
-        $data['boarding_houses_id'] = $id;
-  
-        if($request->hasFile('room_image')){
-            $data['room_image'] = $request->file('room_image')->store('room_images', 'public');
+        $data['boarding_house_id'] = $id;
+          if($request->hasFile('room_image_1')){
+            $data['room_image_1'] = $request->file('room_image_1')->store('room_images', 'public');
+          }
+          if($request->hasFile('room_image_2')){
+            $data['room_image_2'] = $request->file('room_image_2')->store('room_images', 'public');
+          }
+          if($request->hasFile('room_image1_3')){
+            $data['room_image_3'] = $request->file('room_image_3')->store('room_images', 'public');
+          }
 
             Room::create($data);
             return redirect()->route('owner.boardingHouse')->with('message', 'Room created successfully');
-        }else{
-            return redirect()->back()->withErrors('Error creating boarding house');
-        }
+     
+            
+        
         return redirect()->back();
     }
 }

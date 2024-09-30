@@ -13,11 +13,11 @@
         var alert = document.getElementById('success-alert');
         if (alert) {
             setTimeout(function () {
-                alert.style.opacity = '0'; // Fade out effect
+                alert.style.opacity = '0'; 
                 setTimeout(function () {
-                    alert.style.display = 'none'; // Hide element after fade out
-                }, 600); // Time to wait for fade out
-            }, 5000); // Time to display the alert (5 seconds)
+                    alert.style.display = 'none'; 
+                }, 600); 
+            }, 5000); 
         }
     });
     </script>

@@ -1,3 +1,8 @@
+@if (session()->has('errors'))
+   <x-error-toast :message="session()->get('errors')"/>
+@endif
+
+
 
 {{-- modal button --}}
 <a href="#create_bh_modal"
@@ -29,6 +34,9 @@ class="flex items-center justify-center   px-2 py-2 text-sm font-medium leading-
                     class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
                     placeholder="Boarding House Name"
                   />
+                  @error('name')
+                    <div class=" text-red-600">{{$message}}</div>
+                  @enderror
                   <div
                     class="absolute inset-y-0 flex items-center ml-3 pointer-events-none"
                   >
@@ -50,6 +58,9 @@ class="flex items-center justify-center   px-2 py-2 text-sm font-medium leading-
                     class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
                     placeholder="Boarding House Address"
                   />
+                  @error('address')
+                  <div class=" text-red-600">{{$message}}</div>
+                @enderror
                   <div
                     class="absolute inset-y-0 flex items-center ml-3 pointer-events-none"
                   >
@@ -74,6 +85,9 @@ class="flex items-center justify-center   px-2 py-2 text-sm font-medium leading-
                     class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
                     placeholder="Description"
                   />
+                  @error('description')
+                  <div class=" text-red-600">{{$message}}</div>
+                @enderror
                   <div
                     class="absolute inset-y-0 flex items-center ml-3 pointer-events-none"
                   >
@@ -98,6 +112,9 @@ class="flex items-center justify-center   px-2 py-2 text-sm font-medium leading-
         class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
         placeholder="Business permit image"
       />
+      @error('business_permit_image')
+      <div class=" text-red-600">{{$message}}</div>
+    @enderror
       <div
         class="absolute inset-y-0 flex items-center ml-3 pointer-events-none"
       >
@@ -125,6 +142,9 @@ class="flex items-center justify-center   px-2 py-2 text-sm font-medium leading-
                     class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
                     placeholder="Background image"
                   />
+                  @error('background_image')
+      <div class=" text-red-600">{{$message}}</div>
+    @enderror
                   <div
                     class="absolute inset-y-0 flex items-center ml-3 pointer-events-none"
                   >

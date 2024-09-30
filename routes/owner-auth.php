@@ -16,17 +16,14 @@ Route::prefix('owner')->middleware('guest:owner')->group(function () {
     Route::get('/login', [LoginOwnerController::class, 'create'])
                 ->name('owner.login');
 
-    Route::post('/owner-login', [LoginOwnerController::class, 'store'])->name('login-owner.store');
+    Route::post('/login/store', [LoginOwnerController::class, 'store'])->name('login-owner.store');
 
   
 });
 
 Route::prefix('owner')->middleware('auth:owner')->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('owner.dashboard');
-    })->name('owner.dashboard');
-
+        Route::get('/dashboard',[OwnerController::class, 'dashboard'])->name('owner.dashboard');
         Route::get('/room/{id}', [CreateRoomController::class, 'index'])->name('owner.room');
         Route::get('/boarding-house', [OwnerController::class, 'boardingHouse'])->name('owner.boardingHouse');
         Route::post('/add-bh', [OwnerController::class, 'store'])->name('add-boarding-house');

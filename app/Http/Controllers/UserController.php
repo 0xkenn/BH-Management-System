@@ -10,7 +10,9 @@ class UserController extends Controller
     public function  boardingHouse(){
         
         $boardingHouses = DB::table('boarding_houses')->paginate(6);
-
-        return view('dashboard', compact('boardingHouses'));
+        $rooms = DB::table('rooms')->paginate(6);
+        return view('dashboard', compact('boardingHouses', 'rooms'));
     }
+
+    
 }

@@ -12,11 +12,13 @@ class Room extends Model
 
     protected $fillable = [
         'owner_id',
-        'boarding_houses_id',
+        'boarding_house_id',
         'name',
         'capacity',
         'price',
-        'room_image',
+        'room_image_1',
+        'room_image_2',
+        'room_image_3',
     ];
 
     public function boarding_house(): BelongsTo {

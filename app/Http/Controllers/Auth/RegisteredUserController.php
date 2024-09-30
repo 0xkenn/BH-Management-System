@@ -33,22 +33,18 @@ class RegisteredUserController extends Controller
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'age' => ['required', 'integer'],
             'gender'=>['required', 'string'],
-            'mobile_number' => ['required', 'string', 'regex:/^(09|63)\d{9}$/
-'],
-            'is_student' =>['required',' boolean' ],
+            'mobile_number' => ['required', 'string', 'regex:/^(09|63)\d{9}$/'],
+            'is_student' => ['required', 'boolean'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            [
-                'mobile_number.regex' => 'The mobile number must start with 09 or 63 and be 11 digits long.',
-                'mobile_number.digits' => 'The mobile number must be exactly 11 digits.',
-                'mobile_number.numeric' => 'The mobile number must be a number.',
-            ]
+        ], [
+            'mobile_number.regex' => 'The mobile number must start with 09 or 63 and be 11 digits long.',
+            'mobile_number.digits' => 'The mobile number must be exactly 11 digits.',
+            'mobile_number.numeric' => 'The mobile number must be a number.',
         ]);
-        if($request->is_student == true){
-             
-        }
+        
 
         $user = User::create([
             'name' => $request->name,
