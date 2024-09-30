@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
             'address' => 'culaba',
             'mobile_number' => '09090909099',
             'approved' => 1,
-            'password' => '12345678'
+            'password' => 'qwertyuiop'
         ]);
 
         Admin::create([
