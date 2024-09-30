@@ -4,82 +4,77 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Boarding House Listings</title>
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <style>
-        body {
-            font-family: 'Figtree', sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-        }
-        .navbar {
-            margin-bottom: 1rem;
-        }
-        .navbar-brand {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        .card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-        }
-
-
-        .card-img-top {
-            width: 100%;
-            height: 180px; /* Adjusted height */
-            object-fit: cover;
-        }
-
-        .btn-primary-card {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 20px;
-
-            font-size: 0.8rem;
-            text-align: center;
-
-            transition: background-color 0.3s;
-        }
-
-    </style>
 </head>
-<body class="font-sans antialiased">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">BoardingHouseMS</a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a href="{{ route('welcome') }}" class="btn btn-primary">Login</a>
-                </li>
-            </ul>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg" style="background-color: rgb(255, 255, 255); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+        <a class="navbar-brand text-dark d-flex align-items-center" href="#" style="font-weight: bold;">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="mb-1" style="width: 70px; height: auto; background: none; padding: 0 10px;">
+            BoardingHouseMS
+        </a>
+        <div class="collapse navbar-collapse">
+            <form class="form-inline ml-auto my-2 my-lg-0">
+                <input class="form-control mr-sm-2 rounded-pill" type="search" placeholder="Search..." aria-label="Search" style="width: 500px;">
+                <a href="{{ route('welcome') }}" class="btn btn-dark my-2 my-sm-0 rounded-pill" style="width: 150px;">Login</a>
+            </form>
         </div>
     </nav>
 
-    <div class="container py-5">
-        <div class="row">
+
+    <div class="container pt-5 pb-3">
+        <div class="row justify-content-center">
             @foreach($boardingHouses as $house)
-                <div class="col-md-3 mb-8">
-                    <div class="card">
-                        <img src="{{ asset('storage/' . $house->background_image) }}" class="card-img-top" alt="{{ $house->name }}">
+                <div class="col-12 col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
+                    <div class="card bg-base-100 shadow-xl" style="border-radius: 12px; width: 100%; max-width: 450px;">
+                        <img src="{{ asset('storage/' . $house->background_image) }}"
+                             class="card-img-top"
+                             alt="{{ $house->name }}"
+                             style="height: 200px; object-fit: cover; border-top-left-radius: 12px; border-top-right-radius: 12px;">
                         <div class="card-body">
-                            <h5 class="card-title">
-                                <i class="fas fa-house-user icon"></i>
+                            <h5 class="card-title font-weight-bold" style="font-size: 1.2rem; color: #333;">
                                 {{ $house->name }}
                             </h5>
-                            <p class="card-text">
-                                <i class="fas fa-map-marker-alt icon"></i>
+                            <p class="card-text" style="font-size: 0.9rem; color: #666;">
+                                <i class="fas fa-map-marker-alt"></i>
                                 {{ Str::limit($house->address, 90) }}
                             </p>
-                            <p class="card-text italic">{{ Str::limit($house->description, 50) }}</p>
-                            <a href="#" class="btn btn-primary-card">View Details</a>
+                            <p class="card-text" style="color: #555; font-size: 0.85rem; text-align: justify; line-height: 1.4;">
+                                {{ Str::limit($house->description, 80) }}
+                            </p>
+                            <div class="d-flex justify-content-center">
+                                <button type="button" class="btn btn-primary rounded-pill" style="width: 100%;" data-toggle="modal" data-target="#modal{{ $house->id }}">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="modal{{ $house->id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel{{ $house->id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalLabel{{ $house->id }}">{{ $house->name }} Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <img src="{{ asset('storage/' . $house->image1) }}" class="img-fluid" alt="{{ $house->name }}">
+                                    <img src="{{ asset('storage/' . $house->image2) }}" class="img-fluid" alt="{{ $house->name }}">
+                                    <img src="{{ asset('storage/' . $house->image3) }}" class="img-fluid" alt="{{ $house->name }}">
+                                </div>
+                                <p><strong>Price:</strong> ${{ $house->price }}</p>
+                                <p><strong>Description:</strong> {{ $house->description }}</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success">Book Now</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -87,7 +82,9 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
