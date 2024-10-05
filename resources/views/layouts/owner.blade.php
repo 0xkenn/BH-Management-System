@@ -15,8 +15,15 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.owner-nav')
+
+
+
+            <div class="flex  h-screen min-h-screen bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen}">
+
+                @include('owner.asidebar-owner')
+                <div class="flex flex-col flex-1 w-full">
+                    @include('layouts.owner-nav')
+
 
             <!-- Page Heading -->
             @isset($header)

@@ -83,9 +83,12 @@
                 {{ __('Already registered?') }}
             </a>
 
-            <x-primary-button class="ms-4">
+            <x-primary-button class="ms-4" >
                 {{ __('Register') }}
             </x-primary-button>
+            <a class="ms-4 bg-red-700 text-white py-2 px-4 rounded hover:bg-red-800 transition-colors" href="{{ url('/') }}">
+                {{ __('Cancel') }}
+            </a>
         </div>
     </form>
 </x-guest-layout>

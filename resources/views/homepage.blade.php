@@ -4,97 +4,169 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Boarding House Listings</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    @vite('resources/css/app.css') <!-- Ensure Tailwind CSS is included -->
 </head>
-<body class="bg-light">
-    <nav class="navbar navbar-expand-lg" style="background-color: rgb(255, 255, 255); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-        <a class="navbar-brand text-dark d-flex align-items-center" href="#" style="font-weight: bold;">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="mb-1" style="width: 70px; height: auto; background: none; padding: 0 10px;">
-            BoardingHouseMS
-        </a>
-        <div class="collapse navbar-collapse">
-            <form class="form-inline ml-auto my-2 my-lg-0">
-                <input class="form-control mr-sm-2 rounded-pill" type="search" placeholder="Search..." aria-label="Search" style="width: 500px;">
-                <a href="{{ route('welcome') }}" class="btn btn-dark my-2 my-sm-0 rounded-pill" style="width: 150px;">Login</a>
+<body class="bg-gray-150 font-sans m-0">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-12 mr-2" />
+                <a class="font-bold text-xl color-green">BoardingHouseMS</a>
+            </div>
+            <form method="GET" action="#" class="flex items-center">
+                <input type="search" name="query" placeholder="Search..." class="p-2 border border-gray-300 rounded-full w-80 focus:outline-none focus:ring-2 focus:ring-green-400" aria-label="Search">
+                <a href="{{ route('/register-user') }}" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-green-300 font-bold rounded-full text-sm px-5 py-2.5 shadow-lg shadow-green-500/50 transition duration-200 ease-in-out ml-2">
+                    Register
+                </a>
+
+                <a href="{{ route('welcome') }}" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-green-300 font-bold rounded-full text-sm px-5 py-2.5 shadow-lg shadow-green-500/50 transition duration-200 ease-in-out ml-2">
+                    Log In
+                </a>
             </form>
         </div>
     </nav>
 
 
-    <div class="container pt-5 pb-3">
-        <div class="row justify-content-center">
-            @foreach($boardingHouses as $house)
-                <div class="col-12 col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
-                    <div class="card bg-base-100 shadow-xl" style="border-radius: 12px; width: 100%; max-width: 450px;">
-                        <img src="{{ asset('storage/' . $house->background_image) }}"
-                             class="card-img-top"
-                             alt="{{ $house->name }}"
-                             style="height: 200px; object-fit: cover; border-top-left-radius: 12px; border-top-right-radius: 12px;">
-                        <div class="card-body">
-                            <h5 class="card-title font-weight-bold" style="font-size: 1.2rem; color: #333;">
-                                {{ $house->name }}
-                            </h5>
-                            <p class="card-text" style="font-size: 0.9rem; color: #666;">
-                                <i class="fas fa-map-marker-alt"></i>
-                                {{ Str::limit($house->address, 90) }}
-                            </p>
-                            <p class="card-text" style="color: #555; font-size: 0.85rem; text-align: justify; line-height: 1.4;">
-                                {{ Str::limit($house->description, 80) }}
-                            </p>
-                            <div class="d-flex justify-content-center">
-                                <button type="button" class="btn btn-primary rounded-pill" style="width: 100%;" data-toggle="modal" data-target="#modal{{ $house->id }}">
-                                    View Details
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="flex p-5 container mx-auto">
+        <!-- Sidebar -->
+        <aside class="w-full md:w-64 bg-gray-200 border-r border-gray-300 p-4 hidden md:block rounded-lg shadow-md mx-auto">
+            <h3 class="text-lg text-gray-800 font-bold mb-4 text-center">News & Updates</h3>
+            <ul class="list-none p-0">
+                <li class="mb-4">
+                    <a href="#" class="text-green-600 hover:underline font-bold text-center">Latest Updates on Housing</a>
+                    <p class="text-gray-600 text-sm mt-1 text-justify">Stay informed about the latest regulations and developments affecting housing in your area.</p>
+                </li>
+                <li class="mb-4">
+                    <a href="#" class="text-green-600 hover:underline font-bold text-center">Tips for New Renters</a>
+                    <p class="text-gray-600 text-sm mt-1 text-justify">Discover essential tips and tricks to make your renting experience smoother and hassle-free.</p>
+                </li>
+                <li class="mb-4">
+                    <a href="#" class="text-green-600 hover:underline font-bold text-center">Community Events</a>
+                    <p class="text-gray-600 text-sm mt-1 text-justify">Join us for exciting community events designed to bring neighbors together.</p>
+                </li>
+                <li class="mb-4">
+                    <a href="#" class="text-green-600 hover:underline font-bold text-center">Understanding Your Lease</a>
+                    <p class="text-gray-600 text-sm mt-1 text-justify">A comprehensive guide to understanding your rental agreement and what to look out for.</p>
+                </li>
+            </ul>
+        </aside>
 
-                <!-- Modal -->
-                <div class="modal fade" id="modal{{ $house->id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel{{ $house->id }}" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modalLabel{{ $house->id }}">{{ $house->name }} Details</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                @foreach ($house->rooms as $room)
-                                {{-- edit this make it a card --}}
-                                <div class="mb-3">
-                                   @if ($room->room_image_1 != null)
-                                   <img src="{{ asset('storage/' . $room->room_image_1) }}" class="img-fluid" alt="{{ $room->name }}">
-                                   @endif
-                                    @if ($room->room_image_2 != null)
-                                    <img src="{{ asset('storage/' . $room->room_image_2) }}" class="img-fluid" alt="{{ $room->name }}">
-                                    @endif
-                                    @if ($room->room_image_3 != null)
-                                    <img src="{{ asset('storage/' . $room->room_image_3) }}" class="img-fluid" alt="{{ $room->name }}">
-                                    @endif
-                                </div>
-                                <p><strong>Price:</strong> ${{ $room->price }}</p>
-                                <p><strong>Available:</strong> {{ !$room->is_occupied ? 'Yes' : 'No' }}</p>
-                                @endforeach
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-success">Book Now</button>
-                            </div>
+        <!-- Main Content -->
+        <main class="flex-1 pl-5">
+            <div class="flex flex-wrap gap-6 justify-center">
+                @foreach($boardingHouses as $house)
+                    <div class="w-full max-w-sm border border-gray-300 rounded-lg overflow-hidden bg-white shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <div class="flex justify-center"> <!-- Centering the image -->
+                            @if($house->background_image)
+                                <img src="{{ asset('storage/' . $house->background_image) }}" alt="{{ $house->name }}" class="w-full h-48 object-cover">
+                            @else
+                                <img src="{{ asset('images/placeholder.png') }}" alt="Placeholder" class="w-full h-48 object-cover">
+                            @endif
+                        </div>
+                        <div class="p-4">
+                            <h5 class="text-lg font-bold text-gray-800">{{ $house->name }}</h5>
+                            <p class="text-gray-600"><i>{{ $house->address }}</i></p>
+                            <p class="text-gray-700 text-sm leading-relaxed">{{ Str::limit($house->description, 80) }}</p>
+                            <label for="modal{{ $house->id }}" class="mt-3 block w-full bg-green-600 text-white py-2 rounded cursor-pointer hover:bg-green-700 transition-colors text-center">View Details</label>
                         </div>
                     </div>
-                </div>
-            @endforeach
-        </div>
+
+
+                        <!-- Modal -->
+                        <input type="checkbox" id="modal{{ $house->id }}" class="modal-toggle hidden">
+                        <div class="modal fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+                            <div class="bg-white p-5 rounded-lg w-11/12 max-w-3xl overflow-hidden">
+                                <div class="flex justify-between items-center">
+                                    <h5 class="text-xl font-bold">{{ $house->name }} Details</h5>
+                                    <label for="modal{{ $house->id }}" class="bg-transparent border-none text-xl cursor-pointer">&times;</label>
+                                </div>
+
+                                <!-- Carousel Container -->
+                                <div class="relative mt-3 mb-4">
+                                    <div class="overflow-hidden relative">
+                                        <div class="carousel-container flex transition-transform duration-300" id="carousel{{ $house->id }}">
+                                            @foreach ($house->rooms as $room)
+                                                <div class="carousel-item w-full flex-shrink-0 flex flex-col items-center"> <!-- Center items -->
+                                                    <div class="grid grid-cols-2 gap-4"> <!-- 2x2 Grid for images -->
+                                                        @php
+                                                            $images = [
+                                                                $room->room_image_1,
+                                                                $room->room_image_2,
+                                                                $room->room_image_3,
+                                                                $room->room_image_4,
+                                                            ];
+                                                        @endphp
+                                                        @foreach ($images as $image)
+                                                            <div class="flex justify-center"> <!-- Center image -->
+                                                                <div class="w-80 h-52"> <!-- Increase width and height for a larger image container -->
+                                                                    @if($image && file_exists(public_path('storage/' . $image))) <!-- Check if image exists -->
+                                                                        <img src="{{ asset('storage/' . $image) }}" alt="{{ $room->name }}" class="w-full h-full object-cover rounded"> <!-- Adjust to full width and height -->
+                                                                    @else <!-- Placeholder if no image -->
+                                                                        <img src="{{ asset('images/y9DpT.jpg') }}" alt="Placeholder" class="w-full h-full object-cover rounded"> <!-- Adjust to full width and height -->
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+
+                                                    <!-- Room Details and Button -->
+                                                    <div class="relative w-full mt-2"> <!-- Relative positioning for button -->
+                                                        <div class="flex flex-col text-left"> <!-- Flex column for room details -->
+                                                            <h6 class="font-bold text-lg">{{ $room->name }}</h6>
+                                                            <p class="mt-1"><strong>Price:</strong> ${{ $room->price }}</p>
+                                                            <p><strong>Available:</strong> {{ !$room->is_occupied ? 'Yes' : 'No' }}</p>
+                                                        </div>
+                                                        <button class="absolute bottom-0 right-0 bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-colors">Reserve Now</button> <!-- Button at bottom right -->
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+
+                                        <!-- Navigation Controls -->
+                                        @if ($house->rooms->count() > 1) <!-- Only show navigation buttons if there are multiple rooms -->
+                                            <div class="absolute top-1/2 transform -translate-y-1/2 left-4">
+                                                <button class="btn btn-circle bg-gray-800 text-white hover:bg-gray-600"
+                                                    onclick="moveCarousel('{{ $house->id }}', -1)">❮</button> <!-- Previous Button -->
+                                            </div>
+                                            <div class="absolute top-1/2 transform -translate-y-1/2 right-4">
+                                                <button class="btn btn-circle bg-gray-800 text-white hover:bg-gray-600"
+                                                    onclick="moveCarousel('{{ $house->id }}', 1)">❯</button> <!-- Next Button -->
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                @endforeach
+            </div>
+        </main>
     </div>
 
+    <script>
+        function moveCarousel(houseId, direction) {
+            const carousel = document.getElementById('carousel' + houseId);
+            const items = carousel.children;
+            const itemCount = items.length;
+            let index = 0;
 
-    <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+            // Find current index
+            for (let i = 0; i < itemCount; i++) {
+                if (items[i].classList.contains('active')) {
+                    index = i;
+                    items[i].classList.remove('active');
+                    break;
+                }
+            }
+
+            // Update index based on direction
+            index = (index + direction + itemCount) % itemCount;
+
+            // Move carousel
+            carousel.style.transform = `translateX(-${index * 100}%)`;
+            items[index].classList.add('active');
+        }
+    </script>
 </body>
 </html>

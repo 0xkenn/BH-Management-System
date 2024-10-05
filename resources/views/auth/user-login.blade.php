@@ -42,6 +42,9 @@
             <x-primary-button class="ms-3">
                 {{ __('Log in') }}
             </x-primary-button>
+            <a class="ms-3 bg-red-700 text-white py-1 px-4 rounded hover:bg-red-800 transition-colors" href="{{ url('/') }}">
+                {{ __('Cancel') }}
+            </a>
         </div>
     </form>
 </x-guest-layout>
