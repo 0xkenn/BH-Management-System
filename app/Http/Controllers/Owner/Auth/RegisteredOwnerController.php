@@ -35,6 +35,7 @@ class RegisteredOwnerController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.Owner::class],
             'address' => ['required', 'string'],
             'mobile_number' => ['required', 'string', 'regex:/^(09|63)\d{9}$/'],
+            'business_permit' =>['required', 'image', 'mimes:png,jpg,jpeg'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
         
@@ -45,6 +46,7 @@ class RegisteredOwnerController extends Controller
             'email' => $request->email,
             'address' => $request->address,
             'mobile_number' => $request->mobile_number,
+            'business_permit' => $request->file('business_permit')->store('business_permits', 'public'),
             'password' => Hash::make($request->password),
         ]);
        

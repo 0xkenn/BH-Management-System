@@ -36,7 +36,7 @@ class="z-20 flex-shrink-0 hidden w-64 overflow-y-auto bg-slate-100 dark:bg-gray-
     <li class="relative px-6 py-3">
       <a
         class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-        href="forms.html"
+        href="{{route('admin.bh-management')}}"
       >
         <svg
           class="w-5 h-5"
@@ -80,7 +80,7 @@ class="z-20 flex-shrink-0 hidden w-64 overflow-y-auto bg-slate-100 dark:bg-gray-
     <li class="relative px-6 py-3">
       <a
         class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-        href="forms.html"
+        href="{{route('admin.user-list')}}"
       >
         <svg
           class="w-5 h-5"
@@ -102,7 +102,7 @@ class="z-20 flex-shrink-0 hidden w-64 overflow-y-auto bg-slate-100 dark:bg-gray-
     <li class="relative px-6 py-3">
         <a
           class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-          href="forms.html"
+          href="{{route('admin.reports')}}"
         >
           <svg
             class="w-5 h-5"

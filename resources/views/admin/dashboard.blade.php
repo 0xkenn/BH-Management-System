@@ -30,7 +30,7 @@
                         <h3 class="text-xl font-bold">Graph</h3>
                         <div id="graph" style="height: 300px;">
                             <!-- Placeholder for graph rendering -->
-                            <p class="text-center">Graph will be displayed here.</p>
+                            <canvas id="myChart" height="120px"></canvas>
                         </div>
                     </div>
 
@@ -39,6 +39,33 @@
             </div>
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript">
+  
+        var labels =  {{ Js::from($labels) }};
+        var users =  {{ Js::from($data) }};
+    
+        const data = {
+          labels: labels,
+          datasets: [{
+            label: 'Number of Users',
+            backgroundColor: 'rgb(99, 255, 132)',
+            borderColor: 'rgb(99, 255, 132)',
+            data: users,
+          }]
+        };
+    
+        const config = {
+          type: 'bar',
+          data: data,
+          options: {}
+        };
+    
+        const myChart = new Chart(
+          document.getElementById('myChart'),
+          config
+        );
+    
+  </script>
 </x-admin-layout>
 @endauth

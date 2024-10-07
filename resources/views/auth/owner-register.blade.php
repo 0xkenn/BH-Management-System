@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register-owner.store') }}">
+    <form method="POST" action="{{ route('register-owner.store') }}" enctype="multipart/form-data">
         @csrf
 
         <!-- Name -->
@@ -30,6 +30,12 @@
     <x-input-label for="mobile_number" :value="__('mobile_number')" />
     <x-text-input id="mobile_number" class="block mt-1 w-full" type="tel" name="mobile_number" :value="old('mobile_number')" required autocomplete="username" />
     <x-input-error :messages="$errors->get('mobile_number')" class="mt-2" />
+</div>
+
+<div class="mt-4">
+    <x-input-label for="business_permit" :value="__('business_permit')" />
+    <x-text-input id="business_permit" class="block mt-1 w-full" type="file" name="business_permit" :value="old('business_permit')" required autocomplete="username" />
+    <x-input-error :messages="$errors->get('business_permit')" class="mt-2" />
 </div>
 
         <!-- Password -->

@@ -25,6 +25,17 @@ class AdminController extends Controller
 
 
     }
+    public function BHScreen(): View{
+        return view('admin.bh-management');
+    }
+
+    public function userList(){
+        return view('admin.user-management');
+    }
+
+    public function reports(){
+        return view('admin.reports');
+    }
 
 
 }

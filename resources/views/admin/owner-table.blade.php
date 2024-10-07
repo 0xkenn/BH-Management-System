@@ -73,6 +73,16 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m-7 4h8a2 2 0 002-2V6a2 2 0 00-2-2H8a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
       </a>
+    {{-- modal permit --}}
+      <div class="modal" role="dialog" id="permit_data_{{$owner->id}}">
+        <div class="modal-box">
+         
+          <img src="{{asset('storage/'.$owner->business_permit)}}" alt="">
+          <div class="modal-action">
+            <a href="#" class="btn">Yay!</a>
+          </div>
+        </div>
+      </div>
     </td>
 
       <td class="px-4 py-3">
