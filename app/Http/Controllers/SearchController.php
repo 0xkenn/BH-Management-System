@@ -13,4 +13,5 @@ class SearchController extends Controller
 
         return view('search-results', compact('query')); // Example view
     }
+    
 }
