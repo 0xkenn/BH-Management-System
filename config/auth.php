@@ -24,6 +24,10 @@ return [
             'driver' => 'session',
             'provider' => 'owners',
         ],
+        'school' => [
+            'driver' => 'session',
+            'provider' =>'schools',
+        ]
         
     ],
 
@@ -42,6 +46,10 @@ return [
         'owners' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\Owner::class),
+        ],
+        'schools' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', App\Models\School::class),
         ],
 
         // 'users' => [
@@ -71,6 +79,14 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'schools' => [
+            'provider' => 'schools',
+            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+    
+        
     ],
 
  

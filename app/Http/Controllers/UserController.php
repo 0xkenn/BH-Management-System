@@ -11,7 +11,10 @@ class UserController extends Controller
         
         $boardingHouses = DB::table('boarding_houses')->paginate(6);
         $rooms = DB::table('rooms')->paginate(6);
-        return view('dashboard', compact('boardingHouses', 'rooms'));
+        return view('user.dashboard', compact('boardingHouses', 'rooms'));
+    }
+    public function savedBoardingHouse(){
+        return view('user.saved-event');
     }
 
     

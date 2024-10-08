@@ -15,7 +15,11 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+       
+        <div class="flex  h-screen min-h-screen bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen}">
+            
+            @include('user.user-sidebar')
+            <div class="flex flex-col flex-1 w-full">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
@@ -28,7 +32,8 @@
             @endisset
 
             <!-- Page Content -->
-            <main>
+            <main class="z-20 h-full pb-16 overflow-y-auto bg-gray-200">
+                <div class="container grid px-6 mx-auto">
                 {{ $slot }}
             </main>
         </div>

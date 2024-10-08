@@ -46,7 +46,7 @@
 
                         {{-- User Links --}}
                         @auth('web')
-                            <a href="{{ route('dashboard') }}" class="mb-4 w-full text-center px-4 py-3 font-medium text-white bg-green-600 rounded-lg hover:bg-green-700">
+                            <a href="{{ route('user.dashboard') }}" class="mb-4 w-full text-center px-4 py-3 font-medium text-white bg-green-600 rounded-lg hover:bg-green-700">
                                 User Dashboard
                             </a>
                         @else
