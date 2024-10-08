@@ -24,13 +24,13 @@ Route::middleware('auth:web')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
+
 });
 
     Route::get('/welcome', [WelcomeController::class, 'ShowWelcome'])->name('welcome');
 
     Route::get('/search', [SearchController::class, 'search'])->name('search');
-
+    Route::get('/useredit', [UserController::class, 'userProfile'])->name('useredit');
 
 
     Route::get('/', function () {
