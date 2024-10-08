@@ -1,11 +1,11 @@
 @auth('admin')
 <x-admin-layout>
 
-    <div class="py-12">
+    <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
-                <div class="p-6">
+                <div class="p-3">
                     <h2 class="text-lg font-semibold">Dashboard</h2>
 
                     <!-- Container for two rows of cards -->
@@ -14,13 +14,13 @@
                         <!-- Card for User Count -->
                         <div class="bg-gray-100 p-4 rounded-lg shadow-md">
                             <h3 class="text-xl font-bold">User Count</h3>
-                            <p class="text-2xl">0</p> <!-- Replace with dynamic data -->
+                            <p class="text-2xl">{{$users}}</p> <!-- Replace with dynamic data -->
                         </div>
 
                         <!-- Card for Building Height (BH) Count -->
                         <div class="bg-gray-100 p-4 rounded-lg shadow-md">
-                            <h3 class="text-xl font-bold">Building Height Count</h3>
-                            <p class="text-2xl">0</p> <!-- Replace with dynamic data -->
+                            <h3 class="text-xl font-bold">Boarding House Count</h3>
+                            <p class="text-2xl">{{$boarding_houses}}</p> <!-- Replace with dynamic data -->
                         </div>
 
                     </div>

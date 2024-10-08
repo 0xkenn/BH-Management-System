@@ -32,7 +32,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/reports', [AdminController::class, 'reports'])->name('admin.reports');
     
     Route::get('/owner-panel', [AdminController::class, 'ownerScreen'])->name('admin.owner-screen');
-    Route::get('/dashboard',[TableController::class, 'approveOwner'])->name('admin.dashboard');
+    Route::get('/dashboard',[AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::post('/dashboard/{owner}', [TableController::class, 'editApproval'])->name('owner.approve');
 
 

@@ -23,4 +23,7 @@ class BoardingHouse extends Model
     public function rooms(): HasMany{
         return $this->hasMany(Room::class);
     }
+    public function owner(){
+        return $this->belongsTo(Owner::class, 'owner_id');
+    }
 }
