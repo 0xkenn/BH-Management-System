@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\saveRoomController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('user')->middleware('guest:web')->group(function () {
@@ -53,4 +54,6 @@ Route::middleware('auth:web')->group(function () {
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+    Route::post('save-room/{id}', [saveRoomController::class, 'saveRoom']);
 });

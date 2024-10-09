@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Boarding House Listings</title>
-    @vite('resources/css/app.css') <!-- Ensure Tailwind CSS is included -->
-</head>
-<body class="bg-gray-150 font-sans m-0">
+<x-guest-layout>
+    
 
     <!-- Navigation Bar -->
     <nav class="bg-white shadow-md p-4">
@@ -119,7 +112,26 @@
                                                             <p><strong>Available:</strong> {{ !$room->is_occupied ? 'Yes' : 'No' }}</p>
                                                             <p><strong>Vacancy:</strong> {{ $room->capacity }}</p>
                                                         </div>
-                                                        <button class="absolute bottom-0 right-0 bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-colors">Reserve Now</button> <!-- Button at bottom right -->
+                                                      
+                                                     
+                                                 
+                                               
+                                                 <div>
+                                                 
+                                              </div>
+                                              
+                                               
+                                                 <a
+                                                href="{{ route('login') }}"
+                                                 class="absolute bottom-0 right-0 bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-colors"
+                                                
+                                               >
+                                                 reserve Now
+                                            </a>
+                                             
+                                                        
+                                                     
+                                                       <!-- Button at bottom right -->
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -169,5 +181,5 @@
             items[index].classList.add('active');
         }
     </script>
-</body>
-</html>
+
+</x-guest-layout>

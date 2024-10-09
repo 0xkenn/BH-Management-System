@@ -28,9 +28,10 @@ class LoginAdminController extends Controller
     {
         $request->authenticate();
 
-        $request->session()->regenerate();
-        Auth::guard('admin');
-        return redirect()->route('admin.dashboard');
+        if(auth()->guard('admin')->attempt(['email' => $request['email'], 'password' => $request['password']])){
+            $request->session()->regenerate();
+            return redirect()->route('admin.dashboard');
+        }
     }
 
     /**
