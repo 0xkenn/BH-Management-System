@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\saveRoomController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\SearchController;
@@ -12,8 +13,15 @@ use App\Models\BoardingHouse;
 use App\Models\Room;
 
 Route::get('/', function () {
-    return view('homepage');
+    $boardingHouses = BoardingHouse::with('rooms')->get();
+    $id = auth()->guard('web')->id();
+    $room = Room::findOrFail($id);
+    $savedRoom = $room->reservations()->where('user_id', $id)->first();
+    return view('homepage', compact('savedRoom' , 'boardingHouses'));
+ 
+    
 });
+
 
 
 Route::middleware('auth:web')->group(function () {
@@ -24,19 +32,18 @@ Route::middleware('auth:web')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/useredit', [UserController::class, 'userProfile'])->name('useredit');
 
 });
 
     Route::get('/welcome', [WelcomeController::class, 'ShowWelcome'])->name('welcome');
 
     Route::get('/search', [SearchController::class, 'search'])->name('search');
-    Route::get('/useredit', [UserController::class, 'userProfile'])->name('useredit');
+    
 
 
-    Route::get('/', function () {
-        $boardingHouses = BoardingHouse::with('rooms')->get();
-        return view('homepage', ['boardingHouses' => $boardingHouses]);
-    })->name('homepage');
+  
+    Route::post('save-room/{id}', [saveRoomController::class , 'saveRoom']);
 
 require __DIR__.'/auth.php';
 require __DIR__.'/admin-auth.php';

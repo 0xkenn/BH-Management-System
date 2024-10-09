@@ -3,7 +3,7 @@
     <div class="py-12">
         <div class="max-w-full mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-              <a class=" flex link link-primary justify-end mr-32  mt-2">View all Boarding House</a>
+            
                 <div class="p-6 text-gray-900 flex flex-wrap gap-10 items-center justify-center">
                     
                   @forelse ($boardingHouses as $boardingHouse)
