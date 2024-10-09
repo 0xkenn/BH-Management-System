@@ -6,7 +6,7 @@
 
 {{-- modal button --}}
 <a href="#create_bh_modal"
-class="flex items-center justify-center   px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+class="flex items-center justify-center   px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-green-600 border border-transparent rounded-lg active:bg-green-600 hover:bg-green-700 focus:outline-none focus:shadow-outline-green"
 >
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="size-8">
 <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -28,10 +28,10 @@ class="flex items-center justify-center   px-2 py-2 text-sm font-medium leading-
                 <span class="text-gray-700 dark:text-gray-400" for="name">Boarding House Name</span>
                 <!-- focus-within sets the color for the icon when input is focused -->
                 <div
-                  class="relative text-gray-500 focus-within:text-purple-600 dark:focus-within:text-purple-400"
+                  class="relative text-gray-500 focus-within:text-green-600 dark:focus-within:text-green-400"
                 >
                   <input name="name" value="{{old('name')}}" type="text"
-                    class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
+                    class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:focus:shadow-outline-gray form-input"
                     placeholder="Boarding House Name"
                   />
                   @error('name')
@@ -52,10 +52,10 @@ class="flex items-center justify-center   px-2 py-2 text-sm font-medium leading-
                 <span class="text-gray-700 dark:text-gray-400">Address</span>
                 <!-- focus-within sets the color for the icon when input is focused -->
                 <div
-                  class="relative text-gray-500 focus-within:text-purple-600 dark:focus-within:text-purple-400"
+                  class="relative text-gray-500 focus-within:text-green-600 dark:focus-within:text-green-400"
                 >
                   <input type="text" name="address" value="{{old('address')}}"
-                    class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
+                    class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:focus:shadow-outline-gray form-input"
                     placeholder="Boarding House Address"
                   />
                   @error('address')
@@ -79,10 +79,10 @@ class="flex items-center justify-center   px-2 py-2 text-sm font-medium leading-
                 <span class="text-gray-700 dark:text-gray-400" for="description">Description</span>
                 <!-- focus-within sets the color for the icon when input is focused -->
                 <div
-                  class="relative text-gray-500 focus-within:text-purple-600 dark:focus-within:text-purple-400"
+                  class="relative text-gray-500 focus-within:text-green-600 dark:focus-within:text-green-400"
                 >
                   <input name="description" value="{{old('description')}}" type="text"
-                    class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
+                    class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:focus:shadow-outline-gray form-input"
                     placeholder="Description"
                   />
                   @error('description')
@@ -105,11 +105,11 @@ class="flex items-center justify-center   px-2 py-2 text-sm font-medium leading-
     </span>
     <!-- focus-within sets the color for the icon when input is focused -->
     <div
-      class="relative text-gray-500 focus-within:text-purple-600 dark:focus-within:text-purple-400"
+      class="relative text-gray-500 focus-within:text-green-600 dark:focus-within:text-green-400"
     >
       <input name="business_permit_image" value="{{old('business_permit_image')}}"
       type="file"
-        class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
+        class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:focus:shadow-outline-gray form-input"
         placeholder="Business permit image"
       />
       @error('business_permit_image')
@@ -135,11 +135,11 @@ class="flex items-center justify-center   px-2 py-2 text-sm font-medium leading-
                 <span class="text-gray-700 dark:text-gray-400">Background image</span>
                 <!-- focus-within sets the color for the icon when input is focused -->
                 <div
-                  class="relative text-gray-500 focus-within:text-purple-600 dark:focus-within:text-purple-400"
+                  class="relative text-gray-500 focus-within:text-green-600 dark:focus-within:text-green-400"
                 >
                   <input name="background_image" value="{{old('background_image')}}"
                   type="file"
-                    class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
+                    class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:focus:shadow-outline-gray form-input"
                     placeholder="Background image"
                   />
                   @error('background_image')

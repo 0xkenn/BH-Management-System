@@ -22,7 +22,7 @@
                         <span class="font-bold">{{ $boarding_house->name }}</span>
                     </td>
 
-                    BH name
+
                     <td class="py-3 px-4 text-gray-300">
                         <span class="font-bold">{{ $boarding_house->owner->name }}</span>
                     </td>

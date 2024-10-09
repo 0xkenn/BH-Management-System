@@ -110,6 +110,7 @@
                                                             <h6 class="font-bold text-lg">{{ $room->name }}</h6>
                                                             <p class="mt-1"><strong>Price:</strong> ${{ $room->price }}</p>
                                                             <p><strong>Available:</strong> {{ !$room->is_occupied ? 'Yes' : 'No' }}</p>
+                                                            <p><strong>Vacancy:</strong> {{ $room->capacity }}</p>
                                                         </div>
                                                       
                                                      

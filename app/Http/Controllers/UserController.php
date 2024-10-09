@@ -20,4 +20,14 @@ class UserController extends Controller
     public function userProfile(){
         return view ("user.user-profile");
     }
+     public function roomDetail(){
+        return view ("user.user-detail");
+     }
+
+     public function roomNotif(){
+        return view ("user.user-notification");
+     }
+     public function roomShow (){
+        return view('user.show');
+     }
 }
