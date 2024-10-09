@@ -117,6 +117,7 @@
                                                             <h6 class="font-bold text-lg">{{ $room->name }}</h6>
                                                             <p class="mt-1"><strong>Price:</strong> ${{ $room->price }}</p>
                                                             <p><strong>Available:</strong> {{ !$room->is_occupied ? 'Yes' : 'No' }}</p>
+                                                            <p><strong>Vacancy:</strong> {{ $room->capacity }}</p>
                                                         </div>
                                                         <button class="absolute bottom-0 right-0 bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-colors">Reserve Now</button> <!-- Button at bottom right -->
                                                     </div>

@@ -31,6 +31,11 @@ Route::middleware('auth:web')->group(function () {
 
     Route::get('/search', [SearchController::class, 'search'])->name('search');
     Route::get('/useredit', [UserController::class, 'userProfile'])->name('useredit');
+    Route::get('/roomdetail', [UserController::class, 'roomDetail'])->name('roomdetail');
+    Route::get('/notification', [UserController::class, 'roomNotif'])->name('notification');
+    // roomshow
+    Route::get('/rooms/{id}', [UserController::class, 'roomShow'])->name('show');
+
 
 
     Route::get('/', function () {
