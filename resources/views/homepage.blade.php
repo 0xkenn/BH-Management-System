@@ -120,13 +120,23 @@
                                               </div>
                                               
                                                
-                                                 <a
-                                                href="{{ route('login') }}"
-                                                 class="absolute bottom-0 right-0 bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-colors"
-                                                
-                                               >
-                                                 reserve Now
-                                            </a>
+                                               @if (auth()->guard('web')->check())
+                                               <a
+                                               href="{{ route('user.room-details', $room->id) }}"
+                                                class="absolute bottom-0 right-0 bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-colors"
+                                               
+                                              >
+                                                reserve Now
+                                           </a>
+                                               @else
+                                               <a
+                                               href="{{ route('login') }}"
+                                                class="absolute bottom-0 right-0 bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-colors"
+                                               
+                                              >
+                                                reserve Now
+                                           </a>
+                                               @endif
                                              
                                                         
                                                      

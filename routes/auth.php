@@ -55,5 +55,4 @@ Route::middleware('auth:web')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
-    Route::post('save-room/{id}', [saveRoomController::class, 'saveRoom']);
 });

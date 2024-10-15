@@ -3,10 +3,7 @@
     <div class="py-12">
         <div class="max-w-full mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-<<<<<<< HEAD
             
-=======
->>>>>>> b8988996415c638199e54056b601d20762e71705
                 <div class="p-6 text-gray-900 flex flex-wrap gap-10 items-center justify-center">
 
                   @forelse ($boardingHouses as $boardingHouse)
@@ -19,7 +16,12 @@
                     <div class="card-body">
                       <h2 class="card-title">
                         {{$boardingHouse->name}}
-                        <div class="badge badge-secondary">NEW</div>
+                        
+                        @if ($boardingHouse->created_at >= \Carbon\Carbon::now()->subWeek())
+                          <class class="badge badge-secondary text-white">New</class>
+                        @else
+                        <class class="badge badge-success text-white">Available</class>
+                        @endif
                       </h2>
                       <p>If a dog chews shoes whose shoes does he choose?</p>
                       <div class="card-actions justify-start">

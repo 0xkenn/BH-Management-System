@@ -16,4 +16,7 @@ class savedRoom extends Model
     public function room(){
         return $this->belongsTo(Room::class);
     }
+    protected function user(){
+        return $this->belongsTo(User::class);
+    }
 }

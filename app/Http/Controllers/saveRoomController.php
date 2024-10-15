@@ -19,7 +19,6 @@ class saveRoomController extends Controller
             $savedRoom = savedRoom::create([
                
                     'user_id' => auth()->guard('web')->id(),
-                    'room_id' => $room,
                 
             ]);
             return $savedRoom;

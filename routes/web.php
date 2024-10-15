@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Controller;
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\saveRoomController;
+use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\SearchController;
@@ -14,13 +14,12 @@ use App\Models\Room;
 
 Route::get('/', function () {
     $boardingHouses = BoardingHouse::with('rooms')->get();
-    $id = auth()->guard('web')->id();
-    $room = Room::findOrFail($id);
-    $savedRoom = $room->reservations()->where('user_id', $id)->first();
-    return view('homepage', compact('savedRoom' , 'boardingHouses'));
+
+    return view('homepage', compact( 'boardingHouses'));
  
     
 });
+
 
 
 
@@ -33,6 +32,12 @@ Route::middleware('auth:web')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/useredit', [UserController::class, 'userProfile'])->name('useredit');
+    Route::get('/room-details/{id}', [UserController::class, 'roomDetails'])->name('user.room-details');
+    Route::get('room-list', [UserController::class, 'roomList'])->name('room.list');
+    Route::get('notifications', [UserController::class, 'notifications'])->name('notifications');
+    Route::post('/save-room/{id}',[UserController::class, 'reserveRoom']);
+    Route::get('reservation-list', [UserController::class, 'reservationList'])->name('reservation.list');
+
 
 });
 
@@ -42,8 +47,8 @@ Route::middleware('auth:web')->group(function () {
     
 
 
-  
-    Route::post('save-room/{id}', [saveRoomController::class , 'saveRoom']);
+Route::get('/school/login', [SchoolController::class, 'login'])->name('school.login');
+Route::post('/school/login', [SchoolController::class, 'loginAuth'])->name('school.login.auth');
 
 require __DIR__.'/auth.php';
 require __DIR__.'/admin-auth.php';
