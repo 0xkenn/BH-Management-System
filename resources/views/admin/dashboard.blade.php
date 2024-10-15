@@ -6,7 +6,7 @@
             <div class="bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
 
                 <div class="p-6"> <!-- Changed to p-6 for uniform padding -->
-                    <h2 class="text-lg font-semibold text-gray-300">Dashboard</h2>
+                    
 
                     <!-- Container for two rows of cards -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">

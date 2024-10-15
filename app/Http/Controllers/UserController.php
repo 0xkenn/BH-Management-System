@@ -31,6 +31,7 @@ class UserController extends Controller
     public function userProfile(){
         return view ("user.user-profile");
     }
+<<<<<<< HEAD
 
     public function roomDetails($id){
         $room = Room::findOrFail($id);
@@ -72,4 +73,16 @@ public function reserveRoom($id){
         return view('user.reservation-list', compact('reservedRooms'));
 
     }
+=======
+     public function roomDetail(){
+        return view ("user.user-detail");
+     }
+
+     public function roomNotif(){
+        return view ("user.user-notification");
+     }
+     public function roomShow (){
+        return view('user.show');
+     }
+>>>>>>> 27b3d07df5c29a7d9c3325ee715eb06a85af7997
 }
