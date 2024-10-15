@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\BoardingHouse;
 use App\Models\Owner;
+use App\Models\School;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class AdminController extends Controller
@@ -40,16 +42,7 @@ class AdminController extends Controller
         return view('admin.owner-screen', compact('owners'));
     }
 
-    public function destroyOwner(Owner $request, $id){
-        $owner = Owner::findOrFail($id);
 
-        $owner->hash();
-        $owner->delete();
-
-        return redirect()->back();
-
-
-    }
     public function BHScreen(): View{
         $boarding_houses = BoardingHouse::with('owner')->get();
         return view('admin.bh-management',  compact('boarding_houses'));
@@ -62,6 +55,36 @@ class AdminController extends Controller
 
     public function reports(){
         return view('admin.reports');
+    }
+    public function deleteOwner($id){
+        $owner = Owner::find($id);
+        $owner->delete();
+        return redirect()->back()->with('error', 'Successfully deleted');
+    }
+    public function destroyBh($id){
+        $bh = BoardingHouse::find($id);
+        $bh->delete();
+        return redirect()->back()->with('error', 'Successfully deleted');
+    }
+    public function destroyUser($id){
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->back()->with('error', 'Successfully deleted');
+    }
+    public function addSchool(){
+        return view('admin.school-add');
+    }
+    public function storeSchool(Request $request){
+        $data = $request->validate([
+            'school_name' => 'required|string|max:255', 
+            'password' => 'required|string|min:8', 
+        ]);
+
+        $data['password'] = Hash::make($data['password']);
+        School::create($data);
+        return redirect()->back()->with('success', 'Successfully added');
+
+        
     }
 
 

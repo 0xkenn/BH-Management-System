@@ -7,9 +7,15 @@
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <x-input-label for="school_name" :value="__('school_name')" />
+            <x-text-input 
+            id="school_name" class="block mt-1 w-full"
+             type="text" 
+             name="school_name" 
+             :value="old('school_name')" 
+             required autofocus
+              autocomplete="school_name" />
+            <x-input-error :messages="$errors->get('school_name')" class="mt-2" />
         </div>
 
         <!-- Password -->

@@ -53,12 +53,14 @@
                     </td>
 
                     <td class="py-3 px-4">
-                        <button class="text-red-400 hover:text-red-600 transition-colors duration-300">
-                            <!-- Delete Icon -->
-                            <svg class="w-5 h-5" fill="red" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H5a1 1 0 100 2h10a1 1 0 100-2h-2.382l-.724-1.447A1 1 0 0011 2H9zm-4 6a1 1 0 011-1h8a1 1 0 011 1v7a2 2 0 01-2 2H7a2 2 0 01-2-2V8z" clip-rule="evenodd"/>
-                              </svg>
-                        </button>
+                        <form action="{{route('bh.delete.admin')}}" method="post">@csrf
+                            <button class="text-red-400 hover:text-red-600 transition-colors duration-300">
+                                <!-- Delete Icon -->
+                                <svg class="w-5 h-5" fill="red" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H5a1 1 0 100 2h10a1 1 0 100-2h-2.382l-.724-1.447A1 1 0 0011 2H9zm-4 6a1 1 0 011-1h8a1 1 0 011 1v7a2 2 0 01-2 2H7a2 2 0 01-2-2V8z" clip-rule="evenodd"/>
+                                  </svg>
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach

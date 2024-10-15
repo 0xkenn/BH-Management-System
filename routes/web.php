@@ -31,12 +31,14 @@ Route::middleware('auth:web')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/useredit', [UserController::class, 'userProfile'])->name('useredit');
+    Route::get('/useredit/{id}', [UserController::class, 'userProfile'])->name('useredit');
     Route::get('/room-details/{id}', [UserController::class, 'roomDetails'])->name('user.room-details');
     Route::get('room-list', [UserController::class, 'roomList'])->name('room.list');
     Route::get('notifications', [UserController::class, 'notifications'])->name('notifications');
     Route::post('/save-room/{id}',[UserController::class, 'reserveRoom']);
     Route::get('reservation-list', [UserController::class, 'reservationList'])->name('reservation.list');
+    Route::post('edit-user', [UserController::class, 'editProfile'])->name('user.profile.update');
+
 
 
 });
@@ -45,7 +47,7 @@ Route::middleware('auth:web')->group(function () {
 
     Route::get('/search', [SearchController::class, 'search'])->name('search');
 
-    Route::get('/useredit', [UserController::class, 'userProfile'])->name('useredit');
+
     Route::get('/roomdetail', [UserController::class, 'roomDetail'])->name('roomdetail');
     Route::get('/notification', [UserController::class, 'roomNotif'])->name('notification');
     // roomshow
@@ -55,7 +57,10 @@ Route::middleware('auth:web')->group(function () {
 
 
 Route::get('/school/login', [SchoolController::class, 'login'])->name('school.login');
-Route::post('/school/login', [SchoolController::class, 'loginAuth'])->name('school.login.auth');
+Route::post('/school/login/auth', [SchoolController::class, 'loginAuth'])->name('school.login.auth');
+Route::prefix('school')->middleware('auth:school')->group(function (){
+    Route::get('dashboard', [SchoolController::class, 'dashboard'])->name('school.dashboard');
+});
 
 require __DIR__.'/auth.php';
 require __DIR__.'/admin-auth.php';

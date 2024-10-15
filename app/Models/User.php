@@ -53,4 +53,34 @@ class User extends Authenticatable
     public function boardingHoues(): HasMany{
         return $this->hasMany(BoardingHouse::class);
     }
+    public function reservations(){
+        return $this->hasMany(savedRoom::class);
+    }
+    public function deleteAccount()
+    {
+        // Call the method to update room capacities before deletion
+        $this->updateRoomCapacities();
+
+        // Delete the user account
+        $this->delete();
+    }
+
+    protected function updateRoomCapacities()
+    {
+        // Get the reserved rooms for this user
+        $reservedRooms = $this->reservedRooms;
+
+        foreach ($reservedRooms as $room) {
+            // Increment capacity by 1
+            $room->capacity += 1;
+
+            // Update occupancy status if needed
+            if ($room->capacity > 0) {
+                $room->is_occupied = 0; //  0 means not occupied
+            }
+
+            // Save the updated room
+            $room->save();
+        }
+    }
 }

@@ -12,6 +12,7 @@ class AppLayout extends Component
      */
     public function render(): View
     {
-        return view('layouts.app');
+        $user = auth()->guard('web')->id();
+        return view('layouts.app', compact('user'));
     }
 }

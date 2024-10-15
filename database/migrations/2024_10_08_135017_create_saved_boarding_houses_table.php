@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('room_id')->constrained()->cascadeOnDelete();
+            $table->boolean('is_approved')->default(false);
             $table->timestamps();
         });
     }

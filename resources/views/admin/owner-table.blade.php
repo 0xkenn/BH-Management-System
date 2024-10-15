@@ -126,17 +126,33 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
             </svg>
           </a>
+          <div class="modal modal-bottom sm:modal-middle" role="dialog" id="owner_data_{{$owner->id}}">
+            <div class="modal-box flex flex-col">
+              <a href="#" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</a>
+              <h3 class="text-lg font-bold">{{$owner->name}}'s Data!</h3>
+              <p class="py-4">Name: {{$owner->name}}</p>
+              <p class="py-4">email: {{$owner->email}}</p>
+              <p class="py-4">Mobile Number: {{$owner->mobile_number}}</p>
+              <p class="py-4">Address: {{$owner->address}}</p>
+              <div class="modal-action">
+                <a href="#" class="btn hover:bg-red-600">Back</a>
+                
+              </div>
+            </div>
+          </div>
           @endif
-
+          
           {{-- Delete --}}
-          <a href="#"
-            class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-            aria-label="Delete"
-          >
-            <svg class="w-5 h-5" fill="red" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H5a1 1 0 100 2h10a1 1 0 100-2h-2.382l-.724-1.447A1 1 0 0011 2H9zm-4 6a1 1 0 011-1h8a1 1 0 011 1v7a2 2 0 01-2 2H7a2 2 0 01-2-2V8z" clip-rule="evenodd"/>
-            </svg>
-          </a>
+         <form action="{{route('delete.owner.admin', $owner->id)}}" method="post">@csrf
+          <button
+          class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+          aria-label="Delete"
+        >
+          <svg class="w-5 h-5" fill="red" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H5a1 1 0 100 2h10a1 1 0 100-2h-2.382l-.724-1.447A1 1 0 0011 2H9zm-4 6a1 1 0 011-1h8a1 1 0 011 1v7a2 2 0 01-2 2H7a2 2 0 01-2-2V8z" clip-rule="evenodd"/>
+          </svg>
+        </button>
+         </form>
         </div>
       </td>
     </tr>

@@ -16,7 +16,11 @@ class SchoolController extends Controller
     }
 
     public function loginAuth(SchoolLoginRequest $request){
-        $request->validated();
-        return view('school.dashboard');
+       $request->authenticate();
+    
+       if(auth()->guard('school')->attempt(['school_name' => $request['school_name'], 'password' => $request['password']])){
+        $request->session()->regenerate();
+        return redirect()->route('school.dashboard');
     }
+}
 }

@@ -35,12 +35,14 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/dashboard',[AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::post('/dashboard/{owner}', [TableController::class, 'editApproval'])->name('owner.approve');
 
-
+    Route::post('/delete/{id}', [AdminController::class, 'deleteOwner'])->name('delete.owner.admin');
+    Route::post('/delete/bh/{id}', [AdminController::class, 'destroyBh'])->name('bh.delete.admin');
+    Route::post('/delete/user/{id}', [AdminController::class, 'destroyUser'])->name('user.delete.admin');
 
     Route::post('logout', [LoginAdminController::class, 'destroy'])
                 ->name('admin.logout')->middleware(PreventBack::class);
 
+    Route::get('/add/school', [AdminController::class, 'addSchool'])->name('add-school.page');
+    Route::post('add/school/auth', [AdminController::class, 'storeSchool'])->name('school.create.auth');
 
-
-    Route::delete('/delete/{id}', [AdminController::class], 'destroyOwner')->name('delete.owner');
 });

@@ -27,7 +27,7 @@ class SchoolLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'email'],
+            'school_name' => ['required', 'string'],
             'password' => ['required', 'string'],
         ];
     }
@@ -35,7 +35,7 @@ class SchoolLoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::guard('school')->attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        if (! Auth::guard('school')->attempt($this->only('school_name', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([

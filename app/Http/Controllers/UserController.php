@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EditProfileRequest;
 use App\Models\Room;
-use App\Models\savedRoom;
+use App\Models\User;
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 use function Pest\Laravel\get;
 
@@ -20,18 +23,19 @@ class UserController extends Controller
         ->distinct() // Prevent duplicate boarding houses in case they have multiple available rooms
         ->get();
     
-   
+        $user = auth()->guard('web')->id();
         $rooms = DB::table('rooms')->get();
-        return view('user.dashboard', compact('boardingHouses', 'rooms'));
+        return view('user.dashboard', compact('boardingHouses', 'rooms', 'user'));
     }
     public function savedBoardingHouse(){
         return view('user.saved-event');
     }
 
-    public function userProfile(){
+    public function userProfile($id){
+        User::find($id);
         return view ("user.user-profile");
     }
-<<<<<<< HEAD
+
 
     public function roomDetails($id){
         $room = Room::findOrFail($id);
@@ -73,10 +77,7 @@ public function reserveRoom($id){
         return view('user.reservation-list', compact('reservedRooms'));
 
     }
-=======
-     public function roomDetail(){
-        return view ("user.user-detail");
-     }
+
 
      public function roomNotif(){
         return view ("user.user-notification");
@@ -84,5 +85,26 @@ public function reserveRoom($id){
      public function roomShow (){
         return view('user.show');
      }
->>>>>>> 27b3d07df5c29a7d9c3325ee715eb06a85af7997
+     public function editProfile(EditProfileRequest $request){
+        
+            $data = $request->validated();
+            $user = auth()->guard('web')->user();
+
+            $user->name = $data['name'];
+            $user->email = $data['email'];
+            $user->age = $data['age'];
+            $user->gender = $data['gender'];
+            $user->mobile_number =$data['mobile_number'];
+            $user->is_student = $data['is_student'];
+
+            if (isset($data['password'])) {
+                $user->password = Hash::make($data['password']);
+            }
+
+            
+            
+            
+            return redirect()->route('user.dashboard');
+     }
+    
 }
