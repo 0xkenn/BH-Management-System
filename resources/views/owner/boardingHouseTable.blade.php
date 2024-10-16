@@ -78,7 +78,7 @@
              </svg>
 
              <div class="modal modal-bottom sm:modal-middle" role="dialog" id="bh_data_{{$bh->id}}">
-                 <div class="modal-box flex flex-col">
+                 <div class="modal-box flex flex-col bg-gray-800 text-white"> <!-- Set modal background and text color -->
                      <a href="#" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</a>
                      <h3 class="text-lg font-bold">{{$bh->name}}'s Data!</h3>
                      <p class="py-4">Name: {{$bh->name}}</p>
@@ -86,8 +86,7 @@
                      <p class="py-4">Description: {{$bh->description}}</p> <!-- Added description -->
                      <p class="py-4">Rooms: {{$bh->rooms->count()}}</p> <!-- Added rooms -->
                      <div class="modal-action">
-                      <a href="{{route('owner.view-rooms', $bh->id)}}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 inline-block">View Rooms</a>
-
+                         <a href="{{ route('owner.view-rooms', $bh->id) }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 inline-block">View Rooms</a>
                          <!-- You can add action buttons here if needed -->
                      </div>
                  </div>
@@ -96,13 +95,14 @@
 
 
 
+
           {{-- Approve --}}
 
 
           {{-- Delete --}}
-       
 
-        
+
+
 <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"  type="button">
   <svg
   class="w-5 h-5"
@@ -117,7 +117,7 @@
   ></path>
 </svg>
   </button>
-  
+
   <div id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
       <div class="relative p-4 w-full max-w-md max-h-full">
           <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -144,7 +144,7 @@
           </div>
       </div>
   </div>
-  
+
         </div>
       </td>
     </tr>
