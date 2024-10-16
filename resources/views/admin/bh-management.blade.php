@@ -46,14 +46,14 @@
 
                                     <img src="{{asset('storage/'.$boarding_house->business_permit_image)}}" alt="">
                                     <div class="modal-action">
-                                        <a href="#" class="btn">Yay!</a>
+                                        <a href="#" class="btn">Okay!</a>
                                     </div>
                             </div>
                         </div>
                     </td>
 
                     <td class="py-3 px-4">
-                        <form action="{{route('bh.delete.admin')}}" method="post">@csrf
+                        <form action="{{route('bh.delete.admin', $boarding_house->id)}}" method="post">@csrf
                             <button class="text-red-400 hover:text-red-600 transition-colors duration-300">
                                 <!-- Delete Icon -->
                                 <svg class="w-5 h-5" fill="red" viewBox="0 0 20 20">

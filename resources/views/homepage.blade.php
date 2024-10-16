@@ -1,5 +1,5 @@
 <x-guest-layout>
-    
+
 
     <!-- Navigation Bar -->
     <nav class="bg-white shadow-md p-4">
@@ -11,11 +11,14 @@
             <form method="GET" action="#" class="flex items-center">
                 <input type="search" name="query" placeholder="Search..." class="p-2 border border-gray-300 rounded-full w-80 focus:outline-none focus:ring-2 focus:ring-green-400" aria-label="Search">
                 <a href="{{ route('/register-user') }}" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-green-300 font-bold rounded-full text-sm px-5 py-2.5 shadow-lg shadow-green-500/50 transition duration-200 ease-in-out ml-2">
+                    Contact
+                </a>
+                <a href="{{ route('/register-user') }}" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-green-300 font-bold rounded-full text-sm px-5 py-2.5 shadow-lg shadow-green-500/50 transition duration-200 ease-in-out ml-2">
                     Register
                 </a>
 
                 <a href="{{ route('welcome') }}" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-green-300 font-bold rounded-full text-sm px-5 py-2.5 shadow-lg shadow-green-500/50 transition duration-200 ease-in-out ml-2">
-                    Log In
+                    LogIn
                 </a>
             </form>
         </div>
@@ -112,20 +115,20 @@
                                                             <p><strong>Available:</strong> {{ !$room->is_occupied ? 'Yes' : 'No' }}</p>
                                                             <p><strong>Vacancy:</strong> {{ $room->capacity }}</p>
                                                         </div>
-                                                      
-                                                     
-                                                 
-                                               
+
+
+
+
                                                  <div>
-                                                 
+
                                               </div>
-                                              
-                                               
+
+
                                                @if (auth()->guard('web')->check())
                                                <a
                                                href="{{ route('user.room-details', $room->id) }}"
                                                 class="absolute bottom-0 right-0 bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-colors"
-                                               
+
                                               >
                                                 reserve Now
                                            </a>
@@ -133,14 +136,14 @@
                                                <a
                                                href="{{ route('login') }}"
                                                 class="absolute bottom-0 right-0 bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-colors"
-                                               
+
                                               >
                                                 reserve Now
                                            </a>
                                                @endif
-                                             
-                                                        
-                                                     
+
+
+
                                                        <!-- Button at bottom right -->
                                                     </div>
                                                 </div>

@@ -76,10 +76,10 @@
     {{-- modal permit --}}
       <div class="modal" role="dialog" id="permit_data_{{$owner->id}}">
         <div class="modal-box">
-         
+
           <img src="{{asset('storage/'.$owner->business_permit)}}" alt="">
           <div class="modal-action">
-            <a href="#" class="btn">Yay!</a>
+            <a href="#" class="btn">Okay!</a>
           </div>
         </div>
       </div>
@@ -120,28 +120,28 @@
           @else
           <a href="#owner_data_{{$owner->id}}"
             class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-            aria-label="View"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
-            </svg>
-          </a>
-          <div class="modal modal-bottom sm:modal-middle" role="dialog" id="owner_data_{{$owner->id}}">
-            <div class="modal-box flex flex-col">
-              <a href="#" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</a>
-              <h3 class="text-lg font-bold">{{$owner->name}}'s Data!</h3>
-              <p class="py-4">Name: {{$owner->name}}</p>
-              <p class="py-4">email: {{$owner->email}}</p>
-              <p class="py-4">Mobile Number: {{$owner->mobile_number}}</p>
-              <p class="py-4">Address: {{$owner->address}}</p>
-              <div class="modal-action">
-                <a href="#" class="btn hover:bg-red-600">Back</a>
-                
-              </div>
-            </div>
-          </div>
+            aria-label="View">
+           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+             <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+           </svg>
+         </a>
+
+         <div class="modal modal-bottom sm:modal-middle" role="dialog" id="owner_data_{{$owner->id}}">
+           <div class="modal-box flex flex-col bg-gray-900 text-white"> <!-- Set background to dark and text to white -->
+             <a href="#" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-white">✕</a> <!-- White close button -->
+             <h3 class="text-lg font-bold">{{$owner->name}}'s Data!</h3>
+             <p class="py-4">Name: {{$owner->name}}</p>
+             <p class="py-4">Email: {{$owner->email}}</p>
+             <p class="py-4">Mobile Number: {{$owner->mobile_number}}</p>
+             <p class="py-4">Address: {{$owner->address}}</p>
+             <div class="modal-action">
+               <a href="#" class="btn hover:bg-red-600 text-white color-red">Back</a> <!-- Ensure button text is white -->
+             </div>
+           </div>
+         </div>
+
           @endif
-          
+
           {{-- Delete --}}
          <form action="{{route('delete.owner.admin', $owner->id)}}" method="post">@csrf
           <button
