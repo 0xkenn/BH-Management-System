@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Owner;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddBoardingHouseRequest;
-use App\Http\Requests\AddRoomRequest;
 use App\Models\BoardingHouse;
-use App\Models\Room;
+use App\Models\Preference;
 use App\Models\savedRoom;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -59,19 +59,36 @@ class OwnerController extends Controller
 
     public function boardingHouse(){
         $bh = BoardingHouse::with('rooms')->where('owner_id', Auth::guard('owner')->id())->get();
+        $preferences = Preference::all();
 
-        return view('owner.boardingHouse', compact('bh'));
+        return view('owner.boardingHouse', compact('bh', 'preferences'));
     }
-    public function store(AddBoardingHouseRequest $request){
+    public function store(Request $request){
 
-        $data = $request->validated();
+        $data = $request->validate([
+            'name' =>'required|string',
+            'address' => 'required|string',
+            'description' => 'required|string',
+            'business_permit_image' => 'required|image|mimes:png,jpg,jpeg',
+            'background_image' => 'required|image|mimes:png,jpg,jpeg,gif',
+            'preferences' => "nullable|array",
+        ]);
+
         $data['owner_id'] = Auth::guard('owner')->id();
+
             if($request->hasFile('background_image') && $request->hasFile('business_permit_image')){
-            $data['background_image'] = $request->file('background_image')->store('background_images', 'public');
-            $data['business_permit_image'] = $request->file('business_permit_image')->store('business_permit_images', 'public');
+               
         
-            BoardingHouse::create($data);
-                return redirect()->route('owner.boardingHouse')->with('message', 'successfully created a boarding house');
+                $boardingHouse = BoardingHouse::create([
+                'owner_id' => $data['owner_id'],
+                'name' => $data['name'],
+                'address' => $data['address'],
+                'description' => $data['description'],
+                'background_image' => $request->file('background_image')->store('background_images', 'public'),
+                'business_permit_image' => $request->file('business_permit_image')->store('business_permit_images', 'public'),
+            ]);
+            $boardingHouse->preferences()->sync($data['preferences'] ?? []);
+                return redirect()->route('owner.boardingHouse')->with('message', 'successfully added a boarding house');
             }else{
                 return redirect()->back()->with('errors','Error creating boarding house');
             }

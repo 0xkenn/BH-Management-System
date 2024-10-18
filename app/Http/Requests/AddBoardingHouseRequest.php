@@ -27,6 +27,7 @@ class AddBoardingHouseRequest extends FormRequest
             'description' => 'required|string',
             'business_permit_image' => 'required|image|mimes:png,jpg,jpeg',
             'background_image' => 'required|image|mimes:png,jpg,jpeg,gif',
+            'preferences' => "nullable|array",
         ];
     }
 }

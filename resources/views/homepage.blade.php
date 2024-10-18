@@ -8,11 +8,62 @@
                 <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-12 mr-2" />
                 <a class="font-bold text-xl color-green">BoardingHouseMS</a>
             </div>
-            <form method="GET" action="#" class="flex items-center">
-                <input type="search" name="query" placeholder="Search..." class="p-2 border border-gray-300 rounded-full w-80 focus:outline-none focus:ring-2 focus:ring-green-400" aria-label="Search">
-                <a href="{{ route('/register-user') }}" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-green-300 font-bold rounded-full text-sm px-5 py-2.5 shadow-lg shadow-green-500/50 transition duration-200 ease-in-out ml-2">
-                    Contact
-                </a>
+            <div class="flex items-center">
+                <form id="preferencesForm" method="GET" action="{{ route('search') }}">
+                    <div class="relative w-full max-w-xs mb-4">
+                        <input
+                            type="text"
+                            name="search"
+                            placeholder="Search..."
+                            class="w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400"
+                        />
+                        <button type="button" class="absolute inset-y-0 right-0 flex items-center pr-3" id="dropdownBgHoverButton" data-dropdown-toggle="dropdownBgHover">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-orange-500">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5" />
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="relative w-full max-w-xs">
+                        
+                
+                        {{-- Dropdown Menu --}}
+                        <div id="dropdownBgHover" class="z-10 hidden w-48 bg-white rounded-lg shadow-lg dark:bg-gray-700">
+                            <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownBgHoverButton">
+                                @foreach ($preferences as $preference)
+                                    <li>
+                                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                            <input id="preference-{{ $preference->id }}" name="preferences[]" type="checkbox" value="{{ $preference->id }}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            <label for="preference-{{ $preference->id }}" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">{{ $preference->name }}</label>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                
+                    <div class="mt-4">
+                        <button type="submit" class="w-full px-4 py-2 text-white bg-green-500 rounded-full hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">Search</button>
+                    </div>
+                </form>
+                
+                <script>
+                    // Handle dropdown toggle
+                    document.getElementById('dropdownBgHoverButton').addEventListener('click', function() {
+                        const dropdown = document.getElementById('dropdownBgHover');
+                        dropdown.classList.toggle('hidden'); // Toggle dropdown visibility
+                    });
+                
+                    // Optional: Close dropdown if clicked outside
+                    window.addEventListener('click', function(event) {
+                        const dropdown = document.getElementById('dropdownBgHover');
+                        if (!event.target.closest('#dropdownBgHover') && !event.target.closest('#dropdownBgHoverButton')) {
+                            dropdown.classList.add('hidden'); // Close dropdown
+                        }
+                    });
+                </script>
+                
+              
                 <a href="{{ route('/register-user') }}" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-green-300 font-bold rounded-full text-sm px-5 py-2.5 shadow-lg shadow-green-500/50 transition duration-200 ease-in-out ml-2">
                     Register
                 </a>
@@ -20,7 +71,7 @@
                 <a href="{{ route('welcome') }}" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-green-300 font-bold rounded-full text-sm px-5 py-2.5 shadow-lg shadow-green-500/50 transition duration-200 ease-in-out ml-2">
                     LogIn
                 </a>
-            </form>
+            </div>
         </div>
     </nav>
 

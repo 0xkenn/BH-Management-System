@@ -26,4 +26,8 @@ class BoardingHouse extends Model
     public function owner(){
         return $this->belongsTo(Owner::class, 'owner_id');
     }
+    public function preferences()
+    {
+        return $this->belongsToMany(Preference::class, 'bh_preferences');
+    }
 }

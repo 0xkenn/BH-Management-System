@@ -10,12 +10,13 @@ use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 use App\Models\BoardingHouse;
+use App\Models\Preference;
 use App\Models\Room;
 
 Route::get('/', function () {
     $boardingHouses = BoardingHouse::with('rooms')->get();
-
-    return view('homepage', compact( 'boardingHouses'));
+    $preferences = Preference::all();
+    return view('homepage', compact( 'boardingHouses', 'preferences'));
  
     
 });

@@ -45,5 +45,7 @@ class DatabaseSeeder extends Seeder
             'password' => 'qwertyuiop'
         ]);
 
+        $this->call(PreferencesTableSeeder::class);
+
     }
 }

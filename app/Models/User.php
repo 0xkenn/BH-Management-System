@@ -83,4 +83,8 @@ class User extends Authenticatable
             $room->save();
         }
     }
+    public function preferences()
+    {
+        return $this->belongsToMany(Preference::class, 'user_preferences');
+    }
 }

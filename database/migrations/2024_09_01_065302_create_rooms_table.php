@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('room_image_1')->nullable();
             $table->string('room_image_2')->nullable();
             $table->string('room_image_3')->nullable(); // image room
+            $table->string('room_image_4')->nullable(); // image room
             $table->boolean('is_occupied')->default(false); //
             $table->timestamps();
         });
