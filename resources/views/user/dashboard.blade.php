@@ -34,7 +34,7 @@
                             <div class="grid grid-cols-4 gap-4 mt-4">
                                 @php
                                     $images = [
-                                        asset('images/sample1.jpg'),
+                                        asset('storage/sample1.jpg'), // Update this path as needed
                                         asset('images/sample2.jpg'),
                                         asset('images/sample3.jpg'),
                                         asset('images/sample4.jpg'),
@@ -51,9 +51,18 @@
                             <!-- Boarding House Details -->
                             <div class="mt-4">
                                 <p><strong>Name:</strong> {{ $boardingHouse->name }}</p>
-                                <p><strong>Description:</strong> Detailed information about the boarding house goes here...</p>
+                                <p><strong>Description:</strong> {{$boardingHouse->description}} </p>
                                 <p><strong>Status:</strong> {{ $boardingHouse->created_at >= \Carbon\Carbon::now()->subWeek() ? 'New' : 'Available' }}</p>
-                                <p><strong>Location:</strong> The location of the boarding house...</p>
+                                <p><strong>Location:</strong>  {{$boardingHouse->address}}</p>
+                                <p><strong>Available Rooms:</strong> 
+                                    @foreach ($boardingHouse->rooms as $room)
+                                    <li class="text-gray-600">{{ $room->name }} - {{ $room->capacity  }}</li>
+                                @endforeach </p>
+                                <ul>
+                                    @foreach ($boardingHouse->rooms as $room)
+                                        <li class="text-gray-600">{{ $room->name }} - {{ $room->is_occupied ? 'Occupied' : 'Available' }}</li>
+                                    @endforeach
+                                </ul>
                             </div>
 
                             <!-- Reservation Button -->

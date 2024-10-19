@@ -51,7 +51,7 @@ class SearchController extends Controller
     });
 
     // Return the top results (e.g., top 5 boarding houses)
-    $topResults = array_slice($boardingHouseScores, 0, 10);
+    $topResults = array_slice($boardingHouseScores, 0, 5);
     $preferences = Preference::all(); 
 
     return view('homeResult', compact('topResults', 'preferences'));

@@ -61,6 +61,8 @@ Route::get('/school/login', [SchoolController::class, 'login'])->name('school.lo
 Route::post('/school/login/auth', [SchoolController::class, 'loginAuth'])->name('school.login.auth');
 Route::prefix('school')->middleware('auth:school')->group(function (){
     Route::get('dashboard', [SchoolController::class, 'dashboard'])->name('school.dashboard');
+    Route::post('/logout-school', [SchoolController::class, 'destroy'])->name('school.logout');
+    
 });
 
 require __DIR__.'/auth.php';

@@ -29,5 +29,9 @@ class Room extends Model
     public function reservations(): HasMany {
         return $this->hasMany(savedRoom::class);
     }
+    public function students()
+    {
+        return $this->hasMany(User::class)->where('is_student', 1);
+    }
 }
  

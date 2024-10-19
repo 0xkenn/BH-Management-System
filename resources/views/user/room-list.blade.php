@@ -13,7 +13,7 @@
                 </div>
                 <div class="p-4 flex justify-between items-center border-t border-gray-300">
                     <span class="text-gray-700 font-semibold">Monthly Rate</span>
-                    <span class="text-green-600 font-semibold">${{ number_format($room->price, 2) }}/month</span>
+                    <span class="text-green-600 font-semibold">₱{{ number_format($room->price, 2) }}/month</span>
                 </div>
                 <div class="p-4 border-t border-gray-300">
                     <a href="{{ route('user.room-details', $room->id) }}" class="block text-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-500 focus:outline-none transition duration-150">

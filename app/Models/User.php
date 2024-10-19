@@ -50,7 +50,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function boardingHoues(): HasMany{
+    public function boardingHouse(): HasMany{
         return $this->hasMany(BoardingHouse::class);
     }
     public function reservations(){
@@ -86,5 +86,10 @@ class User extends Authenticatable
     public function preferences()
     {
         return $this->belongsToMany(Preference::class, 'user_preferences');
+    }
+
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
     }
 }

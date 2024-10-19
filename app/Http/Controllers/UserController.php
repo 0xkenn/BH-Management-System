@@ -16,16 +16,22 @@ class UserController extends Controller
 {
     public function  boardingHouse(){
 
-        $boardingHouses = DB::table('boarding_houses')
-        ->join('rooms', 'boarding_houses.id', '=', 'rooms.boarding_house_id')
-        ->where('rooms.is_occupied', 0) // check if ther is available rooms in the bh
-        ->select('boarding_houses.*') // To avoid selecting room details if unnecessary
-        ->distinct() // Prevent duplicate boarding houses in case they have multiple available rooms
+        $boardingHouses = DB::table('boarding_houses as bh')
+        ->join('rooms as r', 'bh.id', '=', 'r.boarding_house_id')
+        ->where('r.is_occupied', 0) // Check if there are available rooms
+        ->select('bh.*') // Select boarding house details
+        ->distinct() // Prevent duplicate boarding houses
         ->get();
     
-        $user = auth()->guard('web')->id();
-        $rooms = DB::table('rooms')->get();
-        return view('user.dashboard', compact('boardingHouses', 'rooms', 'user'));
+    // Assuming you want to get rooms for each boarding house
+    $boardingHousesWithRooms = $boardingHouses->map(function ($house) {
+        $house->rooms = DB::table('rooms')
+            ->where('boarding_house_id', $house->id)
+            ->where('is_occupied', 0) // Check for available rooms
+            ->get();
+        return $house;
+    });
+        return view('user.dashboard', compact('boardingHouses', 'boardingHousesWithRooms'));
     }
     public function savedBoardingHouse(){
         return view('user.saved-event');
@@ -87,23 +93,21 @@ public function reserveRoom($id){
      }
      public function editProfile(EditProfileRequest $request){
         
-            $data = $request->validated();
-            $user = auth()->guard('web')->user();
+        $data = $request->validated();
+$userId = auth()->guard('web')->id(); // Get the authenticated user's ID
 
-            $user->name = $data['name'];
-            $user->email = $data['email'];
-            $user->age = $data['age'];
-            $user->gender = $data['gender'];
-            $user->mobile_number =$data['mobile_number'];
-            $user->is_student = $data['is_student'];
+DB::table('users')
+    ->where('id', $userId)
+    ->update([
+        'name' => $data['name'],
+        'email' => $data['email'],
+        'age' => $data['age'],
+        'gender' => $data['gender'],
+        'mobile_number' => $data['mobile_number'],
+        'is_student' => $data['is_student'],
+        'password' => !empty($data['password']) ? Hash::make($data['password']) : DB::raw('password') // Only hash if a new password is provided
+    ]);
 
-            if (isset($data['password'])) {
-                $user->password = Hash::make($data['password']);
-            }
-
-            
-            
-            
             return redirect()->route('user.dashboard');
      }
     

@@ -30,4 +30,13 @@ class BoardingHouse extends Model
     {
         return $this->belongsToMany(Preference::class, 'bh_preferences');
     }
+    public function studentCount()
+    {
+        return User::where('is_student', 1)
+                   ->where('boarding_house_id', $this->id)
+                   ->count();
+    }
+    
+
+
 }

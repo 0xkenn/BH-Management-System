@@ -29,7 +29,7 @@ Route::prefix('owner')->middleware('auth:owner')->group(function () {
         Route::post('/add-bh', [OwnerController::class, 'store'])->name('add-boarding-house');
         Route::post('/add-room/{id}', [CreateRoomController::class, 'storeRoom'])->name('room-add');
         Route::post('/approve/{id}',[OwnerController::class, 'approveReserve'])->name('reserve.check');
-        Route::post('/delete/{id}',[OwnerController::class, 'deleteReserve'])->name('reserve.delete');
+        Route::post('/delete/reserve/{id}',[OwnerController::class, 'deleteReserve'])->name('reserve.delete');
         Route::get('/rooms/{id}', [OwnerController::class, 'viewRooms'])->name('owner.view-rooms');
         Route::post('logout', [LoginOwnerController::class, 'destroy'])->name('owner.logout')->middleware(PreventBack::class);
         Route::post('/delete/{id}', [OwnerController::class, 'deleteBH'])->name('delete.Bh');
