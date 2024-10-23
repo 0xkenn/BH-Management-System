@@ -1,6 +1,6 @@
 <x-guest-layout>
 
-    
+
     <div class="bg-gray-50 text-black/50 dark:bg-white dark:text-balck/50">
         <div class="relative min-h-screen flex flex-col items-center justify-center">
             <div class="relative w-full max-w-md px-6">
@@ -9,7 +9,7 @@
                         <img src="{{ asset('images/Logso.png') }}" alt="Logo" class="mb-1" style="width: 300px; height: auto;">
 
                         <h1 class="text-2xl font-semibold mb-6">Welcome to BHMS</h1>
-
+<div class="grid gap-3 mb-2 md:grid-cols-2">
                         {{-- Admin Links --}}
                         @auth('admin')
                             <a href="{{ route('admin.dashboard') }}" class="mb-4 w-full text-center px-4 py-3 font-medium text-white bg-green-600 rounded-lg hover:bg-green-700">
@@ -47,7 +47,7 @@
                                 User Login
                             </a>
                         @endauth
-
+                    </div>
                     </div>
                 </main>
             </div>

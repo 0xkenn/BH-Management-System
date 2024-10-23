@@ -16,7 +16,6 @@
                             </svg>
                         </button>
                     </div>
-
                     <div class="relative">
                         <div id="dropdownBgHover" class="z-10 hidden w-48 bg-white rounded-lg shadow-lg dark:bg-gray-700">
                             <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownBgHoverButton">
@@ -31,12 +30,10 @@
                             </ul>
                         </div>
                     </div>
-
                     <div>
                         <button type="submit" class="px-4 py-2 text-white bg-green-500 rounded-full hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">Search</button>
                     </div>
                 </form>
-
                 <a href="{{ route('/register-user') }}" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-green-300 font-bold rounded-full text-sm px-5 py-2.5 shadow-lg shadow-green-500/50 transition duration-200 ease-in-out ml-2">Register</a>
                 <a href="{{ route('welcome') }}" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-green-300 font-bold rounded-full text-sm px-5 py-2.5 shadow-lg shadow-green-500/50 transition duration-200 ease-in-out ml-2">LogIn</a>
             </div>
@@ -57,122 +54,30 @@
 
         <!-- Main Listings -->
         <main class="flex-1 pl-5">
-            <div class="flex flex-wrap gap-6 justify-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @if (count($topResults) > 0)
-                    <div class="row">
-                        @foreach ($topResults as $result)
-                            <?php $boardingHouse = $result['boarding_house']; ?>
-                            <div class="w-full max-w-sm border border-gray-300 rounded-lg overflow-hidden bg-white shadow-md hover:shadow-lg transition-shadow duration-300">
-                                <div class="flex justify-center">
-                                    @if($boardingHouse->background_image)
-                                        <img src="{{ asset('storage/' . $boardingHouse->background_image) }}" alt="{{ $boardingHouse->name }}" class="w-full h-48 object-cover">
-                                    @else
-                                        <img src="{{ asset('images/placeholder.png') }}" alt="Placeholder" class="w-full h-48 object-cover">
-                                    @endif
-                                </div>
-                                <div class="p-4">
-                                    <h5 class="text-lg font-bold text-gray-800">{{ $boardingHouse->name }}</h5>
-                                    <p class="text-gray-600"><i>{{ $boardingHouse->address }}</i></p>
-                                    <p class="text-gray-700 text-sm leading-relaxed">{{ Str::limit($boardingHouse->description, 80) }}</p>
-                                    <label for="modal{{ $boardingHouse->id }}" class="mt-3 block w-full bg-green-600 text-white py-2 rounded cursor-pointer hover:bg-green-700 transition-colors text-center">View Details</label>
-                                </div>
+                    @foreach ($topResults as $result)
+                        <?php $boardingHouse = $result['boarding_house']; ?>
+                        <div class="border border-gray-300 rounded-lg overflow-hidden bg-white shadow-md hover:shadow-lg transition-shadow duration-300">
+                            <div class="flex justify-center">
+                                @if($boardingHouse->background_image)
+                                    <img src="{{ asset('storage/' . $boardingHouse->background_image) }}" alt="{{ $boardingHouse->name }}" class="w-full h-48 object-cover">
+                                @else
+                                    <img src="{{ asset('images/placeholder.png') }}" alt="Placeholder" class="w-full h-48 object-cover">
+                                @endif
                             </div>
-
-                            <!-- Modal -->
-                            <input type="checkbox" id="modal{{ $boardingHouse->id }}" class="modal-toggle hidden">
-                            <div class="modal fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-                                <div class="bg-white p-5 rounded-lg w-11/12 max-w-3xl overflow-hidden">
-                                    <div class="flex justify-between items-center">
-                                        <h5 class="text-xl font-bold">{{ $boardingHouse->name }} Details</h5>
-                                        <label for="modal{{ $boardingHouse->id }}" class="bg-transparent border-none text-xl cursor-pointer">&times;</label>
-                                    </div>
-
-                                    <!-- Carousel -->
-                                    <div class="relative mt-3 mb-4">
-                                        <div class="overflow-hidden relative">
-                                            <div class="carousel-container flex transition-transform duration-300" id="carousel{{ $boardingHouse->id }}">
-                                                @foreach ($boardingHouse->rooms as $room)
-                                                    <div class="carousel-item w-full flex-shrink-0 flex flex-col items-center">
-                                                        <div class="grid grid-cols-2 gap-4">
-                                                            @php
-                                                                $images = [$room->room_image_1, $room->room_image_2, $room->room_image_3, $room->room_image_4];
-                                                            @endphp
-                                                            @foreach ($images as $image)
-                                                                <div class="w-80 h-52">
-                                                                    @if($image && file_exists(public_path('storage/'.$image)))
-                                                                        <img src="{{ asset('storage/' . $image) }}" alt="Room Image" class="w-full h-full object-cover">
-                                                                    @else
-                                                                        <img src="{{ asset('images/room_placeholder.png') }}" alt="Placeholder" class="w-full h-full object-cover">
-                                                                    @endif
-                                                                </div>
-                                                            @endforeach
-                                                        </div>
-
-                                                        <!-- Room details -->
-                                                        <div class="flex flex-col justify-center mt-3">
-                                                            <span class="font-bold text-lg">Room {{ $room->room_number }}</span>
-                                                            <span class="text-sm text-gray-600">{{ $room->room_type }}</span>
-                                                            <span class="text-sm text-gray-600">Price: {{ $room->room_price }}</span>
-
-                                                            <!-- "Book Now" Button -->
-                                                            @if (auth()->guard('web')->check())  <!-- If the user is logged in -->
-                                                                <a href="{{ route('user.room-details', ['house_id' => $boardingHouse->id, 'room_id' => $room->id]) }}"
-                                                                   class="mt-3 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition-colors text-center">
-                                                                    Book Now
-                                                                </a>
-                                                            @else  <!-- If the user is not logged in -->
-                                                                <a href="{{ route('login') }}"
-                                                                   class="mt-3 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition-colors text-center">
-                                                                    Book Now (Login Required)
-                                                                </a>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
-
-                                        <!-- Carousel controls -->
-                                        <div class="absolute inset-0 flex justify-between items-center">
-                                            <button onclick="moveCarousel({{ $boardingHouse->id }}, -1)" class="bg-gray-800 text-white p-2 rounded-full hover:bg-gray-900">&#10094;</button>
-                                            <button onclick="moveCarousel({{ $boardingHouse->id }}, 1)" class="bg-gray-800 text-white p-2 rounded-full hover:bg-gray-900">&#10095;</button>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="p-4">
+                                <h5 class="text-lg font-bold text-gray-800">{{ $boardingHouse->name }}</h5>
+                                <p class="text-gray-600"><i>{{ $boardingHouse->address }}</i></p>
+                                <p class="text-gray-700 text-sm leading-relaxed">{{ Str::limit($boardingHouse->description, 80) }}</p>
+                                <label for="modal{{ $boardingHouse->id }}" class="mt-3 block w-full bg-green-600 text-white py-2 rounded cursor-pointer hover:bg-green-700 transition-colors text-center">View Details</label>
                             </div>
-
-                        @endforeach
-                    </div>
+                        </div>
+                    @endforeach
                 @else
                     <p>No results found</p>
                 @endif
             </div>
         </main>
     </div>
-
-    <!-- Carousel Script -->
-    <script>
-        function moveCarousel(houseId, direction) {
-            const carousel = document.getElementById('carousel' + houseId);
-            const items = carousel.children;
-            const itemCount = items.length;
-            let index = 0;
-
-            // Find current index
-            for (let i = 0; i < itemCount; i++) {
-                if (items[i].classList.contains('active')) {
-                    index = i;
-                    items[i].classList.remove('active');
-                    break;
-                }
-            }
-
-            // Update index based on direction
-            index = (index + direction + itemCount) % itemCount;
-
-            // Move carousel
-            carousel.style.transform = `translateX(-${index * 100}%)`;
-            items[index].classList.add('active');
-        }
-    </script>
 </x-guest-layout>
