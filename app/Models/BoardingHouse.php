@@ -36,7 +36,16 @@ class BoardingHouse extends Model
                    ->where('boarding_house_id', $this->id)
                    ->count();
     }
-    
-
+    public function students()
+    {
+        return $this->hasManyThrough(
+            User::class,          // Final model (users table)
+            savedRoom::class,     // Intermediate model (saved_rooms table)
+            'room_id',            // Foreign key on saved_rooms table (room_id)
+            'id',                 // Foreign key on users table (id)
+            'id',                 // Local key on boarding_houses table (id)
+            'user_id'             // Local key on saved_rooms table (user_id)
+        )->where('is_approved', 1);  // Include only approved students
+    }
 
 }

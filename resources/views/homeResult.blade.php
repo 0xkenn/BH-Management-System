@@ -73,6 +73,100 @@
                                 <label for="modal{{ $boardingHouse->id }}" class="mt-3 block w-full bg-green-600 text-white py-2 rounded cursor-pointer hover:bg-green-700 transition-colors text-center">View Details</label>
                             </div>
                         </div>
+                        <input type="checkbox" id="modal{{ $boardingHouse->id }}" class="modal-toggle hidden">
+                        <div class="modal fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+                            <div class="bg-white p-5 rounded-lg w-11/12 max-w-3xl overflow-hidden">
+                                <div class="flex justify-between items-center">
+                                    <h5 class="text-xl font-bold">{{ $boardingHouse->name }} Details</h5>
+                                    <label for="modal{{ $boardingHouse->id }}" class="bg-transparent border-none text-xl cursor-pointer">&times;</label>
+                                </div>
+
+                                <!-- Carousel Container -->
+                                <div class="relative mt-3 mb-4">
+                                    <div class="overflow-hidden relative">
+                                        <div class="carousel-container flex transition-transform duration-300" id="carousel{{ $boardingHouse->id }}">
+                                            @foreach ($boardingHouse->rooms as $room)
+                                                <div class="carousel-item w-full flex-shrink-0 flex flex-col items-center"> <!-- Center items -->
+                                                    <div class="grid grid-cols-2 gap-4"> <!-- 2x2 Grid for images -->
+                                                        @php
+                                                            $images = [
+                                                                $room->room_image_1,
+                                                                $room->room_image_2,
+                                                                $room->room_image_3,
+                                                                $room->room_image_4,
+                                                            ];
+                                                        @endphp
+                                                        @foreach ($images as $image)
+                                                            <div class="flex justify-center"> <!-- Center image -->
+                                                                <div class="w-80 h-52"> <!-- Increase width and height for a larger image container -->
+                                                                    @if($image && file_exists(public_path('storage/' . $image))) <!-- Check if image exists -->
+                                                                        <img src="{{ asset('storage/' . $image) }}" alt="{{ $room->name }}" class="w-full h-full object-cover rounded"> <!-- Adjust to full width and height -->
+                                                                    @else <!-- Placeholder if no image -->
+                                                                        <img src="{{ asset('images/y9DpT.jpg') }}" alt="Placeholder" class="w-full h-full object-cover rounded"> <!-- Adjust to full width and height -->
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+
+                                                    <!-- Room Details and Button -->
+                                                    <div class="relative w-full mt-2"> <!-- Relative positioning for button -->
+                                                        <div class="flex flex-col text-left"> <!-- Flex column for room details -->
+                                                            <h6 class="font-bold text-lg">{{ $room->name }}</h6>
+                                                            <p class="mt-1"><strong>Price:</strong> ${{ $room->price }}</p>
+                                                            <p><strong>Available:</strong> {{ !$room->is_occupied ? 'Yes' : 'No' }}</p>
+                                                            <p><strong>Vacancy:</strong> {{ $room->capacity }}</p>
+                                                        </div>
+
+
+
+
+                                                 <div>
+
+                                              </div>
+
+
+                                               @if (auth()->guard('web')->check())
+                                               <a
+                                               href="{{ route('user.room-details', $room->id) }}"
+                                                class="absolute bottom-0 right-0 bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-colors"
+
+                                              >
+                                                reserve Now
+                                           </a>
+                                               @else
+                                               <a
+                                               href="{{ route('login') }}"
+                                                class="absolute bottom-0 right-0 bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-colors"
+
+                                              >
+                                                reserve Now
+                                           </a>
+                                               @endif
+
+
+
+                                                       <!-- Button at bottom right -->
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+
+                                        <!-- Navigation Controls -->
+                                        @if ($boardingHouse->rooms->count() > 1) <!-- Only show navigation buttons if there are multiple rooms -->
+                                            <div class="absolute top-1/2 transform -translate-y-1/2 left-4">
+                                                <button class="btn btn-circle bg-gray-800 text-white hover:bg-gray-600"
+                                                    onclick="moveCarousel('{{ $boardingHouse->id }}', -1)">❮</button> <!-- Previous Button -->
+                                            </div>
+                                            <div class="absolute top-1/2 transform -translate-y-1/2 right-4">
+                                                <button class="btn btn-circle bg-gray-800 text-white hover:bg-gray-600"
+                                                    onclick="moveCarousel('{{ $boardingHouse->id }}', 1)">❯</button> <!-- Next Button -->
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
                 @else
                     <p>No results found</p>

@@ -71,9 +71,7 @@ public function reserveRoom($id){
         $rooms = Room::with('boarding_house')->get();   
         return view('user.room-list', compact('rooms'));
     }
-    public function notifications(){
-        return view('user.user-notification');
-    }
+
     public function reservationList(){
         $userId = auth()->guard('web')->id();
         $reservedRooms = Room::whereHas('reservations', function ($query) use ($userId) {
@@ -85,9 +83,7 @@ public function reserveRoom($id){
     }
 
 
-     public function roomNotif(){
-        return view ("user.user-notification");
-     }
+ 
      public function roomShow (){
         return view('user.show');
      }
@@ -110,5 +106,11 @@ DB::table('users')
 
             return redirect()->route('user.dashboard');
      }
+
+public function notifications(){
+    $user = auth()->guard('web')->user();
+    $unreadNotifications = $user->unreadNotifications;
+ return view('user.user-notification', compact('unreadNotifications'));
+}
     
 }

@@ -33,10 +33,13 @@
                                         <h3 class="text-lg font-bold mb-4">Boarders of {{ $bh->boarding_house_name }}</h3>
 
                                         <ul class="list-disc list-inside space-y-2">
-                                            <li>John Doe</li>
-                                            <li>Jane Smith</li>
-                                            <li>Mark Johnson</li>
-                                            <li>Emily Davis</li>
+                                            @if ($bh->student_names)
+                                            @foreach (explode(', ', $bh->student_names) as $student)
+                                                <li>{{ $student }}</li>
+                                            @endforeach
+                                        @else
+                                            <li>No students found.</li>
+                                        @endif
                                         </ul>
 
                                         <div class="mt-6 flex justify-end">

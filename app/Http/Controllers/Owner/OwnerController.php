@@ -8,6 +8,7 @@ use App\Models\BoardingHouse;
 use App\Models\Preference;
 use App\Models\savedRoom;
 use App\Models\User;
+use App\Notifications\ReservationApproved;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -105,6 +106,9 @@ class OwnerController extends Controller
         $savedRoom->room->is_occupied = ($savedRoom->room->capacity === 0) ? 1 : 0; // Set occupancy status based on capacity
         $savedRoom->room->save();
         $savedRoom->save();
+
+        $user = $savedRoom->user; 
+        $user->notify(new ReservationApproved($savedRoom)); // Pass the reservation to the notification
         
         return redirect()->back()->with('message', 'Successfully approved');
     }else {

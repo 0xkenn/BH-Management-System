@@ -32,18 +32,14 @@
 
                             <!-- Image Row Container -->
                             <div class="grid grid-cols-4 gap-4 mt-4">
-                                @php
-                                    $images = [
-                                        asset('storage/sample1.jpg'), // Update this path as needed
-                                        asset('images/sample2.jpg'),
-                                        asset('images/sample3.jpg'),
-                                        asset('images/sample4.jpg'),
-                                    ];
-                                @endphp
+                               
 
-                                @foreach($images as $image)
+                                @foreach($boardingHouse->rooms as $image)
                                     <div class="flex justify-center">
-                                        <img src="{{ $image }}" alt="Sample Image" class="w-full h-48 object-cover rounded-lg">
+                                        <img src="{{ asset('storage/'. $image->room_image_1) }}" alt="Sample Image" class="w-full h-48 object-cover rounded-lg">
+                                        <img src="{{ asset('storage/'. $image->room_image_2) }}" alt="Sample Image" class="w-full h-48 object-cover rounded-lg">
+                                        <img src="{{ asset('storage/'. $image->room_image_3) }}" alt="Sample Image" class="w-full h-48 object-cover rounded-lg">
+                                        <img src="{{ asset('storage/'. $image->room_image_1) }}" alt="Sample Image" class="w-full h-48 object-cover rounded-lg">
                                     </div>
                                 @endforeach
                             </div>
