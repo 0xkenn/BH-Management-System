@@ -15,7 +15,7 @@
                 </button>
 
                 <!-- Centered Heading -->
-                <h1 class="text-2xl font-bold text-center mb-6">Owner Login</h1>
+                <h1 class="text-2xl font-bold text-center mb-6">Admin Login</h1>
             </div>
 
             <form method="POST" action="{{ route('admin.login.auth') }}">

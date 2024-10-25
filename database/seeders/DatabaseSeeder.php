@@ -25,24 +25,24 @@ class DatabaseSeeder extends Seeder
             'gender' => 'male',
             'mobile_number' => '09093563451',
             'is_student' => true,
-            'password' => '12345678'
+            'password' => '123456789'
 
         ]);
 
         Owner::create([
-            'name' => 'agay',
+            'name' => 'Edwin',
             'email' => 'owner@gmail.com',
             'address' => 'culaba',
             'mobile_number' => '09090909099',
             'business_permit' => '1234567876543',
             'approved' => 1,
-            'password' => '12345678'
+            'password' => '123456789'
         ]);
 
         Admin::create([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
-            'password' => 'qwertyuiop'
+            'password' => '123456789'
         ]);
 
         $this->call(PreferencesTableSeeder::class);
