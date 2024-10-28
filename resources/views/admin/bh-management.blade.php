@@ -46,7 +46,7 @@
 
                                     <img src="{{asset('storage/'.$boarding_house->business_permit_image)}}" alt="">
                                     <div class="modal-action">
-                                        <a href="#" class="btn">Okay!</a>
+                                        <a href="#" class="btn">back</a>
                                     </div>
                             </div>
                         </div>

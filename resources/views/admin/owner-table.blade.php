@@ -79,7 +79,7 @@
 
           <img src="{{asset('storage/'.$owner->business_permit)}}" alt="">
           <div class="modal-action">
-            <a href="#" class="btn">Okay!</a>
+            <a href="#" class="btn">back</a>
           </div>
         </div>
       </div>
@@ -100,7 +100,7 @@
             </svg>
 
             <div class="modal modal-bottom sm:modal-middle" role="dialog" id="owner_data_{{$owner->id}}">
-              <div class="modal-box flex flex-col">
+              <div class="modal-box flex flex-col text-white">
                 <a href="#" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</a>
                 <h3 class="text-lg font-bold">{{$owner->name}}'s Data!</h3>
                 <p class="py-4">Name: {{$owner->name}}</p>

@@ -9,6 +9,16 @@ class Preference extends Model
 {
     use HasFactory;
    
+    protected $fillable = [
+        'category',
+        'name',
+    ];
+
+    // Casting fields to desired data types
+    protected $casts = [
+        'category' => 'string', // Cast to string
+        'name' => 'string',      // Cast to string
+    ];
 
     public function users()
     {

@@ -9,74 +9,60 @@ use Illuminate\Http\Request;
 class SearchController extends Controller
 {
     public function search(Request $request)
-{
-    // Get user-selected preferences
-    $selectedPreferences = $request->input('preferences', []); // Array of selected preferences IDs
+    {
+        // Retrieve user-selected preferences and search term
+        $selectedPreferences = $request->input('preferences', []); // Array of selected preference IDs
+        $searchQuery = $request->input('search'); // Search input for boarding house name
 
-    // Get all preferences (assuming you have a list of all preferences)
-    $allPreferences = Preference::all()->pluck('id')->toArray();
+        // Fetch all preference IDs for consistent vector creation
+        $allPreferences = Preference::all()->pluck('id')->toArray();
 
-    // Create user's binary vector
-    $userVector = array_map(function ($preferenceId) use ($selectedPreferences) {
-        return in_array($preferenceId, $selectedPreferences) ? 1 : 0;
-    }, $allPreferences);
+        // Build the user's binary vector based on selected preferences
+        $userVector = array_map(fn($preferenceId) => in_array($preferenceId, $selectedPreferences) ? 1 : 0, $allPreferences);
 
-    // Get all boarding houses with their preferences
-    $boardingHouses = BoardingHouse::with('preferences')->get();
+        // Query boarding houses, applying name filter if search query is present
+        $boardingHouses = BoardingHouse::with('preferences')
+            ->when($searchQuery, function ($query, $searchQuery) {
+                return $query->where('name', 'LIKE', '%' . $searchQuery . '%');
+            })
+            ->get();
 
-    // Initialize an array to store the similarity scores
-    $boardingHouseScores = [];
+        // Calculate similarity scores for each boarding house
+        $boardingHouseScores = $boardingHouses->map(function ($boardingHouse) use ($userVector, $allPreferences) {
+            // Create the binary vector for the boarding house based on its preferences
+            $boardingHouseVector = array_map(fn($preferenceId) => in_array($preferenceId, $boardingHouse->preferences->pluck('id')->toArray()) ? 1 : 0, $allPreferences);
 
-    foreach ($boardingHouses as $boardingHouse) {
-        // Create the binary vector for the current boarding house
-        $boardingHousePreferences = $boardingHouse->preferences->pluck('id')->toArray();
+            // Compute cosine similarity score
+            $similarityScore = $this->cosineSimilarity($userVector, $boardingHouseVector);
 
-        $boardingHouseVector = array_map(function ($preferenceId) use ($boardingHousePreferences) {
-            return in_array($preferenceId, $boardingHousePreferences) ? 1 : 0;
-        }, $allPreferences);
+            return [
+                'boarding_house' => $boardingHouse,
+                'similarity_score' => $similarityScore,
+            ];
+        })->sortByDesc('similarity_score')->take(3)->values()->all();
 
-        // Compute the cosine similarity between the user and the boarding house
-        $similarityScore = $this->cosineSimilarity($userVector, $boardingHouseVector);
+        // Fetch all preferences to display in the view
+        $preferences = Preference::all();
 
-        // Store the result with the boarding house id and the score
-        $boardingHouseScores[] = [
-            'boarding_house' => $boardingHouse,
-            'similarity_score' => $similarityScore,
-        ];
+        return view('homeResult', compact('boardingHouseScores', 'preferences'));
     }
 
-    // Sort the boarding houses by similarity score in descending order
-    usort($boardingHouseScores, function ($a, $b) {
-        return $b['similarity_score'] <=> $a['similarity_score'];
-    });
+    // Compute cosine similarity between two binary vectors
+    private function cosineSimilarity(array $vecA, array $vecB)
+    {
+        $dotProduct = 0;
+        $magnitudeA = 0;
+        $magnitudeB = 0;
 
-    // Return the top results (e.g., top 5 boarding houses)
-    $topResults = array_slice($boardingHouseScores, 0, 3);
-    $preferences = Preference::all();
+        foreach ($vecA as $i => $val) {
+            $dotProduct += $val * $vecB[$i];
+            $magnitudeA += pow($val, 2);
+            $magnitudeB += pow($vecB[$i], 2);
+        }
 
-    return view('homeResult', compact('topResults', 'preferences'));
-}
+        $magnitudeA = sqrt($magnitudeA);
+        $magnitudeB = sqrt($magnitudeB);
 
-function cosineSimilarity(array $vecA, array $vecB)
-{
-    $dotProduct = 0;
-    $magnitudeA = 0;
-    $magnitudeB = 0;
-
-    for ($i = 0; $i < count($vecA); $i++) {
-        $dotProduct += $vecA[$i] * $vecB[$i];
-        $magnitudeA += pow($vecA[$i], 2);
-        $magnitudeB += pow($vecB[$i], 2);
+        return ($magnitudeA * $magnitudeB == 0) ? 0 : $dotProduct / ($magnitudeA * $magnitudeB);
     }
-
-    $magnitudeA = sqrt($magnitudeA);
-    $magnitudeB = sqrt($magnitudeB);
-
-    if ($magnitudeA * $magnitudeB == 0) {
-        return 0;
-    }
-
-    return $dotProduct / ($magnitudeA * $magnitudeB);
-}
-
 }

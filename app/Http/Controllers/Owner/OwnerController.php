@@ -17,7 +17,18 @@ class OwnerController extends Controller
 {
 
     public function dashboard() {
-        $users = User::with('reservations')->get();
+        $users = User::with(['reservations' => function ($query) {
+            $query->whereHas('room', function ($query) {
+                $query->where('owner_id', auth()->guard('owner')->id()); // Ensure only reservations for rooms of the authenticated owner
+            });
+        }])
+        ->whereHas('reservations.room', function ($query) {
+            $query->where('owner_id', auth()->guard('owner')->id()); // Only users with reservations for this owner's rooms
+        })
+        ->get();
+    
+    
+    
     
         // Total reservations grouped by month
         $totalReservations = SavedRoom::select(
@@ -62,6 +73,10 @@ class OwnerController extends Controller
         $bh = BoardingHouse::with('rooms')->where('owner_id', Auth::guard('owner')->id())->get();
         $preferences = Preference::all();
 
+        // Decode JSON or handle empty values safely
+    
+      
+
         return view('owner.boardingHouse', compact('bh', 'preferences'));
     }
     public function store(Request $request){
@@ -72,7 +87,8 @@ class OwnerController extends Controller
             'description' => 'required|string',
             'business_permit_image' => 'required|image|mimes:png,jpg,jpeg',
             'background_image' => 'required|image|mimes:png,jpg,jpeg,gif',
-            'preferences' => "nullable|array",
+            'preferences' => 'nullable|array',
+            'preferences.*' => 'exists:preferences,id', // Ensure each preference exists in the database
         ]);
 
         $data['owner_id'] = Auth::guard('owner')->id();
@@ -88,7 +104,8 @@ class OwnerController extends Controller
                 'background_image' => $request->file('background_image')->store('background_images', 'public'),
                 'business_permit_image' => $request->file('business_permit_image')->store('business_permit_images', 'public'),
             ]);
-            $boardingHouse->preferences()->sync($data['preferences'] ?? []);
+            $boardingHouse->preferences()->attach($data['preferences']);
+            
                 return redirect()->route('owner.boardingHouse')->with('message', 'successfully added a boarding house');
             }else{
                 return redirect()->back()->with('errors','Error creating boarding house');

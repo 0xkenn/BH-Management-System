@@ -15,12 +15,28 @@ class PreferencesTableSeeder extends Seeder
     public function run(): void
     {
         DB::table('preferences')->insert([
-            ['name' => 'Wi-Fi'],
-            ['name' => 'Kitchen'],
-            ['name' => 'Electricity'],
-            ['name' => 'Water'],
-            ['name' => 'Rice Cooker']
-            // Add more preferences as needed
+            // Amenities
+            ['category' => 'amenities', 'name' => 'Free Water'],
+            ['category' => 'amenities', 'name' => 'Free Electricity'],
+            ['category' => 'amenities', 'name' => 'With Internet Connectivity'],
+            ['category' => 'amenities', 'name' => 'Shared CR'],
+            ['category' => 'amenities', 'name' => 'Not Shared CR'],
+            ['category' => 'amenities', 'name' => 'With Electric Fan'],
+        
+            // Vacancy
+            ['category' => 'vacancy', 'name' => 'Solo'],
+            ['category' => 'vacancy', 'name' => 'Bed Spacer'],
+        
+            // Location
+            ['category' => 'location', 'name' => 'Near BIPSU'],
+            ['category' => 'location', 'name' => 'Near Public Market and Pier'],
+        
+            // Budget Range
+            ['category' => 'budget_range', 'name' => '500-1000'],
+            ['category' => 'budget_range', 'name' => '1000-1500'],
+            ['category' => 'budget_range', 'name' => '1500-3500'],
+            ['category' => 'budget_range', 'name' => '3500-4500'],
         ]);
+        
     }
 }

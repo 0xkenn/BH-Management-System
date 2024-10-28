@@ -16,6 +16,7 @@ use App\Models\Room;
 Route::get('/', function () {
     $boardingHouses = BoardingHouse::with('rooms')->get();
     $preferences = Preference::all();
+   
     return view('homepage', compact( 'boardingHouses', 'preferences'));
  
     

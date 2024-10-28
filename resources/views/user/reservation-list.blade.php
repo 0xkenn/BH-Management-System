@@ -9,6 +9,7 @@
                         <th class="px-4 py-3">Room Name</th>
                         <th class="px-4 py-3">Boarding House Name</th>
                         <th class="px-4 py-3">Address</th>
+                        <th>status</th>
                         <th class="px-4 py-3">Actions</th>
                     </tr>
                 </thead>
@@ -23,6 +24,18 @@
                     </td>
                     <td class="px-4 py-3 text-sm">{{$reserve->boarding_house->name}}</td>
                     <td class="px-4 py-3 text-sm">{{$reserve->boarding_house->address}}</td>
+                    <td>
+                        @foreach ($reserve->reservations as $reservation)
+                            <span
+                                class="px-2 py-1 font-semibold leading-tight 
+                                {{ $reservation->is_approved ? 'text-green-700 bg-green-100 dark:bg-green-700 dark:text-green-100' : 'text-orange-700 bg-orange-100 dark:text-white dark:bg-orange-600' }} 
+                                rounded-full"
+                            >
+                                {{ $reservation->is_approved ? 'Approved' : 'Pending Approval' }}
+                            </span>
+                        @endforeach
+                    </td>
+                    
                     <td class="px-4 py-3">
                         <div class="flex items-center space-x-4 text-sm">
 

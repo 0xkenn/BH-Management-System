@@ -13,6 +13,7 @@
                             <!-- Boarding House Card -->
                             <div class="bg-gray-800 p-6 rounded-lg shadow-lg" x-data="{ open: false }">
                                 <h3 class="text-lg font-semibold text-white mb-4">{{ $bh->boarding_house_name }}</h3>
+                                <p><strong>Boarding House owner:</strong> {{ $bh->owner_name }}</p>
                                 <p class="text-white mt-2">Number of students: {{ $bh->student_count }}</p>
 
                                 <!-- View Boarders Button -->

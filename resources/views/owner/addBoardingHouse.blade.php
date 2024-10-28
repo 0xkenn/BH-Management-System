@@ -74,20 +74,29 @@
 
             {{-- frefs --}}
             {{-- Preferences Field --}}
-<label class="block text-sm mb-3">
-    <span class="text-gray-700 dark:text-gray-400">Preferences</span>
-    <div class="mt-1">
-        @foreach($preferences as $preference)
-            <label class="inline-flex items-center mt-1">
-                <input type="checkbox" name="preferences[]" value="{{ $preference->id }}" class="form-checkbox text-green-600">
-                <span class="ml-2">{{ $preference->name }}</span>
-            </label><br>
-        @endforeach
-    </div>
-    @error('preferences')
-        <div class="text-red-600">{{ $message }}</div>
-    @enderror
-</label>
+            <label class="block text-sm mb-3">
+                <span class="text-gray-700 dark:text-gray-400">Preferences</span>
+                <div class="mt-1">
+                    @foreach($preferences->groupBy('category') as $category => $prefs)
+                        <div class="mt-4">
+                            <span class="font-semibold">{{ ucfirst($category) }}</span>
+                            <div class="grid grid-cols-2 gap-4 mt-1">
+                                @foreach($prefs as $preference)
+                                    <label class="inline-flex items-center mt-1">
+                                        <input type="checkbox" name="preferences[]" value="{{ $preference->id }}" class="form-checkbox text-green-600">
+                                        <span class="ml-2">{{ $preference->name }}</span>
+                                    </label>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                @error('preferences')
+                    <div class="text-red-600">{{ $message }}</div>
+                @enderror
+            </label>
+            
+            
 
 
             <div class="flex justify-end">

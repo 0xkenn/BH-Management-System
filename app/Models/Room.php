@@ -20,6 +20,7 @@ class Room extends Model
         'room_image_1',
         'room_image_2',
         'room_image_3',
+        'room_image_4',
     ];
 
     public function boarding_house(): BelongsTo {

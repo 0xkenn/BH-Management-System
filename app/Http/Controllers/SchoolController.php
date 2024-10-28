@@ -24,7 +24,8 @@ class SchoolController extends Controller
             'bh.id as boarding_house_id',
             'bh.name as boarding_house_name',
             DB::raw('COUNT(DISTINCT sr.user_id) as student_count'),
-            DB::raw('GROUP_CONCAT(DISTINCT u.name SEPARATOR ", ") as student_names') // Concatenate student names
+            DB::raw('GROUP_CONCAT(DISTINCT u.name SEPARATOR ", ") as student_names'), // Concatenate student names
+            'o.name as owner_name' // Select the owner's name
         )
         ->leftJoin('rooms as r', 'bh.id', '=', 'r.boarding_house_id')
         ->leftJoin('saved_rooms as sr', function($join) {
@@ -32,8 +33,10 @@ class SchoolController extends Controller
                  ->where('sr.is_approved', 1); // Only include approved entries
         })
         ->leftJoin('users as u', 'sr.user_id', '=', 'u.id') // Join with users table
-        ->groupBy('bh.id', 'bh.name')
+        ->leftJoin('owners as o', 'bh.owner_id', '=', 'o.id') // Join with owners table
+        ->groupBy('bh.id', 'bh.name', 'o.name') // Group by owner's name
         ->get();
+    
     
 
     

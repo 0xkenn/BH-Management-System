@@ -52,7 +52,10 @@
         <div class="card-body">
           <h2 class="card-title">
             {{$room->name}}
-            <div class="badge bg-green-500 text-white">{{$room->is_occupied == 0 ? 'available' : 'Not Available'}}</div>
+            <div class="badge text-white {{ $room->is_occupied == 0 ? 'bg-green-500' : 'bg-red-500' }}">
+                {{ $room->is_occupied == 0 ? 'Available' : 'Not Available' }}
+            </div>
+            
           </h2>
           <p>Price: {{$room->price}}</p>
           <div class="card-actions justify-end">

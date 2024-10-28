@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('preferences', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('category'); // e.g., 'amenities', 'vacancy', 'location', 'budget_range'
+            $table->string('name');     // e.g., 'Free Water', 'Solo', 'Near BIPSU'
             $table->timestamps();
         });
+        
     }
 
     /**

@@ -43,44 +43,60 @@ class UserController extends Controller
     }
 
 
-    public function roomDetails($id){
+    public function roomDetails($id)
+    {
         $room = Room::findOrFail($id);
         $savedRoom = $room->reservations()->where('user_id', auth()->guard('web')->id())->first();
-
-
-        return view('user.room-detail', compact('room', 'savedRoom'));
-    }
-public function reserveRoom($id){
-    $room = Room::findOrFail($id);
-    $savedRoom = $room->reservations()->where('user_id', auth()->guard('web')->id())->first();
-   
-    if(!is_null($savedRoom)){
-       $savedRoom->delete();
-       return;
-    }else{
-        $savedRoom = $room->reservations()->create([
-            'user_id' => auth()->guard('web')->id(),
-        ]);
-        return $savedRoom;
-       }
-       
     
-}
+        // Pass `savedRoom` status and `isApproved` to the view
+        return view('user.room-detail', [
+            'room' => $room,
+            'savedRoom' => $savedRoom ? true : false,
+            'isApproved' => $savedRoom ? $savedRoom->is_approved : 0, // Default to 0 if no reservation exists
+        ]);
+    }
+    
+    public function reserveRoom($id)
+    {
+        $room = Room::findOrFail($id);
+        $userId = auth()->guard('web')->id();
+        $savedRoom = $room->reservations()->where('user_id', $userId)->first();
+    
+        if (!is_null($savedRoom)) {
+            // Delete reservation if it exists (unreserve)
+            $savedRoom->delete();
+            return response()->json(['savedRoom' => false, 'isApproved' => null]);
+        } else {
+            // Create new reservation with `is_approved` set to 0
+            $savedRoom = $room->reservations()->create([
+                'user_id' => $userId,
+                'is_approved' => 0, // Default to pending approval
+            ]);
+            return response()->json(['savedRoom' => true, 'isApproved' => $savedRoom->is_approved]);
+        }
+    }
+    
+    
 
     public function roomList(){
         $rooms = Room::with('boarding_house')->get();   
         return view('user.room-list', compact('rooms'));
     }
-
-    public function reservationList(){
+    public function reservationList()
+    {
         $userId = auth()->guard('web')->id();
+    
         $reservedRooms = Room::whereHas('reservations', function ($query) use ($userId) {
             $query->where('user_id', $userId);
-        })->with('boarding_house')->get();
-
+        })
+        ->with(['boarding_house', 'reservations' => function ($query) use ($userId) {
+            $query->where('user_id', $userId); // Load only the user's reservations for each room
+        }])
+        ->get();
+    
         return view('user.reservation-list', compact('reservedRooms'));
-
     }
+    
 
 
  

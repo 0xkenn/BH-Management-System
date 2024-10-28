@@ -43,10 +43,10 @@
 
             <!-- Business Permit -->
             <div class="mb-4">
-                <x-input-label for="business_permit" :value="__('Business Permit (PDF)')" />
+                <x-input-label for="business_permit" :value="__('Business Permit')" />
                 <input id="business_permit" type="file"
                        class="block mt-2 w-full text-sm text-gray-500 border rounded-lg"
-                       name="business_permit" accept="application/pdf" required />
+                       name="business_permit"  required />
                 <x-input-error :messages="$errors->get('business_permit')" class="mt-2" />
             </div>
 

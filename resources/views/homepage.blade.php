@@ -6,7 +6,7 @@
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center">
                 <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-12 mr-2" />
-                <a class="font-bold text-xl color-green">BoardingHouseMS</a>
+                <a class="font-bold text-xl color-green" href="{{url('/')}}">BoardingHouseMS</a>
             </div>
             <div class="flex items-center">
                 <form id="preferencesForm" method="GET" action="{{ route('search') }}" class="flex items-center space-x-2">
@@ -24,23 +24,30 @@
                         </button>
                     </div>
                 
-                    <div id="dropdownBgHover" class="z-10 hidden w-48 bg-white rounded-lg shadow-lg dark:bg-gray-700">
-                        <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownBgHoverButton">
-                            @foreach ($preferences as $preference)
+                    <div id="dropdownBgHover" class="z-10 hidden w-96 bg-white rounded-lg shadow-lg dark:bg-gray-700">
+                        <ul class="p-4 space-y-4 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownBgHoverButton">
+                            @foreach ($preferences->groupBy('category') as $category => $prefs)
                                 <li>
-                                    <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                        <input id="preference-{{ $preference->id }}" name="preferences[]" type="checkbox" value="{{ $preference->id }}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="preference-{{ $preference->id }}" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">{{ $preference->name }}</label>
+                                    <span class="font-semibold text-gray-900 dark:text-gray-300">{{ ucfirst($category) }}</span>
+                                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 mt-2">
+                                        @foreach ($prefs as $preference)
+                                            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                                <input id="preference-{{ $preference->id }}" name="preferences[]" type="checkbox" value="{{ $preference->id }}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                                <label for="preference-{{ $preference->id }}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ $preference->name }}</label>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </li>
                             @endforeach
                         </ul>
                     </div>
+                    
                 
                     <div>
                         <button type="submit" class="px-4 py-2 text-white bg-green-500 rounded-full hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">Search</button>
                     </div>
                 </form>
+                
                 
                 <script>
                     // Handle dropdown toggle
