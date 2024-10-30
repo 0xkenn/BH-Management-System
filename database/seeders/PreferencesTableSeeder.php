@@ -28,8 +28,8 @@ class PreferencesTableSeeder extends Seeder
             ['category' => 'vacancy', 'name' => 'Bed Spacer'],
         
             // Location
-            ['category' => 'location', 'name' => 'Near BIPSU'],
-            ['category' => 'location', 'name' => 'Near Public Market and Pier'],
+            // ['category' => 'location', 'name' => 'Near BIPSU'],
+            // ['category' => 'location', 'name' => 'Near Public Market and Pier'],
         
             // Budget Range
             ['category' => 'budget_range', 'name' => '500-1000'],

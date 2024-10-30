@@ -84,7 +84,7 @@
                      <p class="py-4">Name: {{$bh->name}}</p>
                      <p class="py-4">Address: {{$bh->address}}</p>
                      <p class="py-4">Description: {{$bh->description}}</p> <!-- Added description -->
-                     <p class="py-4">Rooms: {{$bh->rooms->count()}}</p> <!-- Added rooms -->
+                     <p class="py-4">Number of rooms: {{$bh->rooms->count()}}</p> <!-- Added rooms -->
                      <div class="modal-action">
                          <a href="{{ route('owner.view-rooms', $bh->id) }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 inline-block">View Rooms</a>
                          <!-- You can add action buttons here if needed -->

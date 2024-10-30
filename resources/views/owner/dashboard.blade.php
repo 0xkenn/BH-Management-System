@@ -26,8 +26,10 @@
             </div>
         </div>
 
+        <h1 class="text-black font-bold">Reservation List</h1>
         <!-- ListView of User Reservations -->
         <div class="bg-white border border-gray-300  shadow-lg">
+            
             <table class="min-w-full table-auto">
                 <thead>
                     <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">

@@ -15,8 +15,8 @@
             @csrf
 
             <div class="mb-4">
-                <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Room Name:</label>
-                <input type="text" id="name" name="name" placeholder="Enter room name" class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring focus:ring-blue-500">
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Room Number:</label>
+                <input type="text" id="name" name="name" placeholder="Enter room number" class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring focus:ring-blue-500">
                 @error('name')
                     <div class="mt-1 text-sm text-red-400">{{ $message }}</div>
                 @enderror
@@ -40,7 +40,7 @@
 
             <div class="grid grid-cols-2 gap-4 mb-4">
                 <div>
-                    <label for="room_image_1" class="block mb-2 text-sm font-medium text-gray-900">Room Image 1 (optional):</label>
+                    <label for="room_image_1" class="block mb-2 text-sm font-medium text-gray-900">Kitchen Area</label>
                     <input type="file" id="room_image_1" name="room_image_1" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring focus:ring-blue-500">
                     <div class="mt-1 text-sm text-gray-500" id="user_avatar_help"></div>
                     @error('room_image_1')
@@ -49,7 +49,7 @@
                 </div>
 
                 <div>
-                    <label for="room_image_2" class="block mb-2 text-sm font-medium text-gray-900">Room Image 2:</label>
+                    <label for="room_image_2" class="block mb-2 text-sm font-medium text-gray-900">Cr</label>
                     <input type="file" id="room_image_2" name="room_image_2" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring focus:ring-blue-500">
                     <div class="mt-1 text-sm text-gray-500" id="user_avatar_help"></div>
                     @error('room_image_2')
@@ -58,7 +58,7 @@
                 </div>
 
                 <div>
-                    <label for="room_image_3" class="block mb-2 text-sm font-medium text-gray-900">Room Image 3:</label>
+                    <label for="room_image_3" class="block mb-2 text-sm font-medium text-gray-900">Dining Area</label>
                     <input type="file" id="room_image_3" name="room_image_3" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring focus:ring-blue-500">
                     <div class="mt-1 text-sm text-gray-500" id="user_avatar_help"></div>
                     @error('room_image_3')
@@ -67,7 +67,7 @@
                 </div>
 
                 <div>
-                    <label for="room_image_4" class="block mb-2 text-sm font-medium text-gray-900">Room Image 4:</label>
+                    <label for="room_image_4" class="block mb-2 text-sm font-medium text-gray-900">Bedroom</label>
                     <input type="file" id="room_image_4" name="room_image_4" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring focus:ring-blue-500">
                     <div class="mt-1 text-sm text-gray-500" id="user_avatar_help"></div>
                     @error('room_image_4')

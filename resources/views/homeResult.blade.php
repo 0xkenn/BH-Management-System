@@ -81,7 +81,7 @@
                                 <h5 class="text-lg font-bold text-gray-800">{{ $result['boarding_house']->name }}</h5>
                                 <p class="text-gray-600"><i>{{ $result['boarding_house']->address  }}</i></p>
                                 <p class="text-gray-700 text-sm leading-relaxed">{{ Str::limit($result['boarding_house']->description , 80) }}</p>
-                                <p>Similarity Score: {{ $result['similarity_score'] }}</p>
+                                <!-- <p>Similarity Score: {{ $result['similarity_score'] }}</p> -->
                                 <label for="modal{{ $boardingHouse->id }}" class="mt-3 block w-full bg-green-600 text-white py-2 rounded cursor-pointer hover:bg-green-700 transition-colors text-center">View Details</label>
                             </div>
                         </div>
