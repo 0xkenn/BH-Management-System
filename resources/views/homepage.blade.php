@@ -107,10 +107,10 @@
         <main class="flex-1 pl-5">
             <div class="flex flex-wrap gap-6 justify-center">
                 @foreach($boardingHouses as $house)
-                    <div class="w-full max-w-sm border border-gray-300 rounded-lg overflow-hidden bg-white shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <div class="w-92 max-w-sm border border-gray-300 rounded-lg overflow-hidden bg-white shadow-md hover:shadow-lg transition-shadow duration-300">
                         <div class="flex justify-center"> <!-- Centering the image -->
                             @if($house->background_image)
-                                <img src="{{ asset('storage/' . $house->background_image) }}" alt="{{ $house->name }}" class="w-full h-48 object-cover">
+                                <img src="{{ asset('storage/' . $house->background_image) }}"  alt="{{ $house->name }}" class="w-full h-48 object-cover">
                             @else
                                 <img src="{{ asset('images/placeholder.png') }}" alt="Placeholder" class="w-full h-48 object-cover">
                             @endif
@@ -164,7 +164,7 @@
                                                     <!-- Room Details and Button -->
                                                     <div class="relative w-full mt-2"> <!-- Relative positioning for button -->
                                                         <div class="flex flex-col text-left"> <!-- Flex column for room details -->
-                                                            <h6 class="font-bold text-lg">{{ $room->name }}</h6>
+                                                            <h6 class="font-bold text-lg">Room {{ $room->name }}</h6>
                                                             <p class="mt-1"><strong>Price:</strong> ${{ $room->price }}</p>
                                                             <p><strong>Available:</strong> {{ !$room->is_occupied ? 'Yes' : 'No' }}</p>
                                                             <p><strong>Vacancy:</strong> {{ $room->capacity }}</p>

@@ -36,14 +36,14 @@
                     <span class="ml-4">User Management</span>
                 </a>
             </li>
-            <li class="relative px-6 py-3 {{ request()->routeIs('admin.reports') ? 'text-green-500' : '' }}">
+            <!-- <li class="relative px-6 py-3 {{ request()->routeIs('admin.reports') ? 'text-green-500' : '' }}">
                 <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="{{route('admin.reports')}}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 {{ request()->routeIs('admin.reports') ? 'text-green-500' : '' }}">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
                     </svg>
                     <span class="ml-4">Report</span>
                 </a>
-            </li>
+            </li> -->
         </ul>
         <div class="px-6 my-6">
             <form method="post" action="{{ route('admin.logout') }}">

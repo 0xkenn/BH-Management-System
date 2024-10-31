@@ -25,10 +25,10 @@ class AddRoomRequest extends FormRequest
             'name' => 'required|string',
             'capacity' => 'required|integer',
             'price' => 'required|integer',
-            'room_image_1' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'room_image_2' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'room_image_3' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'room_image_4' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'room_image_1' => 'nullable|image|mimes:jpg,jpeg,png',
+            'room_image_2' => 'nullable|image|mimes:jpg,jpeg,png',
+            'room_image_3' => 'nullable|image|mimes:jpg,jpeg,png',
+            'room_image_4' => 'nullable|image|mimes:jpg,jpeg,png',
         ];
     }
 }

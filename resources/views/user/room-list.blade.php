@@ -4,10 +4,11 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Room Card -->
             @forelse ($rooms as $room)
-            <div class="bg-white border border-gray-300 rounded-lg shadow-md transition-transform duration-300 hover:shadow-lg">
+           @if(!$room->is_occupied)
+           <div class="bg-white border border-gray-300 rounded-lg shadow-md transition-transform duration-300 hover:shadow-lg">
                 <img src="{{ asset('storage/' . $room->room_image_1) }}" alt="{{ $room->name }}" class="rounded-t-lg h-48 w-full object-cover">
                 <div class="p-4">
-                    <h2 class="text-xl font-bold text-gray-800">{{ $room->name }}</h2>
+                    <h2 class="text-xl font-bold text-gray-800">Room {{ $room->name }}</h2>
                     <h3 class="text-md text-gray-600">{{ $room->boarding_house->name }}</h3>
                     <p class="mt-2 text-gray-600">{{ Str::limit($room->boarding_house->description, 80) }}</p>
                 </div>
@@ -21,6 +22,7 @@
                     </a>
                 </div>
             </div>
+           @endif
             @empty
                 <div class="col-span-3 text-center text-gray-700">No rooms found</div>
             @endforelse

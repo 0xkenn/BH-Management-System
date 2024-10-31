@@ -64,7 +64,7 @@
 
             {{-- Background Image Field --}}
             <label class="block text-sm mb-5">
-                <span class="text-gray-700 dark:text-gray-400">Background Image</span>
+                <span class="text-gray-700 dark:text-gray-400">Background Image </span><i class="text-red-500 text-sm font-bold"> (image should be 500x500 px)</i>
                 <input name="background_image" value="{{ old('background_image') }}" type="file"
                        class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-green-400 focus:ring focus:ring-green-400 focus:ring-opacity-50" />
                 @error('background_image')

@@ -51,7 +51,7 @@
 
         <div class="card-body">
           <h2 class="card-title">
-            {{$room->name}}
+            Room {{$room->name}}
             <div class="badge text-white {{ $room->is_occupied == 0 ? 'bg-green-500' : 'bg-red-500' }}">
                 {{ $room->is_occupied == 0 ? 'Available' : 'Not Available' }}
             </div>
