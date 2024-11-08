@@ -82,7 +82,7 @@ class AdminController extends Controller
 
         $data['password'] = Hash::make($data['password']);
         School::create($data);
-        return redirect()->back()->with('success', 'Successfully added');
+        return redirect()->route('school.login')->with('success', 'Successfully added');
 
         
     }

@@ -16,6 +16,7 @@ class Room extends Model
         'boarding_house_id',
         'name',
         'capacity',
+        'vacancy',
         'price',
         'room_image_1',
         'room_image_2',

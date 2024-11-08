@@ -3,10 +3,27 @@
         <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
             <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Edit Profile</h2>
 
-            <form action="{{ route('user.profile.update') }}" method="POST">
+            <form action="{{ route('user.profile.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+                    <!-- Profile Picture Field -->
+                    <div class="sm:col-span-2 flex flex-col items-center">
+                        <label for="profile_image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Profile Picture</label>
+                        <div class="relative mb-4">
+                            <img id="profile-image-preview" 
+                                 src="{{ asset('storage/'.auth()->user()->profile_image) }}" 
+                                 alt="Profile Preview" 
+                                 class="rounded-full w-40 h-40 border border-gray-300 dark:border-gray-600" 
+                                 onerror="this.onerror=null;this.src='default-profile.png';" />
+                            <input type="file" id="profile_image" name="profile_image" 
+                                   class="absolute inset-0 opacity-0 cursor-pointer" 
+                                   accept="image/*" 
+                                   onchange="previewImage(event)">
+                        </div>
+                        @error('profile_image')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                    </div>
+
                     <!-- Name Field -->
                     <div class="sm:col-span-2">
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
@@ -68,6 +85,44 @@
                         @error('is_student')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
                     </div>
 
+                    <div class="w-full">
+                        <label for="region" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Region*</label>
+                        <select id="region" name="region_code" class="region-dropdown bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <option value="">Select Region</option>
+                            @foreach($regions as $region)
+                                <option value="{{ $region->region_code }}">{{ $region->region_description }}</option>
+                            @endforeach
+                        </select>
+                        <x-input-error :messages="$errors->get('region_code')" class="mt-2" />
+                    </div>
+
+                    <!-- Province Dropdown -->
+                    <div class="w-full">
+                        <label for="province" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Province*</label>
+                        <select id="province" name="province_code" class="province-dropdown bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <option value="">Select Province</option>
+                        </select>
+                        <x-input-error :messages="$errors->get('province_code')" class="mt-2" />
+                    </div>
+
+                    <!-- City Dropdown -->
+                    <div class="w-full">
+                        <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">City*</label>
+                        <select id="city" name="city_municipality_code" class="city-dropdown bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <option value="">Select City</option>
+                        </select>
+                        <x-input-error :messages="$errors->get('city_municipality_code')" class="mt-2" />
+                    </div>
+
+                    <!-- Barangay Dropdown -->
+                    <div class="w-full">
+                        <label for="barangay" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Barangay*</label>
+                        <select id="barangay" name="barangay_code" class="barangay-dropdown bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <option value="">Select Barangay</option>
+                        </select>
+                        <x-input-error :messages="$errors->get('barangay_code')" class="mt-2" />
+                    </div>
+
                     <!-- Current Password Field -->
                     <div class="w-full">
                         <label for="current_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current Password</label>
@@ -106,3 +161,78 @@
         </div>
     </section>
 </x-app-layout>
+
+<script>
+    function previewImage(event) {
+        const input = event.target;
+        const reader = new FileReader();
+
+        reader.onload = function () {
+            const img = document.getElementById('profile-image-preview');
+            img.src = reader.result;
+        };
+
+        if (input.files[0]) {
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+<script>
+    // Function to dynamically load dropdown options
+    function loadOptions(url, targetDropdown) {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                targetDropdown.innerHTML = '<option value="">Select</option>';
+                data.forEach(item => {
+                    targetDropdown.innerHTML += `<option value="${item.id}">${item.description}</option>`;
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    // Region to Province
+    document.getElementById('region').addEventListener('change', function() {
+        const regionId = this.value;
+        const provinceDropdown = document.getElementById('province');
+        const cityDropdown = document.getElementById('city');
+        const barangayDropdown = document.getElementById('barangay');
+
+        // Reset subsequent dropdowns
+        provinceDropdown.innerHTML = '<option value="">Select Province</option>';
+        cityDropdown.innerHTML = '<option value="">Select City</option>';
+        barangayDropdown.innerHTML = '<option value="">Select Barangay</option>';
+
+        if (regionId) {
+            loadOptions(`/provinces/${regionId}`, provinceDropdown);
+        }
+    });
+
+    // Province to City
+    document.getElementById('province').addEventListener('change', function() {
+        const provinceId = this.value;
+        const cityDropdown = document.getElementById('city');
+        const barangayDropdown = document.getElementById('barangay');
+
+        // Reset city and barangay dropdowns
+        cityDropdown.innerHTML = '<option value="">Select City</option>';
+        barangayDropdown.innerHTML = '<option value="">Select Barangay</option>';
+
+        if (provinceId) {
+            loadOptions(`/cities/${provinceId}`, cityDropdown);
+        }
+    });
+
+    // City to Barangay
+    document.getElementById('city').addEventListener('change', function() {
+        const cityId = this.value;
+        const barangayDropdown = document.getElementById('barangay');
+
+        // Reset barangay dropdown
+        barangayDropdown.innerHTML = '<option value="">Select Barangay</option>';
+
+        if (cityId) {
+            loadOptions(`/barangays/${cityId}`, barangayDropdown);
+        }
+    });
+</script>

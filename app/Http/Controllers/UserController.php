@@ -39,7 +39,8 @@ class UserController extends Controller
 
     public function userProfile($id){
         User::find($id);
-        return view ("user.user-profile");
+        $regions = DB::table('philippine_regions')->select('region_code', 'region_description')->get();
+        return view ("user.user-profile", compact('regions'));
     }
 
 
@@ -111,12 +112,17 @@ $userId = auth()->guard('web')->id(); // Get the authenticated user's ID
 DB::table('users')
     ->where('id', $userId)
     ->update([
+        'profile_image' => $data['profile_image'],
         'name' => $data['name'],
         'email' => $data['email'],
         'age' => $data['age'],
         'gender' => $data['gender'],
         'mobile_number' => $data['mobile_number'],
         'is_student' => $data['is_student'],
+        'region_code' => $data['region_code'],
+        'province_code' => $data['province_code'],
+        'city_municipality_code' => $data['city_municipality_code'],
+        'barangay_code' => $data['barangay_code'],
         'password' => !empty($data['password']) ? Hash::make($data['password']) : DB::raw('password') // Only hash if a new password is provided
     ]);
 

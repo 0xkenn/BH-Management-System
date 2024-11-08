@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -18,13 +19,20 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'profile_image',
         'name',
         'email',
         'age',
         'gender',
         'mobile_number',
         'is_student',
+        'program_id',
+        'region_code',           // Matches the name in the database and Blade form
+        'province_code',         // Matches the name in the database and Blade form
+        'city_municipality_code', // Matches the name in the database and Blade form
+        'barangay_code',   // New field for barangay
         'password',
+       
     ];
 
     /**
@@ -91,5 +99,9 @@ class User extends Authenticatable
     public function room()
     {
         return $this->belongsTo(Room::class);
+    }
+
+    public function program():BelongsTo{
+        return $this->belongsTo(Program::class);
     }
 }

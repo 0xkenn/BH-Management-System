@@ -39,7 +39,7 @@ class SearchController extends Controller
                 'boarding_house' => $boardingHouse,
                 'similarity_score' => $similarityScore,
             ];
-        })->sortByDesc('similarity_score')->take(3)->values()->all();
+        })->sortByDesc('similarity_score')->values()->all();
 
         // Fetch all preferences to display in the view
         $preferences = Preference::all();

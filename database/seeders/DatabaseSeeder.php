@@ -8,6 +8,10 @@ use App\Models\Admin;
 use App\Models\School;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use PhilippineBarangaysTableSeeder;
+use PhilippineCitiesTableSeeder;
+use PhilippineProvincesTableSeeder;
+use PhilippineRegionsTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,16 +22,16 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'user@gmail.com',
-            'age' => '21',
-            'gender' => 'male',
-            'mobile_number' => '09093563451',
-            'is_student' => true,
-            'password' => '123456789'
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'user@gmail.com',
+        //     'age' => '21',
+        //     'gender' => 'male',
+        //     'mobile_number' => '09093563451',
+        //     'is_student' => true,
+        //     'password' => '123456789'
 
-        ]);
+        // ]);
 
         Owner::create([
             'name' => 'Edwin',
@@ -46,6 +50,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call(PreferencesTableSeeder::class);
+        // $this->call(PhilippineRegionsTableSeeder::class);
+        // $this->call(PhilippineProvincesTableSeeder::class);
+        // $this->call(PhilippineCitiesTableSeeder::class);
+        // $this->call(PhilippineBarangaysTableSeeder::class);
+
 
     }
 }

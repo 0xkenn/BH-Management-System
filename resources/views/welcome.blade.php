@@ -22,7 +22,7 @@
                         @endauth
                             {{-- school link --}}
                             <a href="{{ route('school.login') }}" class="mb-4 w-full text-center px-4 py-3 font-medium text-white bg-green-600 rounded-lg hover:bg-green-700">
-                                School Login
+                                SDSO Login
                             </a>
 
 

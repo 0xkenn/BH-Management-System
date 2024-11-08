@@ -24,12 +24,16 @@ class EditProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'profile_image' => 'nullable|image|mimes:jpg,png,jpeg',
             'name' => 'nullable|string|max:255',
             'email' => 'nullable|string|email|max:255',
             'age' => 'nullable|integer|min:0',
             'gender' => 'nullable|string|in:male,female,other',
             'mobile_number' => 'nullable|string|max:20',
             'is_student' => 'nullable|boolean',
+            'region_code' => 'nullable|string',
+            'province_code' => 'nullable|string',
+            'city_municipality_code' => 'nullable|string',
             'current_password' => [
                 'required', 
                 function ($attribute, $value, $fail) {

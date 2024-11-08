@@ -1,0 +1,15 @@
+migrate single table: 
+ php artisan migrate --path=database/migrations/2024_11_08_023357_create_programs_table.php
+
+Step 1: Run the following migrate artisan command:
+php artisan migrate --path="database/migrations/prpcmblmts"
+
+Step 2: Dump autoload using Composer:
+composer dump-autoload
+
+Step 3: Lastly, seed the data using the following seed artisan commands below:
+php artisan db:seed --class=PhilippineRegionsTableSeeder
+php artisan db:seed --class=PhilippineProvincesTableSeeder
+php artisan db:seed --class=PhilippineCitiesTableSeeder
+php artisan db:seed --class=PhilippineBarangaysTableSeeder
+

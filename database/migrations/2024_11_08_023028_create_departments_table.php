@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->integer('department_name');
+            $table->foreignId('school_id')->constrained()->cascadeOnDelete();
+            $table->string('department_name');
+            $table->string('abbrev');
             $table->timestamps();
-
         });
     }
 

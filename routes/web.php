@@ -1,6 +1,7 @@
 <?php
 
-
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\saveRoomController;
 use App\Http\Controllers\SchoolController;
@@ -21,6 +22,9 @@ Route::get('/', function () {
  
     
 });
+
+Route::get('/add/school', [AdminController::class, 'addSchool'])->name('add-school.page');
+Route::post('add/school/auth', [AdminController::class, 'storeSchool'])->name('school.create.auth');
 
 
 
@@ -48,6 +52,10 @@ Route::middleware('auth:web')->group(function () {
     Route::get('/welcome', [WelcomeController::class, 'ShowWelcome'])->name('welcome');
 
     Route::get('/search', [SearchController::class, 'search'])->name('search');
+    Route::get('/regions', [LocationController::class, 'getRegions']);
+Route::get('/provinces/{regionId}', [LocationController::class, 'getProvinces']);
+Route::get('/cities/{provinceId}', [LocationController::class, 'getCities']);
+Route::get('/barangays/{cityId}', [LocationController::class, 'getBarangays']);
 
 
     Route::get('/roomdetail', [UserController::class, 'roomDetail'])->name('roomdetail');
@@ -62,7 +70,17 @@ Route::get('/school/login', [SchoolController::class, 'login'])->name('school.lo
 Route::post('/school/login/auth', [SchoolController::class, 'loginAuth'])->name('school.login.auth');
 Route::prefix('school')->middleware('auth:school')->group(function (){
     Route::get('dashboard', [SchoolController::class, 'dashboard'])->name('school.dashboard');
+    Route::get('sas', [SchoolController::class, 'schoolSAS'])->name('school.sas');
+    Route::get('scje', [SchoolController::class, 'schoolSCJE'])->name('school.scje');
+    Route::get('sme', [SchoolController::class, 'schoolSME'])->name('school.sme');
+    Route::get('snhs', [SchoolController::class, 'schoolSNHS'])->name('school.snhs');
+    Route::get('soe', [SchoolController::class, 'schoolSOE'])->name('school.soe');
+    Route::get('stcs', [SchoolController::class, 'schoolSTCS'])->name('school.stcs');
+    Route::get('sted', [SchoolController::class, 'schoolSTED'])->name('school.sted');
     Route::post('/logout-school', [SchoolController::class, 'destroy'])->name('school.logout');
+    Route::post('add-department', [SchoolController::class, 'addDepartment'])->name('add.department');
+    Route::post('add-program', [SchoolController::class, 'addProgram'])->name('add.program');
+
     
 });
 

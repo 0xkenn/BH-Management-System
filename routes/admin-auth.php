@@ -42,7 +42,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::post('logout', [LoginAdminController::class, 'destroy'])
                 ->name('admin.logout')->middleware(PreventBack::class);
 
-    Route::get('/add/school', [AdminController::class, 'addSchool'])->name('add-school.page');
-    Route::post('add/school/auth', [AdminController::class, 'storeSchool'])->name('school.create.auth');
+    // Route::get('/add/school', [AdminController::class, 'addSchool'])->name('add-school.page');
+    // Route::post('add/school/auth', [AdminController::class, 'storeSchool'])->name('school.create.auth');
 
 });

@@ -15,7 +15,7 @@
                 </a>
 
                 <!-- Centered Heading -->
-                <h1 class="text-center text-2xl font-bold">School Login</h1>
+                <h1 class="text-center text-2xl font-bold">SDSO Login</h1>
             </div>
 
 
@@ -25,15 +25,16 @@
 
                 <!-- School Name -->
                 <div>
-                    <x-input-label for="school_name" :value="__('School Name')" />
+                    <x-input-label for="school_name" :value="__('SDSO Email')" />
                     <x-text-input
                         id="school_name"
                         class="block mt-1 w-full"
-                        type="text"
+                        type="email"
                         name="school_name"
                         :value="old('school_name')"
                         required autofocus
                         autocomplete="school_name" />
+                        
                     <x-input-error :messages="$errors->get('school_name')" class="mt-2" />
                 </div>
 
@@ -52,20 +53,15 @@
                 </div>
 
                 <!-- Remember Me -->
-                <div class="block mt-4">
-                    <label for="remember_me" class="inline-flex items-center">
-                        <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                        <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                    </label>
-                </div>
+                
 
                 <!-- Forgot Password and Login Button -->
                 <div class="flex items-center justify-between mt-6">
-                    {{-- @if (Route::has('password.request'))
-                        <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                            {{ __('Forgot your password?') }}
+                    @if (Route::has('password.request'))
+                        <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('add-school.page') }}">
+                            {{ __('Not registered yet?') }}
                         </a>
-                    @endif --}}
+                    @endif
 <a href=""></a>
                     <x-primary-button class="ml-3">
                         {{ __('Log in') }}

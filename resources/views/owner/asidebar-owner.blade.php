@@ -11,8 +11,7 @@
                     <span class="ml-4">Dashboard</span>
                 </a>
             </li>
-        </ul>
-        <ul>
+       
             <li class="relative px-6 py-3 {{ request()->routeIs('owner.boardingHouse') ? 'text-green-500' : '' }}">
                 <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="{{route('owner.boardingHouse')}}">
 
@@ -21,6 +20,17 @@
                     </svg>
 
                     <span class="ml-4">Boarding House Management</span>
+                </a>
+            </li>
+
+            <li class="relative px-6 py-3 {{ request()->routeIs('user-manage.table') ? 'text-green-500' : '' }}">
+                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="{{route('user-manage.table')}}">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 {{ request()->routeIs('user-manage.table') ? 'text-green-500' : '' }}">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                    </svg>
+
+                    <span class="ml-4">Approved User Management</span>
                 </a>
             </li>
         </ul>

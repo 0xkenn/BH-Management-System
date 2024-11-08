@@ -60,6 +60,7 @@ class ReservationApproved extends Notification
             'room_id' => $this->reservation->room->id,
             'room_name' => $this->reservation->room->name,
             'message' => 'Your reservation has been approved',
+            'status' => 'Approved',
         ];
     }
 }

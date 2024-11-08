@@ -107,7 +107,7 @@
         <main class="flex-1 pl-5">
             <div class="flex flex-wrap gap-6 justify-center">
                 @foreach($boardingHouses as $house)
-                    <div class="w-92 max-w-sm border border-gray-300 rounded-lg overflow-hidden bg-white shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <div class="w-92  max-w-sm h-92 border border-gray-300 rounded-lg overflow-hidden bg-white shadow-md hover:shadow-lg transition-shadow duration-300">
                         <div class="flex justify-center"> <!-- Centering the image -->
                             @if($house->background_image)
                                 <img src="{{ asset('storage/' . $house->background_image) }}"  alt="{{ $house->name }}" class="w-full h-48 object-cover">
@@ -119,7 +119,37 @@
                             <h5 class="text-lg font-bold text-gray-800">{{ $house->name }}</h5>
                             <p class="text-gray-600"><i>{{ $house->address }}</i></p>
                             <p class="text-gray-700 text-sm leading-relaxed">{{ Str::limit($house->description, 80) }}</p>
+                            <div class="flex flex-wrap gap-2 mt-2">
+                                <div class="relative overflow-hidden whitespace-nowrap">
+                                    <div class="flex space-x-4 animate-scroll">
+                                        @foreach($house->preferences as $preference)
+                                            <span class="bg-green-100 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap">{{ $preference->name }}</span>
+                                        @endforeach
+                                        <!-- Duplicate the items to make the scroll loop seamless -->
+                                        @foreach($house->preferences as $preference)
+                                            <span class="bg-green-100 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap">{{ $preference->name }}</span>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                
+                                <style>
+                                    /* Define the scroll animation */
+                                    @keyframes scroll {
+                                        0% { transform: translateX(0); }
+                                        100% { transform: translateX(-100%); }
+                                    }
+                                
+                                    /* Apply animation to the scrolling container */
+                                    .animate-scroll {
+                                        animation: scroll 15s linear infinite;
+                                    }
+                                </style>
+                                
+                            </div>
+    
+                            
                             <label for="modal{{ $house->id }}" class="mt-3 block w-full bg-green-600 text-white py-2 rounded cursor-pointer hover:bg-green-700 transition-colors text-center">View Details</label>
+                          
                         </div>
                     </div>
 

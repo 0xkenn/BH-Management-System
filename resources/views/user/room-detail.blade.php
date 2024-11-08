@@ -28,7 +28,8 @@
             </div>
             <div class="px-8 py-6">
                 <div class="font-bold text-2xl mb-2 text-gray-800">Room {{ $room->name }}</div>
-                <p class="text-gray-600">Capacity: {{ $room->capacity }}</p>
+                <p class="text-gray-600">Vacancy: {{ $room->capacity }}</p>
+                <p class="text-gray-600">Capacity: {{ $room->vacancy }}</p>
                 <p class="text-gray-600">Price: ₱{{ number_format($room->price, 2) }}</p>
                 <p class="text-gray-600">Available: {{ $room->is_occupied == 0 ? 'Yes' : 'No' }}</p>
             </div>

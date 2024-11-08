@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Program;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
@@ -19,7 +21,9 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $regions = DB::table('philippine_regions')->select('region_code', 'region_description')->get();
+        $programs =  Program::all();
+        return view('auth.register', compact('regions', 'programs'));
     }
 
     /**
@@ -30,37 +34,52 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request['is_student'] = filter_var($request->input('is_student'), FILTER_VALIDATE_BOOLEAN);
-
+       
         $request->validate([
+            'profile_image' => ['required','image', 'mimes:png,jpeg,jpg'],
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'age' => ['required', 'integer'],
-            'gender'=>['required', 'string'],
+            'gender' => ['required', 'string'],
             'mobile_number' => ['required', 'string', 'regex:/^(09|63)\d{9}$/'],
             'is_student' => ['required', 'boolean'],
+            'program_id' => ['required'],
+            'region_code' => ['required', 'string', 'max:255'],     // New validation for region
+            'province_code' => ['required', 'string', 'max:255'],   // New validation for province
+            'city_municipality_code' => ['required', 'string', 'max:255'],       // New validation for city
+            'barangay_code' => ['required', 'string', 'max:255'],   // New validation for barangay
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+           
         ], [
             'mobile_number.regex' => 'The mobile number must start with 09 or 63 and be 11 digits long.',
-            'mobile_number.digits' => 'The mobile number must be exactly 11 digits.',
-            'mobile_number.numeric' => 'The mobile number must be a number.',
         ]);
-        
 
+        // Create the user with validated data
         $user = User::create([
+            'profile_image' => $request->file('profile_image')->store('profile_images', 'public'),
             'name' => $request->name,
             'email' => $request->email,
-            'age'=>$request->age,
+            'age' => $request->age,
+            'gender' => $request->gender,
+            'name' => $request->name,
+            'email' => $request->email,
+            'age' => $request->age,
             'gender' => $request->gender,
             'mobile_number' => $request->mobile_number,
             'is_student' => $request->is_student,
+            'program_id' => $request->program_id,
+            'region_code' => $request->region_code,         // Save region
+            'province_code' => $request->province_code,     // Save province
+            'city_municipality_code' => $request->city_municipality_code,             // Save city
+            'barangay_code' => $request->barangay_code,     // Save barangay
             'password' => Hash::make($request->password),
-            
+           
         ]);
 
         event(new Registered($user));
 
-        Auth::login($user);
 
-        return redirect(route('user.dashboard', absolute: false));
+
+        return redirect()->route('login');
     }
 }

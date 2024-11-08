@@ -28,6 +28,7 @@ class CreateRoomController extends Controller
         // Add the authenticated owner ID and boarding house ID
         $data['owner_id'] = Auth::guard('owner')->id();
         $data['boarding_house_id'] = $id;
+        $data['vacancy'] = $request->capacity;
 
         // Handle image uploads
         if ($request->hasFile('room_image_1')) {
