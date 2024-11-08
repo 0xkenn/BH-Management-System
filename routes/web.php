@@ -33,7 +33,7 @@ Route::middleware('auth:web')->group(function () {
 
     Route::get('/motifications', [UserController::class], 'notifications')->name('notifications.show');
     Route::get('saved-boarding_house', [UserController::class, 'savedBoardingHouse'])->name('user.saved-boarding-house');
-    Route::get('/dashboard', [UserController::class, 'boardingHouse'])->name('user.dashboard');
+    Route::get('/dashboard', [UserController::class, 'roomList'])->name('user.dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

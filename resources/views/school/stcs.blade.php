@@ -30,11 +30,11 @@
                         @foreach ($users as $user)
                         <td class="px-6 py-4 whitespace-nowrap flex items-center">
                             <img class="w-10 h-10 rounded-full mr-3" src="{{asset('storage/'.$user->profile_image)}}" alt="John Doe Profile">
-                            <span class="text-sm font-medium text-gray-900 dark:text-gray-200">jadei</span>
+                            <span class="text-sm font-medium text-gray-900 dark:text-gray-200">{{$user->user_name}}</span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                           
-                            {{$user->name}}
+                      {{$user->boarding_house_name}}
                         
                          
                         </td>
@@ -44,11 +44,11 @@
                         </td>
 
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                            barangay
+                            Brgy. {{$user->brgy}} {{$user->muni}}, {{$user->prov}}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                         
-                           STCS
+                           {{$user->program_abbrev}}
                           
                         </td>
                         @endforeach

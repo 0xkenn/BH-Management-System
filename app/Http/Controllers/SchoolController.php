@@ -121,13 +121,32 @@ class SchoolController extends Controller
         return view('school.soe', compact('users'));
     }
     public function schoolSTCS(){
-        $users =  DB::table('users as user')
+        $users = DB::table('users as user')
+        
         ->join('programs as program', 'user.program_id', '=', 'program.id')
-        ->join('departments as dept', 'program.department_id', '=', "dept.id")
+        ->join('departments as dept', 'program.department_id', '=', 'dept.id')
         ->join('saved_rooms as sr', 'user.id', '=', 'sr.user_id')
         ->join('rooms as room', 'sr.room_id', '=', 'room.id')
         ->join('boarding_houses as bh', 'room.boarding_house_id', '=', 'bh.id')
-        ->where('dept.abbrev', 'STCS')->get();
+        ->join('philippine_provinces as prov', 'user.province_code', '=', 'prov.province_code')
+        ->join('philippine_cities as pc', 'user.city_municipality_code', '=', 'pc.city_municipality_code')
+        ->join('philippine_barangays as pb' , 'user.barangay_code', '=', 'pb.barangay_code')
+        ->where('dept.abbrev', 'STCS')
+        ->select(
+            'user.name as user_name',         // User's name
+            'user.profile_image',
+            'user.mobile_number',
+            'bh.name as boarding_house_name',  // Boarding house name
+            'program.abbrev as program_abbrev',                       // All program fields
+            'dept.abbrev as dept_abbrev',                          // All department fields
+            'sr.*',                            // All saved rooms fields
+            'room.*',                           // All room fields
+            'pc.city_municipality_description as muni', 
+            'pb.barangay_description as brgy',
+            'prov.province_description as prov',
+        )
+        ->get();
+    
    
       
         return view('school.stcs', compact('users'));
