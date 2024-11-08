@@ -116,35 +116,35 @@ class OwnerController extends Controller
     }
 
     public function approveReserve($id)
-{
-    $savedRoom = SavedRoom::with('room')->findOrFail($id);
- 
-    if ($savedRoom) {
-        // Check if the user already has an approved reservation
-        $existingReservation = SavedRoom::where('user_id', $savedRoom->user_id)
-                                         ->where('is_approved', 1)
-                                         ->first();
-        
-        // If there is an existing approved reservation, delete it
-        if ($existingReservation) {
-            $existingReservation->delete(); // Remove the previous approved reservation
+    {
+        // Find the SavedRoom record with related Room data
+        $savedRoom = SavedRoom::with('room')->findOrFail($id);
+    
+        if ($savedRoom) {
+            // Delete all other reservations (approved or not) for this user, excluding the current one
+            SavedRoom::where('user_id', $savedRoom->user_id)
+                     ->where('id', '!=', $savedRoom->id) // Exclude the current reservation being approved
+                     ->delete();
+    
+            // Proceed to approve the current reservation
+            $savedRoom->is_approved = 1;
+            $savedRoom->room->capacity -= 1; // Decrease room capacity
+            $savedRoom->room->is_occupied = ($savedRoom->room->capacity === 0) ? 1 : 0; // Update occupancy status
+            $savedRoom->room->save(); // Save room updates
+            $savedRoom->save(); // Save the approved reservation
+    
+            // Notify the user about the approval
+            $user = $savedRoom->user; 
+            $user->notify(new ReservationApproved($savedRoom));
+    
+            // Redirect back with a success message
+            return redirect()->back()->with('message', 'Successfully approved');
+        } else {
+            // If the room is already fully booked, return with an error message
+            return redirect()->back()->with('error', 'Room is already fully booked');
         }
-
-        // Proceed to approve the new reservation
-        $savedRoom->is_approved = 1;
-        $savedRoom->room->capacity -= 1; // Decrease room capacity
-        $savedRoom->room->is_occupied = ($savedRoom->room->capacity === 0) ? 1 : 0; // Update occupancy status
-        $savedRoom->room->save();
-        $savedRoom->save();
-
-        $user = $savedRoom->user; 
-        $user->notify(new ReservationApproved($savedRoom)); // Send notification
-        
-        return redirect()->back()->with('message', 'Successfully approved');
-    } else {
-        return redirect()->back()->with('error', 'Room is already fully booked');
     }
-}
+    
 
 
 public function deleteReserve($id)
@@ -190,13 +190,17 @@ public function deleteReserve($id)
     public function approvedUser(){
         $users = User::with(['reservations' => function ($query) {
             $query->whereHas('room', function ($query) {
-                $query->where('owner_id', auth()->guard('owner')->id()); // Ensure only reservations for rooms of the authenticated owner
+                $query->where('owner_id', auth()->guard('owner')->id());
             });
         }])
-        ->whereDoesntHave('reservations', function ($query) {
-            $query->where('is_approved', 0); // Exclude users with any !approved reservations
+        ->whereHas('reservations', function ($query) {
+            $query->whereHas('room', function ($query) {
+                $query->where('owner_id', auth()->guard('owner')->id());
+            })
+            ->where('is_approved', 1); // Only include approved reservations
         })
         ->get();
+
 
         return view('owner.usre-table', compact('users'));
     }   

@@ -25,6 +25,7 @@ class User extends Authenticatable
         'age',
         'gender',
         'mobile_number',
+        'parent',
         'is_student',
         'program_id',
         'region_code',           // Matches the name in the database and Blade form

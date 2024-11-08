@@ -42,6 +42,7 @@ class RegisteredUserController extends Controller
             'age' => ['required', 'integer'],
             'gender' => ['required', 'string'],
             'mobile_number' => ['required', 'string', 'regex:/^(09|63)\d{9}$/'],
+            'parent' => ['required', 'string'],
             'is_student' => ['required', 'boolean'],
             'program_id' => ['required'],
             'region_code' => ['required', 'string', 'max:255'],     // New validation for region
@@ -66,6 +67,7 @@ class RegisteredUserController extends Controller
             'age' => $request->age,
             'gender' => $request->gender,
             'mobile_number' => $request->mobile_number,
+            'parent' => $request->parent,
             'is_student' => $request->is_student,
             'program_id' => $request->program_id,
             'region_code' => $request->region_code,         // Save region

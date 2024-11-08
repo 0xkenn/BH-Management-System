@@ -14,7 +14,10 @@
                             Boarding Name
                         </th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                            Number
+                            Contact Number
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                            Address
                         </th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                             Course
@@ -27,18 +30,25 @@
                         @foreach ($users as $user)
                         <td class="px-6 py-4 whitespace-nowrap flex items-center">
                             <img class="w-10 h-10 rounded-full mr-3" src="{{asset('storage/'.$user->profile_image)}}" alt="John Doe Profile">
-                            <span class="text-sm font-medium text-gray-900 dark:text-gray-200">{{$user->name}}</span>
+                            <span class="text-sm font-medium text-gray-900 dark:text-gray-200">{{$user->user_name}}</span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                            BH-101
+                          
+                      {{$user->boarding_house_name}}
+                        
+                         
                         </td>
 
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                             {{$user->mobile_number}}
                         </td>
+
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                            Brgy. {{$user->brgy}} {{$user->muni}}, {{$user->prov}}
+                        </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                         
-                           STCS
+                           {{$user->program_abbrev}}
                           
                         </td>
                         @endforeach

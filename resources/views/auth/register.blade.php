@@ -34,14 +34,14 @@
                     <!-- Email Address -->
                     <div class="sm:col-span-2">
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email*</label>
-                        <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" :value="old('email')" required autocomplete="username">
+                        <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="{{old('email')}}" required autocomplete="username">
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
 
                     <!-- Age -->
                     <div class="w-full">
                         <label for="age" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Age*</label>
-                        <input type="number" name="age" id="age" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" :value="old('age')" required>
+                        <input type="number" name="age" id="age" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="{{old('age')}}" required>
                         <x-input-error :messages="$errors->get('age')" class="mt-2" />
                     </div>
 
@@ -60,8 +60,16 @@
                     <!-- Mobile Number -->
                     <div class="w-full">
                         <label for="mobile_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mobile Number*</label>
-                        <input type="tel" name="mobile_number" id="mobile_number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" :value="old('mobile_number')" required>
+                        <input type="tel" name="mobile_number" id="mobile_number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="{{old('mobile_number')}}" required>
                         <x-input-error :messages="$errors->get('mobile_number')" class="mt-2" />
+                    </div>
+
+                    {{-- parent --}}
+
+                    <div class="w-full">
+                        <label for="parent" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parent/Guardian*</label>
+                        <input type="text" name="parent" id="parent" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="{{old('parent')}}" required>
+                        <x-input-error :messages="$errors->get('parent')" class="mt-2" />
                     </div>
 
                     <!-- Student Status -->

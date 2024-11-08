@@ -19,6 +19,7 @@ return new class extends Migration
             $table->smallInteger('age');
             $table->string('gender');
             $table->string('mobile_number')->unique();
+            $table->string('parent')->unique();
             $table->boolean('is_student');
             $table->foreignId('program_id')->constrained()->cascadeOnDelete();
             $table->string('region_code'); // region_code to link to philippine_regions
