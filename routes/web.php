@@ -30,6 +30,7 @@ Route::post('add/school/auth', [AdminController::class, 'storeSchool'])->name('s
 
 
 Route::middleware('auth:web')->group(function () {
+    Route::post('/rate-room/{id}', [UserController::class, 'rateRoom'])->name('rate-room');
 
     Route::get('/motifications', [UserController::class], 'notifications')->name('notifications.show');
     Route::get('saved-boarding_house', [UserController::class, 'savedBoardingHouse'])->name('user.saved-boarding-house');

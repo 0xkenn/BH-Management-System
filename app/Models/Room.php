@@ -35,5 +35,9 @@ class Room extends Model
     {
         return $this->hasMany(User::class)->where('is_student', 1);
     }
+    public function ratings()
+{
+    return $this->hasMany(RoomRating::class);
+}
 }
  

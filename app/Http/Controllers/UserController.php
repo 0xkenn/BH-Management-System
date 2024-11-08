@@ -7,6 +7,7 @@ use App\Http\Requests\EditProfileRequest;
 use App\Models\Room;
 use App\Models\User;
 use Illuminate\Container\Attributes\Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -48,12 +49,14 @@ class UserController extends Controller
     {
         $room = Room::findOrFail($id);
         $savedRoom = $room->reservations()->where('user_id', auth()->guard('web')->id())->first();
+        $userHasRating = $room->ratings()->where('user_id', auth()->guard('web')->id())->exists();
     
         // Pass `savedRoom` status and `isApproved` to the view
         return view('user.room-detail', [
             'room' => $room,
             'savedRoom' => $savedRoom ? true : false,
             'isApproved' => $savedRoom ? $savedRoom->is_approved : 0, // Default to 0 if no reservation exists
+            'userHasRating' => $userHasRating,
         ]);
     }
     
@@ -134,5 +137,18 @@ public function notifications(){
     $unreadNotifications = $user->unreadNotifications;
  return view('user.user-notification', compact('unreadNotifications'));
 }
-    
+public function rateRoom(Request $request, $id)
+{
+    $validated = $request->validate([
+        'rating' => 'required|integer|min:1|max:5',
+    ]);
+
+    $room = Room::findOrFail($id);
+    $room->ratings()->create([
+        'user_id' => auth()->guard('web')->id(),
+        'rating' => $validated['rating'],
+    ]);
+
+    return redirect()->back()->with('message', 'Thank you for your review!');
+}
 }
