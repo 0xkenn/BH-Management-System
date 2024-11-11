@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EditProfileRequest;
+use App\Models\Preference;
 use App\Models\Room;
 use App\Models\User;
 use Illuminate\Container\Attributes\Auth;
@@ -32,6 +33,7 @@ class UserController extends Controller
             ->get();
         return $house;
     });
+    
         return view('user.dashboard', compact('boardingHouses', 'boardingHousesWithRooms'));
     }
     public function savedBoardingHouse(){
@@ -50,9 +52,10 @@ class UserController extends Controller
         $room = Room::findOrFail($id);
         $savedRoom = $room->reservations()->where('user_id', auth()->guard('web')->id())->first();
         $userHasRating = $room->ratings()->where('user_id', auth()->guard('web')->id())->exists();
-    
+        $allPreferences = Preference::all()->groupBy('category');
         // Pass `savedRoom` status and `isApproved` to the view
         return view('user.room-detail', [
+            'allPreferences' => $allPreferences,
             'room' => $room,
             'savedRoom' => $savedRoom ? true : false,
             'isApproved' => $savedRoom ? $savedRoom->is_approved : 0, // Default to 0 if no reservation exists
@@ -83,8 +86,9 @@ class UserController extends Controller
     
 
     public function roomList(){
-        $rooms = Room::with('boarding_house')->get();   
-        return view('user.room-list', compact('rooms'));
+        $rooms = Room::with('boarding_house')->get();  
+        $allPreferences = Preference::all()->groupBy('category');
+        return view('user.room-list', compact('rooms' , 'allPreferences'));
     }
     public function reservationList()
     {
