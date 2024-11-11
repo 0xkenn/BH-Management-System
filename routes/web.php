@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoomSearchController;
 use App\Http\Controllers\saveRoomController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\UserController;
@@ -45,9 +46,7 @@ Route::middleware('auth:web')->group(function () {
     Route::post('/save-room/{id}',[UserController::class, 'reserveRoom']);
     Route::get('reservation-list', [UserController::class, 'reservationList'])->name('reservation.list');
     Route::post('edit-user', [UserController::class, 'editProfile'])->name('user.profile.update');
-
-
-
+    Route::get('/searc/rooms', [RoomSearchController::class, 'index'])->name('rooms.search');
 });
 
     Route::get('/welcome', [WelcomeController::class, 'ShowWelcome'])->name('welcome');
