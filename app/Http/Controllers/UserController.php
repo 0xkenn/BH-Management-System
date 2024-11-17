@@ -24,7 +24,7 @@ class UserController extends Controller
         ->select('bh.*') // Select boarding house details
         ->distinct() // Prevent duplicate boarding houses
         ->get();
-    
+
     // Assuming you want to get rooms for each boarding house
     $boardingHousesWithRooms = $boardingHouses->map(function ($house) {
         $house->rooms = DB::table('rooms')
@@ -33,7 +33,7 @@ class UserController extends Controller
             ->get();
         return $house;
     });
-    
+
         return view('user.dashboard', compact('boardingHouses', 'boardingHousesWithRooms'));
     }
     public function savedBoardingHouse(){
@@ -62,13 +62,13 @@ class UserController extends Controller
             'userHasRating' => $userHasRating,
         ]);
     }
-    
+
     public function reserveRoom($id)
     {
         $room = Room::findOrFail($id);
         $userId = auth()->guard('web')->id();
         $savedRoom = $room->reservations()->where('user_id', $userId)->first();
-    
+
         if (!is_null($savedRoom)) {
             // Delete reservation if it exists (unreserve)
             $savedRoom->delete();
@@ -82,18 +82,18 @@ class UserController extends Controller
             return response()->json(['savedRoom' => true, 'isApproved' => $savedRoom->is_approved]);
         }
     }
-    
-    
+
+
 
     public function roomList(){
-        $rooms = Room::with('boarding_house')->get();  
+        $rooms = Room::with('boarding_house')->paginate(12);
         $allPreferences = Preference::all()->groupBy('category');
         return view('user.room-list', compact('rooms' , 'allPreferences'));
     }
     public function reservationList()
     {
         $userId = auth()->guard('web')->id();
-    
+
         $reservedRooms = Room::whereHas('reservations', function ($query) use ($userId) {
             $query->where('user_id', $userId);
         })
@@ -101,18 +101,18 @@ class UserController extends Controller
             $query->where('user_id', $userId); // Load only the user's reservations for each room
         }])
         ->get();
-    
+
         return view('user.reservation-list', compact('reservedRooms'));
     }
-    
 
 
- 
+
+
      public function roomShow (){
         return view('user.show');
      }
      public function editProfile(EditProfileRequest $request){
-        
+
         $data = $request->validated();
 $userId = auth()->guard('web')->id(); // Get the authenticated user's ID
 

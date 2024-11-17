@@ -16,12 +16,12 @@ use App\Models\Preference;
 use App\Models\Room;
 
 Route::get('/', function () {
-    $boardingHouses = BoardingHouse::with('rooms')->get();
+    $boardingHouses = BoardingHouse::with('rooms')->pagination(12);
     $preferences = Preference::all();
-   
+
     return view('homepage', compact( 'boardingHouses', 'preferences'));
- 
-    
+
+
 });
 
 Route::get('/add/school', [AdminController::class, 'addSchool'])->name('add-school.page');
@@ -77,11 +77,12 @@ Route::prefix('school')->middleware('auth:school')->group(function (){
     Route::get('soe', [SchoolController::class, 'schoolSOE'])->name('school.soe');
     Route::get('stcs', [SchoolController::class, 'schoolSTCS'])->name('school.stcs');
     Route::get('sted', [SchoolController::class, 'schoolSTED'])->name('school.sted');
+    Route::get('allSchool', [SchoolController::class, 'allSchool'])->name('school.all-school');
     Route::post('/logout-school', [SchoolController::class, 'destroy'])->name('school.logout');
     Route::post('add-department', [SchoolController::class, 'addDepartment'])->name('add.department');
     Route::post('add-program', [SchoolController::class, 'addProgram'])->name('add.program');
 
-    
+
 });
 
 require __DIR__.'/auth.php';
