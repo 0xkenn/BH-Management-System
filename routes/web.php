@@ -16,7 +16,7 @@ use App\Models\Preference;
 use App\Models\Room;
 
 Route::get('/', function () {
-    $boardingHouses = BoardingHouse::with('rooms')->pagination(12);
+    $boardingHouses = BoardingHouse::with('rooms')->paginate(12);
     $preferences = Preference::all();
 
     return view('homepage', compact( 'boardingHouses', 'preferences'));
