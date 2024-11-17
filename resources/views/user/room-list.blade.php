@@ -13,12 +13,12 @@
                 />
 
                 <!-- Preferences Dropdown Toggle -->
-                <button 
-                    type="button" 
-                    class="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none" 
-                    id="dropdownBgHoverButton" 
+                <button
+                    type="button"
+                    class="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none"
+                    id="dropdownBgHoverButton"
                     data-dropdown-toggle="dropdownBgHover"
-                    aria-expanded="false" 
+                    aria-expanded="false"
                     aria-haspopup="true"
                 >
                     <!-- Icon for preferences dropdown -->
@@ -44,11 +44,11 @@
                             <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-2">
                                 @foreach ($prefs as $preference)
                                     <div class="flex items-center p-2 rounded transition-colors hover:bg-gray-100 dark:hover:bg-gray-600">
-                                        <input 
-                                            id="preference-{{ $preference->id }}" 
-                                            name="preferences[]" 
-                                            type="checkbox" 
-                                            value="{{ $preference->id }}" 
+                                        <input
+                                            id="preference-{{ $preference->id }}"
+                                            name="preferences[]"
+                                            type="checkbox"
+                                            value="{{ $preference->id }}"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                         >
                                         <label for="preference-{{ $preference->id }}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -81,7 +81,7 @@
         </script>
 
         <!-- Room Viewer Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
             <!-- Room Card -->
             @forelse ($rooms as $room)
                 @if(!$room->is_occupied)

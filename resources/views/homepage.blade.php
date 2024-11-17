@@ -23,7 +23,7 @@
                             </svg>
                         </button>
                     </div>
-                
+
                     <div id="dropdownBgHover" class="z-10 hidden w-96 bg-white rounded-lg shadow-lg dark:bg-gray-700">
                         <ul class="p-4 space-y-4 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownBgHoverButton">
                             @foreach ($preferences->groupBy('category') as $category => $prefs)
@@ -41,21 +41,21 @@
                             @endforeach
                         </ul>
                     </div>
-                    
-                
+
+
                     <div>
                         <button type="submit" class="px-4 py-2 text-white bg-green-500 rounded-full hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">Search</button>
                     </div>
                 </form>
-                
-                
+
+
                 <script>
                     // Handle dropdown toggle
                     document.getElementById('dropdownBgHoverButton').addEventListener('click', function() {
                         const dropdown = document.getElementById('dropdownBgHover');
                         dropdown.classList.toggle('hidden'); // Toggle dropdown visibility
                     });
-                
+
                     // Optional: Close dropdown if clicked outside
                     window.addEventListener('click', function(event) {
                         const dropdown = document.getElementById('dropdownBgHover');
@@ -64,9 +64,9 @@
                         }
                     });
                 </script>
-                
-                
-              
+
+
+
                 <a href="{{ route('/register-user') }}" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-green-300 font-bold rounded-full text-sm px-5 py-2.5 shadow-lg shadow-green-500/50 transition duration-200 ease-in-out ml-2">
                     Register
                 </a>
@@ -131,25 +131,25 @@
                                         @endforeach
                                     </div>
                                 </div>
-                                
+
                                 <style>
                                     /* Define the scroll animation */
                                     @keyframes scroll {
                                         0% { transform: translateX(0); }
                                         100% { transform: translateX(-100%); }
                                     }
-                                
+
                                     /* Apply animation to the scrolling container */
                                     .animate-scroll {
                                         animation: scroll 15s linear infinite;
                                     }
                                 </style>
-                                
+
                             </div>
-    
-                            
+
+
                             <label for="modal{{ $house->id }}" class="mt-3 block w-full bg-green-600 text-white py-2 rounded cursor-pointer hover:bg-green-700 transition-colors text-center">View Details</label>
-                          
+
                         </div>
                     </div>
 

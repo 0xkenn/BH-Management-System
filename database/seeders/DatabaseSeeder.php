@@ -33,21 +33,21 @@ class DatabaseSeeder extends Seeder
 
         // ]);
 
-        Owner::create([
-            'name' => 'Edwin',
-            'email' => 'owner@gmail.com',
-            'address' => 'culaba',
-            'mobile_number' => '09090909099',
-            'business_permit' => '1234567876543',
-            'approved' => 1,
-            'password' => '123456789'
-        ]);
+        // Owner::create([
+        //     'name' => 'Edwin',
+        //     'email' => 'owner@gmail.com',
+        //     'address' => 'culaba',
+        //     'mobile_number' => '09090909099',
+        //     'business_permit' => '1234567876543',
+        //     'approved' => 1,
+        //     'password' => '123456789'
+        // ]);
 
-        Admin::create([
-            'name' => 'admin',
-            'email' => 'admin@gmail.com',
-            'password' => '123456789'
-        ]);
+        // Admin::create([
+        //     'name' => 'admin',
+        //     'email' => 'admin@gmail.com',
+        //     'password' => '123456789'
+        // ]);
 
         $this->call(PreferencesTableSeeder::class);
         // $this->call(PhilippineRegionsTableSeeder::class);

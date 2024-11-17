@@ -34,7 +34,7 @@
                         :value="old('school_name')"
                         required autofocus
                         autocomplete="school_name" />
-                        
+
                     <x-input-error :messages="$errors->get('school_name')" class="mt-2" />
                 </div>
 
@@ -53,7 +53,7 @@
                 </div>
 
                 <!-- Remember Me -->
-                
+                0l
 
                 <!-- Forgot Password and Login Button -->
                 <div class="flex items-center justify-between mt-6">
