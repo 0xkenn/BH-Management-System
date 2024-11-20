@@ -85,21 +85,21 @@
 <div class="flex space-x-4 justify-end mt-6">
     <!-- Back Button -->
     @if ($rooms->onFirstPage())
-        <span class="text-gray-500">No previous page</span>
-    @else
-        <a href="{{ $rooms->previousPageUrl() }}" class="px-6 py-3 text-white bg-blue-600 rounded-full shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 ease-in-out">
-            Back
-        </a>
-    @endif
+    <span class="text-gray-500">No previous page</span>
+@else
+    <a href="{{ $rooms->previousPageUrl() }}" class="px-6 py-3 text-white bg-blue-600 rounded-full shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 ease-in-out">
+        Back
+    </a>
+@endif
 
-    <!-- Next Button -->
-    @if ($rooms->hasMorePages())
-        <a href="{{ $rooms->nextPageUrl() }}" class="px-6 py-3 text-white bg-blue-600 rounded-full shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 ease-in-out">
-            Next
-        </a>
-    @else
-        <span class="text-gray-500">No next page</span>
-    @endif
+@if ($rooms->hasMorePages())
+    <a href="{{ $rooms->nextPageUrl() }}" class="px-6 py-3 text-white bg-blue-600 rounded-full shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 ease-in-out">
+        Next
+    </a>
+@else
+    <span class="text-gray-500">No next page</span>
+@endif
+
 </div>
         <!-- Room Viewer Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">

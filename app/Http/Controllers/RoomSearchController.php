@@ -14,38 +14,34 @@ class RoomSearchController extends Controller
     {
         $searchTerm = $request->input('search');
         $selectedPreferences = $request->input('preferences', []);
-
-        // Fetch rooms with their boarding houses and preferences
-        $rooms = Room::where('is_occupied', false)
-            ->with(['boarding_house.preferences'])  // Load preferences with boarding house
-            ->get();
-
+    
+        $query = Room::where('is_occupied', false)
+            ->with(['boarding_house.preferences']);
+    
+        // Apply filtering by preferences if selected
+        if (!empty($selectedPreferences)) {
+            $query->whereHas('boarding_house.preferences', function ($q) use ($selectedPreferences) {
+                $q->whereIn('id', $selectedPreferences);
+            });
+        }
+    
+        $rooms = $query->paginate(10);
+    
         // Calculate similarity scores if search term is provided
         if ($searchTerm) {
-            $rooms = $rooms->map(function ($room) use ($searchTerm) {
-                // Calculate similarity with room name and boarding house name
+            $rooms->through(function ($room) use ($searchTerm) {
                 $room->similarity_score = max(
                     CosineSimilarityHelper::calculateSimilarity($searchTerm, $room->name),
                     CosineSimilarityHelper::calculateSimilarity($searchTerm, $room->boarding_house->name)
                 );
                 return $room;
             });
-
-            // Sort rooms by similarity score in descending order
-            $rooms = $rooms->sortByDesc('similarity_score')->values();
         }
-
-        // Filter rooms by selected preferences if any are provided
-        if (!empty($selectedPreferences)) {
-            $rooms = $rooms->filter(function ($room) use ($selectedPreferences) {
-                $roomPreferenceIds = $room->boarding_house->preferences->pluck('id')->toArray();  // Get array of preference IDs
-                return !array_diff($selectedPreferences, $roomPreferenceIds);  // Ensure all selected preferences match
-            })->values();
-        }
-
+    
         // Retrieve all preferences, grouped by category, to display in the view
         $allPreferences = Preference::all()->groupBy('category');
-
+    
         return view('user.room-list', compact('rooms', 'searchTerm', 'selectedPreferences', 'allPreferences'));
     }
+    
 }
