@@ -27,25 +27,25 @@ class SchoolController extends Controller
 
         Program::create($data);
 
-        return redirect()->back();       
+        return redirect()->back();
     }
 
     public function addDepartment(Request $request){
-        
+
         $schoolId = auth()->guard('school')->id();
         $data = $request->validate([
             'department_name' => ['required', 'unique:departments,department_name'],
             'abbrev' => ['required', 'unique:departments,abbrev'],
         ]);
         $data['school_id'] = $schoolId;
-       
+
         Department::create($data);
 
         return redirect()->back();
 
     }
     public function dashboard(){
-       
+
         $boardingHouses = DB::table('boarding_houses as bh')
         ->select(
             'bh.id as boarding_house_id',
@@ -63,7 +63,7 @@ class SchoolController extends Controller
         ->leftJoin('owners as o', 'bh.owner_id', '=', 'o.id') // Join with owners table
         ->groupBy('bh.id', 'bh.name', 'o.name') // Group by owner's name
         ->get();
-    
+
          $departments = Department::all();
 
         return view('school.dashboard', compact('boardingHouses', 'departments'));
@@ -89,7 +89,7 @@ class SchoolController extends Controller
             'dept.abbrev as dept_abbrev',                          // All department fields
             'sr.*',                            // All saved rooms fields
             'room.*',                           // All room fields
-            'pc.city_municipality_description as muni', 
+            'pc.city_municipality_description as muni',
             'pb.barangay_description as brgy',
             'prov.province_description as prov',
         )
@@ -107,7 +107,7 @@ class SchoolController extends Controller
         ->join('philippine_provinces as prov', 'user.province_code', '=', 'prov.province_code')
         ->join('philippine_cities as pc', 'user.city_municipality_code', '=', 'pc.city_municipality_code')
         ->join('philippine_barangays as pb' , 'user.barangay_code', '=', 'pb.barangay_code')
-       
+
         ->select(
             'user.name as user_name',         // User's name
             'user.profile_image',
@@ -117,7 +117,7 @@ class SchoolController extends Controller
             'dept.abbrev as dept_abbrev',                          // All department fields
             'sr.*',                            // All saved rooms fields
             'room.*',                           // All room fields
-            'pc.city_municipality_description as muni', 
+            'pc.city_municipality_description as muni',
             'pb.barangay_description as brgy',
             'prov.province_description as prov',
         )
@@ -144,7 +144,7 @@ class SchoolController extends Controller
             'dept.abbrev as dept_abbrev',                          // All department fields
             'sr.*',                            // All saved rooms fields
             'room.*',                           // All room fields
-            'pc.city_municipality_description as muni', 
+            'pc.city_municipality_description as muni',
             'pb.barangay_description as brgy',
             'prov.province_description as prov',
         )
@@ -171,7 +171,7 @@ class SchoolController extends Controller
             'dept.abbrev as dept_abbrev',                          // All department fields
             'sr.*',                            // All saved rooms fields
             'room.*',                           // All room fields
-            'pc.city_municipality_description as muni', 
+            'pc.city_municipality_description as muni',
             'pb.barangay_description as brgy',
             'prov.province_description as prov',
         )
@@ -198,7 +198,7 @@ class SchoolController extends Controller
             'dept.abbrev as dept_abbrev',                          // All department fields
             'sr.*',                            // All saved rooms fields
             'room.*',                           // All room fields
-            'pc.city_municipality_description as muni', 
+            'pc.city_municipality_description as muni',
             'pb.barangay_description as brgy',
             'prov.province_description as SOE',
         )
@@ -225,14 +225,14 @@ class SchoolController extends Controller
                 'dept.abbrev as dept_abbrev',                          // All department fields
                 'sr.*',                            // All saved rooms fields
                 'room.*',                           // All room fields
-                'pc.city_municipality_description as muni', 
+                'pc.city_municipality_description as muni',
                 'pb.barangay_description as brgy',
                 'prov.province_description as prov',
             )
             ->get();
-    
-   
-      
+
+
+
         return view('school.stcs', compact('users'));
     }
     public function schoolSTED(){
@@ -255,7 +255,7 @@ class SchoolController extends Controller
             'dept.abbrev as dept_abbrev',                          // All department fields
             'sr.*',                            // All saved rooms fields
             'room.*',                           // All room fields
-            'pc.city_municipality_description as muni', 
+            'pc.city_municipality_description as muni',
             'pb.barangay_description as brgy',
             'prov.province_description as prov',
         )
@@ -263,6 +263,10 @@ class SchoolController extends Controller
         return view('school.sted', compact('users'));
     }
 
+    public function allSchool () {
+        $users = DB::table('users as user')->get();
+        return view ('school.all-school', compact('users'));
+    }
 
     public function login(){
      ;
@@ -275,7 +279,7 @@ class SchoolController extends Controller
        $request->authenticate();
         $request->session()->regenerate();
         return redirect()->route('school.dashboard');
-    
+
 }
 
 public function destroy(Request $request): RedirectResponse

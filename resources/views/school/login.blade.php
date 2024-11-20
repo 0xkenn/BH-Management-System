@@ -34,7 +34,7 @@
                         :value="old('school_name')"
                         required autofocus
                         autocomplete="school_name" />
-                        
+
                     <x-input-error :messages="$errors->get('school_name')" class="mt-2" />
                 </div>
 
@@ -53,7 +53,12 @@
                 </div>
 
                 <!-- Remember Me -->
-                
+                <div class="block mt-4">
+                    <label for="remember_me" class="inline-flex items-center">
+                        <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                        <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                    </label>
+                </div>
 
                 <!-- Forgot Password and Login Button -->
                 <div class="flex items-center justify-between mt-6">

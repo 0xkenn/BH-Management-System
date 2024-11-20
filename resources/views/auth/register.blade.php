@@ -16,21 +16,35 @@
                     {{-- profile image --}}
                     <div class="sm:col-span-2">
                         <label for="profile_image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Profile Picture*</label>
-                        <input type="file" name="profile_image" id="profile_image" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="{{old('profile_image')}}"   
-                      
+                        <input type="file" name="profile_image" id="profile_image" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="{{old('profile_image')}}"
+
                       >
                         <x-input-error :messages="$errors->get('profile_image')" class="mt-2" />
                     </div>
+<!-- First Name -->
+<div class="w-full">
+    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name*</label>
+    <input type="text" name="first_name" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="{{ old('first_name') }}" required>
+    <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
+</div>
 
-                    <!-- Name -->
-                    <div class="sm:col-span-2">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name*</label>
-                        <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="{{old('name')}}" required autofocus autocomplete="name">
-                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                    </div>
+<!-- Last Name -->
+<div class="w-full">
+    <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name*</label>
+    <input type="text" name="last_name" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="{{ old('last_name') }}" required>
+    <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
+</div>
 
-                     <!-- LastName -->
-               
+<!-- Middle Initial -->
+<div class="w-full">
+    <label for="middle_initial" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Middle Initial</label>
+    <input type="text" name="middle_initial" id="middle_initial" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="{{ old('middle_initial') }}" maxlength="1">
+    <x-input-error :messages="$errors->get('middle_initial')" class="mt-2" />
+</div>
+
+
+
+
                     <!-- Email Address -->
                     <div class="sm:col-span-2">
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email*</label>
@@ -94,7 +108,7 @@
                         </select>
                         <x-input-error :messages="$errors->get('is_student')" class="mt-2" />
                     </div>
-                    
+
 
                     <div class="w-full">
                         <label for="region" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Region*</label>
@@ -134,7 +148,7 @@
                         <x-input-error :messages="$errors->get('barangay_code')" class="mt-2" />
                     </div>
 
-                    
+
 
                     <!-- Password -->
                     <div class="w-full">
@@ -152,7 +166,7 @@
                                 <span class="text-red-500 mt-10">NOTE:</span> Password must be atleast 8 characters.
                             </label>
                     </div>
-                   
+
                 </div>
 
                 <!-- Action Buttons (Aligned Together) -->
@@ -168,7 +182,7 @@
         </div>
     </section>
 
-     <script>
+    <script>
         // Function to dynamically load dropdown options
         function loadOptions(url, targetDropdown) {
             fetch(url)
@@ -226,5 +240,18 @@
                 loadOptions(`/barangays/${cityId}`, barangayDropdown);
             }
         });
+
+        // Handle disabling the program dropdown based on student status
+        document.getElementById('is_student').addEventListener('change', function() {
+            const programDropdown = document.getElementById('program_id');
+            const isStudent = this.value;
+
+            if (isStudent === 'false') {
+                programDropdown.disabled = true;
+            } else {
+                programDropdown.disabled = false;
+            }
+        });
     </script>
+
     </x-guest-layout>

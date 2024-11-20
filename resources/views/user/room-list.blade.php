@@ -13,12 +13,12 @@
                 />
 
                 <!-- Preferences Dropdown Toggle -->
-                <button 
-                    type="button" 
-                    class="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none" 
-                    id="dropdownBgHoverButton" 
+                <button
+                    type="button"
+                    class="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none"
+                    id="dropdownBgHoverButton"
                     data-dropdown-toggle="dropdownBgHover"
-                    aria-expanded="false" 
+                    aria-expanded="false"
                     aria-haspopup="true"
                 >
                     <!-- Icon for preferences dropdown -->
@@ -36,22 +36,22 @@
 
         <!-- Preferences Dropdown -->
         <div id="dropdownBgHover" class="absolute z-20 hidden w-full md:w-96 bg-white rounded-lg shadow-lg border border-gray-200 mt-2">
-            <div class="p-4 text-sm text-gray-700 dark:text-gray-200">
+            <div class="p-4 text-sm text-gray-700">
                 <ul class="space-y-4">
                     @foreach ($allPreferences as $category => $prefs)
                         <li>
-                            <span class="font-semibold text-gray-900 dark:text-gray-300">{{ ucfirst($category) }}</span>
+                            <span class="font-semibold text-gray-900">{{ ucfirst($category) }}</span>
                             <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-2">
                                 @foreach ($prefs as $preference)
-                                    <div class="flex items-center p-2 rounded transition-colors hover:bg-gray-100 dark:hover:bg-gray-600">
-                                        <input 
-                                            id="preference-{{ $preference->id }}" 
-                                            name="preferences[]" 
-                                            type="checkbox" 
-                                            value="{{ $preference->id }}" 
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                    <div class="flex items-center p-2 rounded transition-colors hover:bg-gray-100">
+                                        <input
+                                            id="preference-{{ $preference->id }}"
+                                            name="preferences[]"
+                                            type="checkbox"
+                                            value="{{ $preference->id }}"
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                                         >
-                                        <label for="preference-{{ $preference->id }}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                        <label for="preference-{{ $preference->id }}" class="ml-2 text-sm font-medium text-gray-900">
                                             {{ $preference->name }}
                                         </label>
                                     </div>
@@ -80,8 +80,29 @@
             });
         </script>
 
+
+<!-- Pagination Buttons (Back and Next) -->
+<div class="flex space-x-4 justify-end mt-6">
+    <!-- Back Button -->
+    @if ($rooms->onFirstPage())
+        <span class="text-gray-500">No previous page</span>
+    @else
+        <a href="{{ $rooms->previousPageUrl() }}" class="px-6 py-3 text-white bg-blue-600 rounded-full shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 ease-in-out">
+            Back
+        </a>
+    @endif
+
+    <!-- Next Button -->
+    @if ($rooms->hasMorePages())
+        <a href="{{ $rooms->nextPageUrl() }}" class="px-6 py-3 text-white bg-blue-600 rounded-full shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 ease-in-out">
+            Next
+        </a>
+    @else
+        <span class="text-gray-500">No next page</span>
+    @endif
+</div>
         <!-- Room Viewer Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
             <!-- Room Card -->
             @forelse ($rooms as $room)
                 @if(!$room->is_occupied)
@@ -107,5 +128,7 @@
                 <div class="col-span-3 text-center text-gray-700">No rooms found</div>
             @endforelse
         </div>
+
+
     </div>
 </x-app-layout>

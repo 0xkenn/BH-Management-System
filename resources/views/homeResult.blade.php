@@ -21,7 +21,7 @@
                             </svg>
                         </button>
                     </div>
-                
+
                     <div id="dropdownBgHover" class="z-10 hidden w-96 bg-white rounded-lg shadow-lg dark:bg-gray-700">
                         <ul class="p-4 space-y-4 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownBgHoverButton">
                             @foreach ($preferences->groupBy('category') as $category => $prefs)
@@ -39,8 +39,8 @@
                             @endforeach
                         </ul>
                     </div>
-                    
-                
+
+
                     <div>
                         <button type="submit" class="px-4 py-2 text-white bg-green-500 rounded-full hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">Search</button>
                     </div>
@@ -59,6 +59,18 @@
                 <li class="mb-4">
                     <a href="#" class="text-green-600 hover:underline font-bold text-center">Latest Updates on Housing</a>
                     <p class="text-gray-600 text-sm mt-1 text-justify">Stay informed about the latest regulations and developments affecting housing in your area.</p>
+                </li>
+                <li class="mb-4">
+                    <a href="#" class="text-green-600 hover:underline font-bold text-center">Tips for New Renters</a>
+                    <p class="text-gray-600 text-sm mt-1 text-justify">Discover essential tips and tricks to make your renting experience smoother and hassle-free.</p>
+                </li>
+                <li class="mb-4">
+                    <a href="#" class="text-green-600 hover:underline font-bold text-center">Community Events</a>
+                    <p class="text-gray-600 text-sm mt-1 text-justify">Join us for exciting community events designed to bring neighbors together.</p>
+                </li>
+                <li class="mb-4">
+                    <a href="#" class="text-green-600 hover:underline font-bold text-center">Understanding Your Lease</a>
+                    <p class="text-gray-600 text-sm mt-1 text-justify">A comprehensive guide to understanding your rental agreement and what to look out for.</p>
                 </li>
             </ul>
         </aside>
@@ -186,4 +198,5 @@
             </div>
         </main>
     </div>
+
 </x-guest-layout>
