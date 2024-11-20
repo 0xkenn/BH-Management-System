@@ -6,7 +6,8 @@
     @endif
 
     <!-- Full Page Container with Background Image -->
-    <div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-100 via-green-200 to-green-400 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+     
         <div class="bg-cover bg-center w-full h-full absolute" style="background-image: url('/path/to/your/background-image.jpg'); opacity: 0.8;"></div>
 
         <!-- Card Container -->

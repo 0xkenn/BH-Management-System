@@ -20,7 +20,7 @@
                             Parents
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
-                            Boarding Name
+                            BoardingHouse Name
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
                             Contact Number
@@ -44,28 +44,25 @@
                   @foreach($users as $user)
                   <tr>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                            {{$user->name}}
+                            {{$user->first_name}} {{$user->middle_name}} {{$user->last_name}} {{$user->suffix}}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            Hillview Dorm
+                            {{$user->parent}}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            Hillview Dorm
+                            {{$user->boarding_house_name}}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            +1 123 456 7890
+                            {{$user->user_mb}}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            123 Maple St, Cityville
+                            Brgy. {{$user->brgy}}, {{$user->muni}}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            Computer Science
+                            {{$user->program_abbrev}}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            Bipsu
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
+                            {{$user->dept_abbrev}}
                         </td>
                     </tr>
                    

@@ -1,8 +1,9 @@
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+    <div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-100 via-green-200 to-green-400 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+     
 
-    <div class="flex justify-center items-center min-h-screen bg-gray-100"> <!-- Added bg-gray-100 to the outer container -->
         <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-md"> <!-- White background card -->
 
 
@@ -75,5 +76,6 @@
                 </div>
             </form>
         </div>
+    
     </div>
 </x-guest-layout>

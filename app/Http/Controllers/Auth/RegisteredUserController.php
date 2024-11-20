@@ -34,10 +34,13 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request['is_student'] = filter_var($request->input('is_student'), FILTER_VALIDATE_BOOLEAN);
-       
+   
         $request->validate([
             'profile_image' => ['required','image', 'mimes:png,jpeg,jpg'],
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'middle_name' => ['required', 'string', 'max:2'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'suffix' => ['string', 'max:10'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'age' => ['required', 'integer'],
             'gender' => ['required', 'string'],
@@ -58,7 +61,10 @@ class RegisteredUserController extends Controller
         // Create the user with validated data
         $user = User::create([
             'profile_image' => $request->file('profile_image')->store('profile_images', 'public'),
-            'name' => $request->name,
+            'first_name' => $request->first_name,
+            'middle_name' => $request->middle_name,
+            'last_name' => $request->last_name,
+            'suffix' => $request->suffix,
             'email' => $request->email,
             'age' => $request->age,
             'gender' => $request->gender,

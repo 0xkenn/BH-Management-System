@@ -3,7 +3,8 @@
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <!-- Login Card Container -->
-    <div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-100 via-green-200 to-green-400 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+     
         
         <div class="bg-white shadow-lg rounded-lg p-6 sm:p-8 w-full max-w-md">
             

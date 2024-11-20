@@ -25,12 +25,40 @@
                     </div>
 
                     <!-- Name Field -->
-                    <div class="sm:col-span-2">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                        <input type="text" id="name" name="name" placeholder="Enter your name"
+                    <div class="w-full">
+                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
+                        <input type="text" id="first_name" name="first_name" placeholder="Enter your first_name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
-                            value="{{ old('name', auth()->user()->name) }}" required>
+                            value="{{ old('first_name', auth()->user()->first_name) }}" required>
+                        @error('first_name')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                    </div>
+
+                    <div class="w-full">
+                        <label for="middle_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Middle Initial</label>
+                        <input type="text" id="middle_name" name="middle_name" placeholder="Enter your Middle Name"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
+                            value="{{ old('middle_name', auth()->user()->middle_name) }}" required>
+                        @error('middle_name')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                    </div>
+
+                    <div class="w-full">
+                        <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
+                        <input type="text" id="last_name" name="last_name" placeholder="Enter your Last Name"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
+                            value="{{ old('last_name', auth()->user()->last_name) }}" required>
                         @error('name')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                    </div>
+
+                    <div class="w-full">
+                        <label for="suffix" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Suffix</label>
+                        <select id="suffix" name="suffix"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500">
+                            <option value="" disabled>SUffix</option>
+                            <option value="Jr" {{ (old('suffix', auth()->user()->suffix) == 'Jr') ? 'selected' : '' }}>Jr</option>
+                            <option value="Sr" {{ (old('suffix', auth()->user()->suffix) == 'Sr') ? 'selected' : '' }}>Sr</option>
+                            <option value="" {{ (old('suffix', auth()->user()->suffix) == '') ? 'selected' : '' }}>N/A</option>
+                        </select>
+                        @error('suffix')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
                     </div>
 
                     <!-- Email Field -->

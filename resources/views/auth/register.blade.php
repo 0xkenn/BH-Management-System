@@ -1,5 +1,6 @@
 <x-guest-layout>
-    <section class="bg-white dark:bg-gray-900">
+    <div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-100 via-green-200 to-green-400 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+     
         <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-lg">
             <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white"><strong>Boarding House Seeker Registration</strong></h2>
             <div class="sm:col-span-2">
@@ -28,6 +29,14 @@
     <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
 </div>
 
+<!-- Middle Initial -->
+<div class="w-full">
+    <label for="middle_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Middle Initial</label>
+    <input type="text" name="middle_name" id="middle_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="{{ old('middle_initial') }}" maxlength="1">
+    <x-input-error :messages="$errors->get('middle_name')" class="mt-2" />
+</div>
+
+
 <!-- Last Name -->
 <div class="w-full">
     <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name*</label>
@@ -35,11 +44,16 @@
     <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
 </div>
 
-<!-- Middle Initial -->
 <div class="w-full">
-    <label for="middle_initial" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Middle Initial</label>
-    <input type="text" name="middle_initial" id="middle_initial" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="{{ old('middle_initial') }}" maxlength="1">
-    <x-input-error :messages="$errors->get('middle_initial')" class="mt-2" />
+    <label for="suffix" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">suffix *</label>
+    <select id="suffix" name="suffix" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+        <option value="" disabled>Suffix</option>
+        <option value="Jr" {{ old('suffix') == 'Jr' ? 'selected' : '' }}>Jr</option>
+        <option value="Sr" {{ old('suffix') == 'Sr' ? 'selected' : '' }}>Sr</option>
+        <option value="III" {{ old('suffix') == 'III' ? 'selected' : '' }}>III</option>
+        <option value="" {{ old('suffix') == '' ? 'selected' : '' }}>N/A</option>
+    </select>
+    <x-input-error :messages="$errors->get('suffix')" class="mt-2" />
 </div>
 
 
@@ -90,7 +104,7 @@
                     <div class="w-full">
                         <label for="is_student" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Are you a student of BiPSU?*</label>
                         <select id="is_student" name="is_student" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option value="">Select</option>
+                            <option value="" disabled>Select</option>
                             <option value="true" {{ old('is_student') == 'true' ? 'selected' : '' }}>Yes</option>
                             <option value="false" {{ old('is_student') == 'false' ? 'selected' : '' }}>No</option>
                         </select>
@@ -180,7 +194,7 @@
                 </div>
             </form>
         </div>
-    </section>
+    </div>
 
     <script>
         // Function to dynamically load dropdown options

@@ -1,7 +1,8 @@
 <x-guest-layout>
 
 
-    <div class="bg-gray-50 text-black/50 dark:bg-white dark:text-balck/50">
+    <div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-100 via-green-200 to-green-400 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+     
         <div class="relative min-h-screen flex flex-col items-center justify-center">
             <div class="relative w-full max-w-md px-6">
                 <main class="mt-6">
