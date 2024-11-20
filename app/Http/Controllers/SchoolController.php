@@ -8,6 +8,7 @@ use App\Models\BoardingHouse;
 use App\Models\Department;
 use App\Models\Program;
 use App\Models\User;
+use App\Models\Owner;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,7 +53,9 @@ class SchoolController extends Controller
             'bh.name as boarding_house_name',
             DB::raw('COUNT(DISTINCT sr.user_id) as student_count'),
             DB::raw('GROUP_CONCAT(DISTINCT u.name SEPARATOR ", ") as student_names'), // Concatenate student names
-            'o.name as owner_name' // Select the owner's name
+            'o.name as owner_name',
+            'o.address as owner_address',
+            'o.mobile_number as owner_number',
         )
         ->leftJoin('rooms as r', 'bh.id', '=', 'r.boarding_house_id')
         ->leftJoin('saved_rooms as sr', function($join) {
@@ -61,12 +64,13 @@ class SchoolController extends Controller
         })
         ->leftJoin('users as u', 'sr.user_id', '=', 'u.id') // Join with users table
         ->leftJoin('owners as o', 'bh.owner_id', '=', 'o.id') // Join with owners table
-        ->groupBy('bh.id', 'bh.name', 'o.name') // Group by owner's name
+        ->groupBy('bh.id', 'bh.name', 'o.name', 'o.address', 'o.mobile_number') // Group by owner's name
         ->get();
 
          $departments = Department::all();
+         $owners = Owner:: all();
 
-        return view('school.dashboard', compact('boardingHouses', 'departments'));
+        return view('school.dashboard', compact('boardingHouses', 'departments', 'owners'));
     }
 
     public function schoolSAS(){
