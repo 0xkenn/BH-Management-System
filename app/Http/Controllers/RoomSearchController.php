@@ -37,6 +37,9 @@ class RoomSearchController extends Controller
                 );
                 return $room;
             });
+            $rooms = $rooms->setCollection(
+                $rooms->getCollection()->sortByDesc('similarity_score')
+            );
         }
 
         // Retrieve all preferences grouped by category to display in the view
