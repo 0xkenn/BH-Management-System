@@ -14,13 +14,19 @@
                 <thead>
                     <tr>
                         <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
-                            Student Name
+                            Profile
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
-                            Grade
+                            Boarding Name
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
-                            Status
+                            Contact Number
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
+                            Address
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
+                            Course
                         </th>
                         <th scope="col" class="relative px-6 py-3">
                             <span class="sr-only">Actions</span>
@@ -34,10 +40,16 @@
                             John Doe
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            10th Grade
+                            Hillview Dorm
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            Active
+                            +1 123 456 7890
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            123 Maple St, Cityville
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            Computer Science
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
@@ -48,10 +60,16 @@
                             Jane Smith
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            9th Grade
+                            Sunrise Residence
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            Inactive
+                            +1 987 654 3210
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            456 Oak Ave, Townsville
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            Business Administration
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
@@ -62,10 +80,16 @@
                             Mark Johnson
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            11th Grade
+                            Evergreen Lodge
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            Active
+                            +1 555 555 5555
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            789 Pine Rd, Metrocity
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            Mechanical Engineering
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
@@ -87,19 +111,17 @@
             // Loop through all table rows, starting from index 1 (skip the header row)
             for (let i = 1; i < rows.length; i++) {
                 let cells = rows[i].getElementsByTagName("td");
-                let studentName = cells[0].textContent || cells[0].innerText;
-                let grade = cells[1].textContent || cells[1].innerText;
-                let status = cells[2].textContent || cells[2].innerText;
+                let match = false;
 
-                if (
-                    studentName.toLowerCase().indexOf(filter) > -1 ||
-                    grade.toLowerCase().indexOf(filter) > -1 ||
-                    status.toLowerCase().indexOf(filter) > -1
-                ) {
-                    rows[i].style.display = "";
-                } else {
-                    rows[i].style.display = "none";
+                for (let j = 0; j < cells.length; j++) {
+                    let cellValue = cells[j].textContent || cells[j].innerText;
+                    if (cellValue.toLowerCase().indexOf(filter) > -1) {
+                        match = true;
+                        break;
+                    }
                 }
+
+                rows[i].style.display = match ? "" : "none";
             }
         }
     </script>
