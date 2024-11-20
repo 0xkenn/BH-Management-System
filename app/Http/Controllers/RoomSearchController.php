@@ -2,84 +2,76 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Room;
+use App\Http\Controllers\Controller;
 use App\Models\Preference;
+use App\Models\Room;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class RoomSearchController extends Controller
 {
     public function index(Request $request)
     {
-        // Retrieve search term and selected preferences
         $searchTerm = $request->input('search');
         $selectedPreferences = $request->input('preferences', []);
 
-        // Build the query for rooms
-        $query = Room::where('is_occupied', false)
-            ->with(['boarding_house.preferences']);
+        // Fetch rooms with their boarding houses and preferences
+        $rooms = Room::where('is_occupied', false)
+            ->with(['boarding_house.preferences'])  // Load preferences with boarding house
+            ->get();
 
-        // Apply filtering by preferences if selected
-        if (!empty($selectedPreferences)) {
-            $query->whereHas('boarding_house.preferences', function ($q) use ($selectedPreferences) {
-                $q->whereIn('id', $selectedPreferences);
-            });
-        }
-
-        // Paginate the results (10 items per page)
-        $rooms = $query->paginate(12);
-
-        // Calculate similarity scores if a search term is provided
+        // Calculate similarity scores if search term is provided
         if ($searchTerm) {
-            $rooms->through(function ($room) use ($searchTerm) {
+            $rooms = $rooms->map(function ($room) use ($searchTerm) {
+                // Calculate similarity with room name and boarding house name
                 $room->similarity_score = max(
-                    $this->cosineSimilarity($searchTerm, $room->name),
-                    $this->cosineSimilarity($searchTerm, $room->boarding_house->name)
+                    CosineSimilarityHelper::calculateSimilarity($searchTerm, $room->name),
+                    CosineSimilarityHelper::calculateSimilarity($searchTerm, $room->boarding_house->name)
                 );
                 return $room;
             });
-            $rooms = $rooms->setCollection(
-                $rooms->getCollection()->sortByDesc('similarity_score')
-            );
+
+            // Sort rooms by similarity score in descending order, keeping all rooms
+            $rooms = $rooms->sortByDesc('similarity_score')->values();
         }
 
-        // Retrieve all preferences grouped by category to display in the view
+        // Filter rooms by selected preferences if any are provided
+        if (!empty($selectedPreferences)) {
+            $rooms = $rooms->filter(function ($room) use ($selectedPreferences) {
+                $roomPreferenceIds = $room->boarding_house->preferences->pluck('id')->toArray();  // Get array of preference IDs
+                return !array_diff($selectedPreferences, $roomPreferenceIds);  // Ensure all selected preferences match
+            })->values();
+        }
+
+        // Paginate the results (12 items per page)
+        $rooms = $this->paginate($rooms, 12, $request->page);
+
+        // Retrieve all preferences, grouped by category, to display in the view
         $allPreferences = Preference::all()->groupBy('category');
 
         return view('user.room-list', compact('rooms', 'searchTerm', 'selectedPreferences', 'allPreferences'));
     }
 
-    // Compute cosine similarity between two strings
-    private function cosineSimilarity($stringA, $stringB)
+    /**
+     * Paginate a Laravel collection or array.
+     *
+     * @param Collection|array $items
+     * @param int $perPage
+     * @param int|null $page
+     * @return LengthAwarePaginator
+     */
+    private function paginate($items, $perPage = 12, $page = null)
     {
-        $vecA = $this->stringToVector($stringA);
-        $vecB = $this->stringToVector($stringB);
+        $page = $page ?: (LengthAwarePaginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
 
-        $dotProduct = 0;
-        $magnitudeA = 0;
-        $magnitudeB = 0;
-
-        foreach ($vecA as $i => $val) {
-            $dotProduct += $val * ($vecB[$i] ?? 0);
-            $magnitudeA += pow($val, 2);
-            $magnitudeB += pow($vecB[$i] ?? 0, 2);
-        }
-
-        $magnitudeA = sqrt($magnitudeA);
-        $magnitudeB = sqrt($magnitudeB);
-
-        return ($magnitudeA * $magnitudeB == 0) ? 0 : $dotProduct / ($magnitudeA * $magnitudeB);
-    }
-
-    // Convert a string to a character frequency vector
-    private function stringToVector($string)
-    {
-        $vector = [];
-        $string = strtolower(preg_replace('/[^a-z0-9]/', '', $string)); // Clean string
-
-        foreach (count_chars($string, 1) as $char => $count) {
-            $vector[chr($char)] = $count;
-        }
-
-        return $vector;
+        return new LengthAwarePaginator(
+            $items->forPage($page, $perPage),
+            $items->count(),
+            $perPage,
+            $page,
+            ['path' => LengthAwarePaginator::resolveCurrentPath()]
+        );
     }
 }

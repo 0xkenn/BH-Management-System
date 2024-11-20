@@ -28,13 +28,7 @@
                 </button>
             </div>
 
-            <!-- Submit Button -->
-            <button type="submit" class="px-6 py-3 text-white bg-green-500 rounded-full shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 transition duration-200 ease-in-out">
-                Search
-            </button>
-        </form>
-
-        <!-- Preferences Dropdown -->
+             <!-- Preferences Dropdown -->
         <div id="dropdownBgHover" class="absolute z-20 hidden w-full md:w-96 bg-white rounded-lg shadow-lg border border-gray-200 mt-2">
             <div class="p-4 text-sm text-gray-700">
                 <ul class="space-y-4">
@@ -62,6 +56,14 @@
                 </ul>
             </div>
         </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="px-6 py-3 text-white bg-green-500 rounded-full shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 transition duration-200 ease-in-out">
+                Search
+            </button>
+        </form>
+
+       
 
         <script>
             // Toggle Dropdown

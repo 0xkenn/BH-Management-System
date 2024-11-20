@@ -13,7 +13,7 @@ class SearchController extends Controller
         // Retrieve user-selected preferences and search term
         $selectedPreferences = $request->input('preferences', []); // Array of selected preference IDs
         $searchQuery = $request->input('search'); // Search input for boarding house name
-
+       
         // Fetch all preference IDs for consistent vector creation
         $allPreferences = Preference::all()->pluck('id')->toArray();
 
