@@ -14,7 +14,10 @@
                 <thead>
                     <tr>
                         <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
-                            Profile
+                            Student Name
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
+                            Parents
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
                             Boarding Name
@@ -26,7 +29,10 @@
                             Address
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
-                            Course
+                            Program
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
+                            School
                         </th>
                         <th scope="col" class="relative px-6 py-3">
                             <span class="sr-only">Actions</span>
@@ -35,9 +41,13 @@
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     <!-- Static content for students -->
-                    <tr>
+                  @foreach($users as $user)
+                  <tr>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                            John Doe
+                            {{$user->name}}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            Hillview Dorm
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             Hillview Dorm
@@ -51,50 +61,15 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             Computer Science
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                            Jane Smith
-                        </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            Sunrise Residence
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            +1 987 654 3210
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            456 Oak Ave, Townsville
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            Business Administration
+                            Bipsu
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                            Mark Johnson
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            Evergreen Lodge
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            +1 555 555 5555
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            789 Pine Rd, Metrocity
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            Mechanical Engineering
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
-                        </td>
-                    </tr>
+                   
+                  @endforeach
                     <!-- Add more student rows as needed -->
                 </tbody>
             </table>

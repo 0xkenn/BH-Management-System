@@ -66,6 +66,7 @@ class OwnerController extends Controller
         $totalData = $totalReservations->values(); // Total reservations count
         $pendingData = $pendingReservations->values(); // Pending reservations count
         $approvedData = $approvedReservations->values(); // Approved reservations count
+       
     
         return view('owner.dashboard', compact('users', 'labels', 'totalData', 'pendingData', 'approvedData'));
     }
