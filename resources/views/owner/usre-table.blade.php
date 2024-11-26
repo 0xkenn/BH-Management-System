@@ -34,7 +34,7 @@
                                     @foreach ($users as $user)
                                     @foreach ($user->reservations as $reservation)
                                         <tr class="bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400">
-                                            <td class="px-4 py-3">{{ $user->name }}</td>
+                                            <td class="px-4 py-3">{{ $user->first_name }} {{$user->middle_name}}. {{$user->last_name}} {{$user->suffix}}</td>
                                             <td class="px-4 py-3">{{ $user->mobile_number }}</td>
                                             <td class="px-4 py-3">
                                                 <span class="{{ $reservation->is_approved ? 'bg-green-500 text-white' : 'bg-orange-500 text-white' }} px-2 py-1 rounded">

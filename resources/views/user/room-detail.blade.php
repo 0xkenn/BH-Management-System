@@ -48,6 +48,29 @@
             @endif
             <!-- Reservation Button -->
             <div class="px-8 py-4">
+            <button 
+        onclick="document.getElementById('modal').classList.remove('hidden')" 
+        class="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
+    >
+        BH Policy
+    </button>
+
+    <!-- Modal -->
+    <div id="modal" class="hidden fixed inset-0 flex items-center justify-center z-50">
+        <div class="modal-backdrop fixed inset-0 bg-black opacity-50"></div>
+
+        <div class="bg-white p-8 rounded-lg shadow-lg w-1/3">
+            <h2 class="text-xl font-semibold mb-4">This is a Modal</h2>
+            <p class="mb-4">This modal is centered on the screen!</p>
+            <button 
+                onclick="document.getElementById('modal').classList.add('hidden')" 
+                class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
+            >
+                Close
+            </button>
+        </div>
+    </div>
+
                 <button x-data="{ savedRoom: @json($savedRoom), isApproved: @json($isApproved) }"
                         @click="handleReservation($event, savedRoom, isApproved)"
                         class="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center transition duration-150"

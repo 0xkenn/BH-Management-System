@@ -118,7 +118,6 @@
                         <div class="p-4">
                             <h5 class="text-lg font-bold text-gray-800">{{ $house->name }}</h5>
                             <p class="text-gray-600"><i>{{ $house->address }}</i></p>
-                            <p class="text-gray-700 text-sm leading-relaxed">{{ Str::limit($house->description, 80) }}</p>
                             <div class="flex flex-wrap gap-2 mt-2">
                                 <div class="relative overflow-hidden whitespace-nowrap">
                                     <div class="flex space-x-4 animate-scroll">
