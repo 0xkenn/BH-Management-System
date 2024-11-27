@@ -113,8 +113,9 @@
                         <div class="p-4">
                             <h2 class="text-xl font-bold text-gray-800">Room {{ $room->name }}</h2>
                             <h3 class="text-md text-gray-600">{{ $room->boarding_house->name }}</h3>
-                            <p class="mt-2 text-gray-600">{{ Str::limit($room->boarding_house->description, 80) }}</p>
+                            
                         </div>
+                        
                         <div class="p-4 flex justify-between items-center border-t border-gray-300">
                             <span class="text-gray-700 font-semibold">Monthly Rate</span>
                             <span class="text-green-600 font-semibold">₱{{ number_format($room->price, 2) }}/month</span>
