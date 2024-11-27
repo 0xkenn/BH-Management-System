@@ -43,10 +43,11 @@
 
             {{-- Description Field --}}
             <label class="block text-sm mb-3">
-                <span class="text-gray-700 dark:text-gray-400">Description</span>
-                <input name="description" value="{{ old('description') }}" type="text"
-                       class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-green-400 focus:ring focus:ring-green-400 focus:ring-opacity-50"
-                       placeholder="Description" />
+                <label for="description" class="text-gray-700 dark:text-gray-400">Boarding House Policy</label>
+                <textarea name="description" id="description"
+                          class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-green-400 focus:ring focus:ring-green-400 focus:ring-opacity-50"
+                          rows="5" placeholder="Boarding house Policy">{{ old('description') }}</textarea>
+                
                 @error('description')
                     <div class="text-red-600">{{ $message }}</div>
                 @enderror

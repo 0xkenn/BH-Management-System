@@ -49,7 +49,11 @@ class UserController extends Controller
 
     public function roomDetails($id)
     {
-        $room = Room::findOrFail($id);
+
+      
+
+        $room = Room::with('boarding_house')->findOrFail($id);
+        $description = $room->boarding_house->description;
         $savedRoom = $room->reservations()->where('user_id', auth()->guard('web')->id())->first();
         $userHasRating = $room->ratings()->where('user_id', auth()->guard('web')->id())->exists();
         $allPreferences = Preference::all()->groupBy('category');
@@ -60,6 +64,7 @@ class UserController extends Controller
             'savedRoom' => $savedRoom ? true : false,
             'isApproved' => $savedRoom ? $savedRoom->is_approved : 0, // Default to 0 if no reservation exists
             'userHasRating' => $userHasRating,
+            'description' => $description,
         ]);
     }
 
@@ -86,7 +91,8 @@ class UserController extends Controller
 
 
     public function roomList(){
-        $rooms = Room::with('boarding_house')->paginate(12);
+        $rooms = Room::with(['boarding_house.preferences'])->paginate(12);
+        
         $allPreferences = Preference::all()->groupBy('category');
         return view('user.room-list', compact('rooms' , 'allPreferences'));
     }

@@ -110,11 +110,18 @@
                 @if(!$room->is_occupied)
                     <div class="bg-white border border-gray-300 rounded-lg shadow-md transition-transform duration-300 hover:shadow-lg">
                         <img src="{{ asset('storage/' . $room->room_image_1) }}" alt="{{ $room->name }}" class="rounded-t-lg h-48 w-full object-cover">
-                        <div class="p-4">
-                            <h2 class="text-xl font-bold text-gray-800">Room {{ $room->name }}</h2>
-                            <h3 class="text-md text-gray-600">{{ $room->boarding_house->name }}</h3>
-                            
+                        <div class="p-4 bg-white shadow-md rounded-lg">
+                            <h2 class="text-xl font-bold text-gray-800 mb-2">Room {{ $room->name }}</h2>
+                            <h3 class="text-md text-gray-600 mb-3">{{ $room->boarding_house->name }}</h3>
+                            <div class="flex items-center gap-2 overflow-x-auto scrollbar-hide">
+                                @foreach ($room->boarding_house->preferences as $preference)
+                                    <span class="bg-green-100 text-green-800 text-xs font-medium px-3 py-1 rounded-full shadow-sm whitespace-nowrap">
+                                        {{ $preference->name }}
+                                    </span>
+                                @endforeach
+                            </div>
                         </div>
+                        
                         
                         <div class="p-4 flex justify-between items-center border-t border-gray-300">
                             <span class="text-gray-700 font-semibold">Monthly Rate</span>

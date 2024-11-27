@@ -60,8 +60,8 @@
         <div class="modal-backdrop fixed inset-0 bg-black opacity-50"></div>
 
         <div class="bg-white p-8 rounded-lg shadow-lg w-1/3">
-            <h2 class="text-xl font-semibold mb-4">This is a Modal</h2>
-            <p class="mb-4">This modal is centered on the screen!</p>
+            <h2 class="text-xl font-semibold mb-4">Boarding House Policy</h2>
+            <p class="mb-4">{{$description}}</p>
             <button 
                 onclick="document.getElementById('modal').classList.add('hidden')" 
                 class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"

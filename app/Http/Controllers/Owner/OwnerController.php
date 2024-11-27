@@ -28,7 +28,7 @@ class OwnerController extends Controller
         })
         ->get();
         
-    
+ 
     
     
     
